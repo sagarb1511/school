@@ -1,4 +1,5 @@
-import { HashRouter as Router, Routes, Route } from 'react-router-dom';
+
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Home from "./component/pages/home";
 import Navbar from "./component/pages/Navbar";
 import Aboutus from "./component/pages/Aboutus";
@@ -22,21 +23,25 @@ function App() {
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/school/about" element={<Aboutus />} />
-        <Route path="/school/vision" element={<Vision />} />
-        <Route path="/school/achivement" element={<Achievements />} />
-        <Route path="/school/faculty" element={<FacultyForm />} />
-        <Route path="/school/nonteaching" element={<NonTeachingStaff />} />
-        <Route path="/school/acadmice" element={<Acadmic />} />
-        <Route path="/school/gallery" element={<Gallery />} />
-        <Route path="/school/admission" element={<Admission />} />
-        <Route path="/school/nss" element={<NSS />} />
-        <Route path="/school/sports" element={<Sports />} />
-        <Route path="/school/publications" element={<PublicationsList />} />
-        <Route path="/school/contact" element={<ContactUs />} />
-        <Route path="/school/activitie" element={<Activities  />} />
+        <Route path="/about" element={<Aboutus />} />
+        <Route path="/vision" element={<Vision />} />
+        <Route path="/achivement" element={<Achievements />} />
+        <Route path="/faculty" element={<FacultyForm />} />
+        <Route path="/nonteaching" element={<NonTeachingStaff />} />
+         <Route path="/acadmice" element={<Acadmic />} />
+         <Route path="/gallery" element={<Gallery />} />
+         <Route path="/admission" element={<Admission />} />
+         <Route path="/nss" element={<NSS />} />
+          <Route path="/sports" element={<Sports />} />
+          <Route path="/publications" element={<PublicationsList />} />
+          <Route path="/contact" element={<ContactUs />} />
+          <Route path="/activitie" element={<Activities  />} />
+
+        
+
+
       </Routes>
-      <Footer/>
+     <Footer/>
     </Router>
   );
 }
