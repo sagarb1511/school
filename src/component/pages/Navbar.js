@@ -4,73 +4,106 @@ import { Link } from 'react-router-dom';
 const Navbar = () => {
   const [activeDropdown, setActiveDropdown] = useState(null);
 
+  // const menuItems = [
+  //   {
+  //     name: "Home",
+  //     href: "/",
+  //   },
+  //    {
+  //     name: "Achievements",
+  //     href: "/achivement",
+  //   },
+  //    {
+  //     name: "Faculty",
+  //     submenu: [
+  //           { name: "Teaching Staff", href: "/faculty" },
+  //           { name: "Non-Teaching Staff", href: "/nonteaching" }
+  //         ]
+  //   },
+  //   {
+  //     name: "About Us",
+     
+  //     submenu: [
+  //        { name: "About Us", href: "/about" },
+  //       { name: "Vision & Mission", href: "/vision" },
+        
+  //       { name: "Organisation", href: "/organisation" },
+        
+  //     ]
+  //   },
+  //   {
+  //     name: "Academics",
+  //     href: "/acadmice",
+     
+       
+       
+        
+      
+  //   },
+  //   {
+  //     name: "Admission",
+  //     href: "/admission",
+      
+  //   },
+  //   {
+  //     name: "Gallery",
+  //     href: "/gallery",
+      
+  //   },
+  //   {
+  //     name: "Student Life",
+      
+  //     submenu: [
+        
+  //       { name: "NSS (National Service Scheme)", href: "/nss" },
+  //       { name: "Sports", href: "/sports" },
+  //       // { name: "Cultural Activities", href: "/activitie" }
+  //     ]
+  //   },
+  //   {
+  //     name: "Research",
+  //     href: "/publications",
+      
+  //   },
+  //   {
+  //     name: "Contact Us",
+  //     href: "/contact",
+      
+  //   }
+  // ];
+
   const menuItems = [
-    {
-      name: "Home",
-      href: "/",
-    },
-     {
-      name: "Achievements",
-      href: "/achivement",
-    },
-     {
-      name: "Faculty",
-      submenu: [
-            { name: "Teaching Staff", href: "/faculty" },
-            { name: "Non-Teaching Staff", href: "/nonteaching" }
-          ]
-    },
-    {
-      name: "About Us",
-     
-      submenu: [
-         { name: "About Us", href: "/about" },
-        { name: "Vision & Mission", href: "/vision" },
-        
-        { name: "Organisation", href: "/organisation" },
-        
-      ]
-    },
-    {
-      name: "Academics",
-      href: "/acadmice",
-     
-       
-       
-        
-      
-    },
-    {
-      name: "Admission",
-      href: "/admission",
-      
-    },
-    {
-      name: "Gallery",
-      href: "/gallery",
-      
-    },
-    {
-      name: "Student Life",
-      
-      submenu: [
-        
-        { name: "NSS (National Service Scheme)", href: "/nss" },
-        { name: "Sports", href: "/sports" },
-        // { name: "Cultural Activities", href: "/activitie" }
-      ]
-    },
-    {
-      name: "Research",
-      href: "/publications",
-      
-    },
-    {
-      name: "Contact Us",
-      href: "/contact",
-      
-    }
-  ];
+  { name: "Home", href: "/" },
+  { name: "Achievements", href: "/achievements" },  // Fixed path
+  {
+    name: "Faculty",
+    submenu: [
+      { name: "Teaching Staff", href: "/faculty" },
+      { name: "Non-Teaching Staff", href: "/nonteaching" }
+    ]
+  },
+  {
+    name: "About Us",
+    submenu: [
+      { name: "About Us", href: "/about" },
+      { name: "Vision & Mission", href: "/vision" },
+      // { name: "Organisation", href: "/organisation" },  // Commented out until route/component exists
+    ]
+  },
+  { name: "Academics", href: "/academics" },  // Fixed path
+  { name: "Admission", href: "/admission" },
+  { name: "Gallery", href: "/gallery" },
+  {
+    name: "Student Life",
+    submenu: [
+      { name: "NSS (National Service Scheme)", href: "/nss" },
+      { name: "Sports", href: "/sports" },
+      { name: "Activities", href: "/activities" }  // Added direct link for consistency
+    ]
+  },
+  { name: "Research", href: "/publications" },
+  { name: "Contact Us", href: "/contact" }
+];
 
   const handleMouseEnter = (menuName) => {
     setActiveDropdown(menuName);
