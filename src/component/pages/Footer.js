@@ -44,19 +44,19 @@ const Footer = () => {
               Quick Links
             </h4>
             <ul className="space-y-2">
-              <li><a href="/school/about" className="text-slate-300 hover:text-blue-400 transition-colors duration-200 text-sm flex items-center group">
+              <li><a href="/about" className="text-slate-300 hover:text-blue-400 transition-colors duration-200 text-sm flex items-center group">
                 <span className="w-1.5 h-1.5 bg-blue-400 rounded-full mr-2 group-hover:bg-blue-300"></span>
                 About Us
               </a></li>
-              <li><a href="/school/admission" className="text-slate-300 hover:text-blue-400 transition-colors duration-200 text-sm flex items-center group">
+              <li><a href="/admission" className="text-slate-300 hover:text-blue-400 transition-colors duration-200 text-sm flex items-center group">
                 <span className="w-1.5 h-1.5 bg-blue-400 rounded-full mr-2 group-hover:bg-blue-300"></span>
                 Admissions
               </a></li>
-              <li><a href="/school/academic" className="text-slate-300 hover:text-blue-400 transition-colors duration-200 text-sm flex items-center group">
+              <li><a href="/academic" className="text-slate-300 hover:text-blue-400 transition-colors duration-200 text-sm flex items-center group">
                 <span className="w-1.5 h-1.5 bg-blue-400 rounded-full mr-2 group-hover:bg-blue-300"></span>
                 Academics
               </a></li>
-              <li><a href="/school/activities" className="text-slate-300 hover:text-blue-400 transition-colors duration-200 text-sm flex items-center group">
+              <li><a href="/activities" className="text-slate-300 hover:text-blue-400 transition-colors duration-200 text-sm flex items-center group">
                 <span className="w-1.5 h-1.5 bg-blue-400 rounded-full mr-2 group-hover:bg-blue-300"></span>
                 Activities
               </a></li>
@@ -69,19 +69,19 @@ const Footer = () => {
               Departments
             </h4>
             <ul className="space-y-2">
-              <li><a href="/school/faculty" className="text-slate-300 hover:text-purple-400 transition-colors duration-200 text-sm flex items-center group">
+              <li><a href="/faculty" className="text-slate-300 hover:text-purple-400 transition-colors duration-200 text-sm flex items-center group">
                 <span className="w-1.5 h-1.5 bg-purple-400 rounded-full mr-2 group-hover:bg-purple-300"></span>
                 Faculty
               </a></li>
-              <li><a href="/school/nonteaching" className="text-slate-300 hover:text-purple-400 transition-colors duration-200 text-sm flex items-center group">
+              <li><a href="/nonteaching" className="text-slate-300 hover:text-purple-400 transition-colors duration-200 text-sm flex items-center group">
                 <span className="w-1.5 h-1.5 bg-purple-400 rounded-full mr-2 group-hover:bg-purple-300"></span>
                 Non-Teaching Staff
               </a></li>
-              <li><a href="/school/nss" className="text-slate-300 hover:text-purple-400 transition-colors duration-200 text-sm flex items-center group">
+              <li><a href="/nss" className="text-slate-300 hover:text-purple-400 transition-colors duration-200 text-sm flex items-center group">
                 <span className="w-1.5 h-1.5 bg-purple-400 rounded-full mr-2 group-hover:bg-purple-300"></span>
                 NSS
               </a></li>
-              <li><a href="/school/sports" className="text-slate-300 hover:text-purple-400 transition-colors duration-200 text-sm flex items-center group">
+              <li><a href="/sports" className="text-slate-300 hover:text-purple-400 transition-colors duration-200 text-sm flex items-center group">
                 <span className="w-1.5 h-1.5 bg-purple-400 rounded-full mr-2 group-hover:bg-purple-300"></span>
                 Sports
               </a></li>
