@@ -125,13 +125,13 @@ const Footer = () => {
             <div className="flex items-center space-x-6">
               <span className="text-slate-400 text-sm">Follow us:</span>
               <div className="flex space-x-3">
-                <a href="#" className="text-slate-400 hover:text-blue-400 transition-colors duration-200 text-sm font-medium">
+                <a href="/home" className="text-slate-400 hover:text-blue-400 transition-colors duration-200 text-sm font-medium">
                   Facebook
                 </a>
-                <a href="#" className="text-slate-400 hover:text-sky-400 transition-colors duration-200 text-sm font-medium">
+                <a href="/home" className="text-slate-400 hover:text-sky-400 transition-colors duration-200 text-sm font-medium">
                   Twitter
                 </a>
-                <a href="#" className="text-slate-400 hover:text-pink-400 transition-colors duration-200 text-sm font-medium">
+                <a href="/home" className="text-slate-400 hover:text-pink-400 transition-colors duration-200 text-sm font-medium">
                   Instagram
                 </a>
               </div>
