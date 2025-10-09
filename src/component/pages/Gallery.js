@@ -116,6 +116,15 @@ const Gallery = () => {
 
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [activeFilter, setActiveFilter] = useState('All');
+
+  // Extract unique categories from gallery data
+  const categories = ['All', ...new Set(galleryData.map(item => item.title))];
+
+  // Filter gallery items based on active filter
+  const filteredGallery = activeFilter === 'All' 
+    ? galleryData 
+    : galleryData.filter(item => item.title === activeFilter);
 
   const openModal = (category) => {
     setSelectedCategory(category);
@@ -326,40 +335,308 @@ const Gallery = () => {
         zIndex: 1
       }}>
         {/* Header */}
-        <h1 className="text-4xl font-bold text-blue-700 text-center mb-10">
+        <h1 className="text-4xl font-bold text-blue-700 text-center mb-8">
           📸 College Gallery
         </h1>
 
-        {/* Gallery Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-          {galleryData.map((item) => (
-            <div
-              key={item.id}
-              className="bg-white rounded-2xl shadow-md overflow-hidden hover:shadow-2xl transition-all duration-300 cursor-pointer transform hover:-translate-y-1"
-              onClick={() => openModal(item)}
-            >
-              <div className="overflow-hidden">
-                <img
-                  src={item.mainImage}
-                  alt={item.title}
-                  className="w-full h-56 object-cover hover:scale-110 transition-transform duration-500"
-                  onError={(e) => {
-                    e.target.src = "https://images.unsplash.com/photo-1562774053-701939374585?auto=format&fit=crop&w=800&q=80";
-                  }}
-                />
-              </div>
-              <div className="p-4">
-                <h2 className="text-lg font-semibold text-gray-800">
-                  {item.title}
-                </h2>
-                <p className="text-sm text-gray-500 mt-1">{item.desc}</p>
-                <p className="text-xs text-blue-500 mt-2 font-medium">
-                  Click to view {item.images.length} images
-                </p>
-              </div>
-            </div>
-          ))}
+        {/* Filter Dropdown */}
+        <div style={{
+          maxWidth: '300px',
+          margin: '0 auto 30px',
+          position: 'relative'
+        }}>
+          <label style={{
+            display: 'block',
+            marginBottom: '8px',
+            fontSize: '14px',
+            fontWeight: '600',
+            color: '#374151',
+            textAlign: 'center'
+          }}>
+            Filter by Category
+          </label>
+          <select
+            value={activeFilter}
+            onChange={(e) => setActiveFilter(e.target.value)}
+            style={{
+              width: '100%',
+              padding: '12px 16px',
+              borderRadius: '12px',
+              border: '2px solid #e5e7eb',
+              backgroundColor: 'white',
+              fontSize: '16px',
+              color: '#374151',
+              cursor: 'pointer',
+              boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
+              outline: 'none',
+              transition: 'all 0.3s ease',
+              appearance: 'none',
+              backgroundImage: 'url("data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'20\' height=\'20\' fill=\'%23374151\' viewBox=\'0 0 16 16\'%3E%3Cpath d=\'M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z\'/%3E%3C/svg%3E")',
+              backgroundRepeat: 'no-repeat',
+              backgroundPosition: 'right 12px center',
+              paddingRight: '40px'
+            }}
+            onFocus={(e) => {
+              e.target.style.borderColor = '#3b82f6';
+              e.target.style.boxShadow = '0 0 0 3px rgba(59, 130, 246, 0.1)';
+            }}
+            onBlur={(e) => {
+              e.target.style.borderColor = '#e5e7eb';
+              e.target.style.boxShadow = '0 4px 6px rgba(0, 0, 0, 0.1)';
+            }}
+          >
+            <option value="All">🏫 All Categories</option>
+            {categories.filter(cat => cat !== 'All').map((category) => {
+              const icons = {
+                'College Campus': '🏫',
+                'Science Laboratory': '🔬',
+                'Library Hall': '📚',
+                'Computer Lab': '💻',
+                'Cultural Event': '🎭',
+                'Sports Ground': '⚽',
+                'Classroom Learning': '📖',
+                'Annual Function': '🎉',
+                'Campus Garden': '🌿'
+              };
+              return (
+                <option key={category} value={category}>
+                  {icons[category] || '📷'} {category}
+                </option>
+              );
+            })}
+          </select>
         </div>
+
+        {/* Results Info */}
+        {activeFilter !== 'All' && (
+          <div style={{
+            textAlign: 'center',
+            marginBottom: '20px',
+            padding: '12px 20px',
+            backgroundColor: '#f0f9ff',
+            borderRadius: '8px',
+            border: '1px solid #bfdbfe',
+            maxWidth: '500px',
+            margin: '0 auto 20px'
+          }}>
+            <p style={{
+              color: '#1e40af',
+              fontSize: '14px',
+              fontWeight: '500',
+              margin: 0
+            }}>
+              📋 Showing {filteredGallery.length} {filteredGallery.length === 1 ? 'item' : 'items'} in "{activeFilter}" category
+            </p>
+          </div>
+        )}
+
+        {/* Gallery Grid */}
+        <div className="space-y-8 max-w-6xl mx-auto" style={{
+          animation: 'fadeIn 0.5s ease-in-out'
+        }}>
+          {filteredGallery.length > 0 ? (
+            filteredGallery.map((item) => {
+              const icons = {
+                'College Campus': '🏫',
+                'Science Laboratory': '🔬',
+                'Library Hall': '📚',
+                'Computer Lab': '💻',
+                'Cultural Event': '🎭',
+                'Sports Ground': '⚽',
+                'Classroom Learning': '📖',
+                'Annual Function': '🎉',
+                'Campus Garden': '🌿'
+              };
+              
+              return (
+                <div
+                  key={item.id}
+                  className="bg-white rounded-lg shadow-md hover:shadow-lg transition-all duration-300"
+                  style={{
+                    border: '1px solid #e5e7eb',
+                    padding: '24px',
+                    marginBottom: '24px'
+                  }}
+                >
+                  {/* Header Section */}
+                  <div style={{
+                    marginBottom: '16px'
+                  }}>
+                    <h2 style={{
+                      fontSize: '24px',
+                      fontWeight: 'bold',
+                      color: '#1f2937',
+                      marginBottom: '8px',
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '8px'
+                    }}>
+                      <span>{icons[item.title] || '📷'}</span>
+                      {item.title}
+                    </h2>
+                    
+                    <p style={{
+                      fontSize: '16px',
+                      color: '#6b7280',
+                      lineHeight: '1.5',
+                      margin: 0
+                    }}>
+                      {item.desc}
+                    </p>
+                  </div>
+
+                  {/* Images Row */}
+                  <div style={{
+                    display: 'flex',
+                    gap: '12px',
+                    overflowX: 'auto',
+                    paddingBottom: '8px'
+                  }}>
+                    {item.images.slice(0, 5).map((image, index) => (
+                      <div
+                        key={index}
+                        style={{
+                          flexShrink: 0,
+                          width: '180px',
+                          height: '120px',
+                          borderRadius: '8px',
+                          overflow: 'hidden',
+                          cursor: 'pointer',
+                          transition: 'transform 0.2s ease'
+                        }}
+                        onClick={() => {
+                          setCurrentImageIndex(index);
+                          openModal(item);
+                        }}
+                        onMouseEnter={(e) => {
+                          e.target.style.transform = 'scale(1.05)';
+                        }}
+                        onMouseLeave={(e) => {
+                          e.target.style.transform = 'scale(1)';
+                        }}
+                      >
+                        <img
+                          src={image}
+                          alt={`${item.title} ${index + 1}`}
+                          style={{
+                            width: '100%',
+                            height: '100%',
+                            objectFit: 'cover',
+                            transition: 'transform 0.3s ease'
+                          }}
+                          onError={(e) => {
+                            e.target.src = "https://images.unsplash.com/photo-1562774053-701939374585?auto=format&fit=crop&w=800&q=80";
+                          }}
+                        />
+                      </div>
+                    ))}
+                    
+                    {/* Show More Button if more than 5 images */}
+                    {item.images.length > 5 && (
+                      <div
+                        style={{
+                          flexShrink: 0,
+                          width: '180px',
+                          height: '120px',
+                          borderRadius: '8px',
+                          backgroundColor: '#f3f4f6',
+                          display: 'flex',
+                          flexDirection: 'column',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          cursor: 'pointer',
+                          border: '2px dashed #d1d5db',
+                          transition: 'all 0.2s ease'
+                        }}
+                        onClick={() => openModal(item)}
+                        onMouseEnter={(e) => {
+                          e.target.style.backgroundColor = '#e5e7eb';
+                          e.target.style.borderColor = '#9ca3af';
+                        }}
+                        onMouseLeave={(e) => {
+                          e.target.style.backgroundColor = '#f3f4f6';
+                          e.target.style.borderColor = '#d1d5db';
+                        }}
+                      >
+                        <div style={{
+                          fontSize: '24px',
+                          color: '#6b7280',
+                          marginBottom: '4px'
+                        }}>
+                          +{item.images.length - 5}
+                        </div>
+                        <div style={{
+                          fontSize: '12px',
+                          color: '#6b7280',
+                          textAlign: 'center'
+                        }}>
+                          View More
+                        </div>
+                      </div>
+                    )}
+                  </div>
+
+                  {/* Footer Info */}
+                  <div style={{
+                    marginTop: '16px',
+                    paddingTop: '16px',
+                    borderTop: '1px solid #f3f4f6',
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    alignItems: 'center'
+                  }}>
+                    <span style={{
+                      fontSize: '14px',
+                      color: '#6b7280'
+                    }}>
+                      📸 {item.images.length} photos available
+                    </span>
+                    <button
+                      onClick={() => openModal(item)}
+                      style={{
+                        backgroundColor: '#3b82f6',
+                        color: 'white',
+                        padding: '8px 16px',
+                        borderRadius: '6px',
+                        border: 'none',
+                        fontSize: '14px',
+                        fontWeight: '500',
+                        cursor: 'pointer',
+                        transition: 'background-color 0.2s ease'
+                      }}
+                      onMouseEnter={(e) => {
+                        e.target.style.backgroundColor = '#2563eb';
+                      }}
+                      onMouseLeave={(e) => {
+                        e.target.style.backgroundColor = '#3b82f6';
+                      }}
+                    >
+                      View Gallery
+                    </button>
+                  </div>
+                </div>
+              );
+            })
+          ) : (
+            <div style={{
+              gridColumn: '1 / -1',
+              textAlign: 'center',
+              padding: '60px 20px',
+              color: '#6b7280'
+            }}>
+              <div style={{ fontSize: '48px', marginBottom: '16px' }}>🔍</div>
+              <h3 style={{ fontSize: '18px', fontWeight: '600', marginBottom: '8px' }}>
+                No items found
+              </h3>
+              <p style={{ fontSize: '14px' }}>
+                No gallery items match the selected filter.
+              </p>
+            </div>
+          )}
+        </div>
+
+        {/* Gallery Stats */}
+        
       </div>
 
       {/* Modal */}
@@ -467,6 +744,11 @@ const Gallery = () => {
       
       {/* CSS Animations */}
       <style jsx>{`
+        @keyframes fadeIn {
+          from { opacity: 0; transform: translateY(20px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+        
         @keyframes galleryGradient {
           0% { background-position: 0% 50%; }
           50% { background-position: 100% 50%; }

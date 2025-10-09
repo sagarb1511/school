@@ -49,7 +49,7 @@
 // export default App;
 
 
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { HashRouter as Router, Routes, Route } from 'react-router-dom';  
 import Home from "./component/pages/home";
 import Navbar from "./component/pages/Navbar";
 import Aboutus from "./component/pages/Aboutus";
@@ -71,7 +71,7 @@ import Footer from './component/pages/Footer';
 
 function App() {
   return (
-    <Router>
+      <Router basename="/">  
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />

@@ -1,5 +1,5 @@
 import React from 'react';
-
+import { Link } from 'react-router-dom';
 const Footer = () => {
   return (
     <footer className="bg-gradient-to-br from-slate-800 via-slate-900 to-slate-800 text-white">
@@ -44,22 +44,32 @@ const Footer = () => {
               Quick Links
             </h4>
             <ul className="space-y-2">
-              <li><a href="/about" className="text-slate-300 hover:text-blue-400 transition-colors duration-200 text-sm flex items-center group">
+              <li>
+                <Link to="/about" className="text-slate-300 hover:text-blue-400 transition-colors duration-200 text-sm flex items-center group"> <span className="w-1.5 h-1.5 bg-blue-400 rounded-full mr-2 group-hover:bg-blue-300"></span>
+                About Us</Link>
+                
+                {/* <a href="/about" className="text-slate-300 hover:text-blue-400 transition-colors duration-200 text-sm flex items-center group">
                 <span className="w-1.5 h-1.5 bg-blue-400 rounded-full mr-2 group-hover:bg-blue-300"></span>
                 About Us
-              </a></li>
-              <li><a href="/admission" className="text-slate-300 hover:text-blue-400 transition-colors duration-200 text-sm flex items-center group">
+              </a> */}
+              </li>
+              <li>
+                
+                <Link to="/admission" className="text-slate-300 hover:text-blue-400 transition-colors duration-200 text-sm flex items-center group">
                 <span className="w-1.5 h-1.5 bg-blue-400 rounded-full mr-2 group-hover:bg-blue-300"></span>
                 Admissions
-              </a></li>
-              <li><a href="/academic" className="text-slate-300 hover:text-blue-400 transition-colors duration-200 text-sm flex items-center group">
+              </Link>
+              </li>
+
+              <li><Link to="/academic" className="text-slate-300 hover:text-blue-400 transition-colors duration-200 text-sm flex items-center group">
                 <span className="w-1.5 h-1.5 bg-blue-400 rounded-full mr-2 group-hover:bg-blue-300"></span>
                 Academics
-              </a></li>
-              <li><a href="/activities" className="text-slate-300 hover:text-blue-400 transition-colors duration-200 text-sm flex items-center group">
+              </Link></li>
+
+              <li><Link to="/activities" className="text-slate-300 hover:text-blue-400 transition-colors duration-200 text-sm flex items-center group">
                 <span className="w-1.5 h-1.5 bg-blue-400 rounded-full mr-2 group-hover:bg-blue-300"></span>
                 Activities
-              </a></li>
+              </Link></li>
             </ul>
           </div>
           

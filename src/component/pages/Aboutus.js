@@ -16,7 +16,7 @@ const Aboutus = () => {
           margin: '0 auto',
           padding: '0 20px'
         }}>
-        <h1 style={{
+        <h1 className="main-title" style={{
           textAlign: 'center',
           fontSize: '48px',
           fontWeight: 'bold',
@@ -27,14 +27,14 @@ const Aboutus = () => {
         }}>About Us</h1>
         
         {/* Leadership Section - Founder and Co-Founder Side by Side */}
-        <div style={{
+        <div className="leadership-grid" style={{
           display: 'grid',
           gridTemplateColumns: 'repeat(auto-fit, minmax(400px, 1fr))',
           gap: '40px',
           marginBottom: '40px'
         }}>
           {/* Founder Image Card */}
-          <div style={{
+          <div className="founder-card" style={{
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
@@ -51,6 +51,7 @@ const Aboutus = () => {
             <img 
               src={vilasraoImage} 
               alt="स्व. विलासराव शिंदे साहेब" 
+              className="founder-image"
               style={{
                 width: '220px',
                 height: '270px',
@@ -76,7 +77,7 @@ const Aboutus = () => {
               FOUNDER
             </h3>
             
-            <h2 style={{ 
+            <h2 className="founder-name" style={{ 
               color: '#1e40af', 
               fontSize: '24px', 
               marginBottom: '20px',
@@ -102,7 +103,7 @@ const Aboutus = () => {
           </div>
 
           {/* Co-Founder Image Card */}
-          <div style={{
+          <div className="cofounder-card" style={{
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
@@ -119,6 +120,7 @@ const Aboutus = () => {
             <img 
               src={coFounderImage} 
               alt="श्री वैभव विलासराव शिंदे" 
+              className="cofounder-image"
               style={{
                 width: '220px',
                 height: '270px',
@@ -144,7 +146,7 @@ const Aboutus = () => {
               CO-FOUNDER & CHAIRMAN
             </h3>
             
-            <h2 style={{ 
+            <h2 className="cofounder-name" style={{ 
               color: '#059669', 
               fontSize: '24px', 
               marginBottom: '20px',
@@ -185,7 +187,7 @@ const Aboutus = () => {
         }}
         onMouseEnter={(e) => e.target.style.transform = 'translateY(-3px)'}
         onMouseLeave={(e) => e.target.style.transform = 'translateY(0)'}>
-          <h2 style={{
+          <h2 className="section-title" style={{
             fontSize: '28px',
             fontWeight: 'bold',
             color: '#1e40af',
@@ -220,7 +222,7 @@ const Aboutus = () => {
         }}
         onMouseEnter={(e) => e.target.style.transform = 'translateY(-3px)'}
         onMouseLeave={(e) => e.target.style.transform = 'translateY(0)'}>
-          <h2 style={{
+          <h2 className="section-title" style={{
             fontSize: '28px',
             fontWeight: 'bold',
             color: '#dc2626',
@@ -255,7 +257,7 @@ const Aboutus = () => {
         }}
         onMouseEnter={(e) => e.target.style.transform = 'translateY(-3px)'}
         onMouseLeave={(e) => e.target.style.transform = 'translateY(0)'}>
-          <h2 style={{
+          <h2 className="section-title" style={{
             fontSize: '28px',
             fontWeight: 'bold',
             color: '#059669',
@@ -290,7 +292,7 @@ const Aboutus = () => {
         }}
         onMouseEnter={(e) => e.target.style.transform = 'translateY(-3px)'}
         onMouseLeave={(e) => e.target.style.transform = 'translateY(0)'}>
-          <h2 style={{
+          <h2 className="section-title" style={{
             fontSize: '28px',
             fontWeight: 'bold',
             color: '#7c3aed',
@@ -325,7 +327,7 @@ const Aboutus = () => {
         }}
         onMouseEnter={(e) => e.target.style.transform = 'translateY(-3px)'}
         onMouseLeave={(e) => e.target.style.transform = 'translateY(0)'}>
-          <h2 style={{
+          <h2 className="section-title" style={{
             fontSize: '32px',
             fontWeight: 'bold',
             color: 'white',
@@ -338,7 +340,7 @@ const Aboutus = () => {
           }}>
             🎓 Vilasrao Shinde Mahavidyalaya
           </h2>
-          <p style={{
+          <p className="section-text" style={{
             fontSize: '18px',
             lineHeight: '1.8',
             color: '#e0f2fe',
@@ -353,7 +355,7 @@ const Aboutus = () => {
             borderRadius: '15px',
             border: '1px solid rgba(255,255,255,0.2)'
           }}>
-            <p style={{
+            <p className="section-text" style={{
               fontSize: '18px',
               lineHeight: '1.8',
               color: '#e0f2fe',
@@ -374,7 +376,7 @@ const Aboutus = () => {
         }}
         onMouseEnter={(e) => e.target.style.transform = 'translateY(-3px)'}
         onMouseLeave={(e) => e.target.style.transform = 'translateY(0)'}>
-          <h2 style={{
+          <h2 className="section-title" style={{
             fontSize: '32px',
             fontWeight: 'bold',
             color: '#dc2626',
@@ -390,7 +392,7 @@ const Aboutus = () => {
             🏆 Key Features of the College
           </h2>
           
-          <div style={{
+          <div className="features-grid" style={{
             display: 'grid',
             gridTemplateColumns: 'repeat(auto-fit, minmax(400px, 1fr))',
             gap: '20px',
@@ -441,6 +443,111 @@ const Aboutus = () => {
         </div>
       </div>
       
+      {/* Responsive CSS Styles */}
+      <style jsx>{`
+        @media (max-width: 768px) {
+          .main-title {
+            font-size: 32px !important;
+            margin-bottom: 24px !important;
+            padding: 0 16px !important;
+          }
+          
+          .leadership-grid {
+            grid-template-columns: 1fr !important;
+            gap: 24px !important;
+            margin-bottom: 24px !important;
+          }
+          
+          .founder-card, .cofounder-card {
+            padding: 20px !important;
+            margin: 0 8px !important;
+          }
+          
+          .founder-image, .cofounder-image {
+            width: 180px !important;
+            height: 220px !important;
+            margin-bottom: 16px !important;
+          }
+          
+          .founder-name, .cofounder-name {
+            font-size: 18px !important;
+            margin-bottom: 16px !important;
+            line-height: 1.3 !important;
+          }
+          
+          .section-title {
+            font-size: 20px !important;
+            margin-bottom: 16px !important;
+            flex-direction: column !important;
+            text-align: center !important;
+            gap: 8px !important;
+          }
+          
+          .section-text {
+            font-size: 16px !important;
+            line-height: 1.6 !important;
+            text-align: left !important;
+          }
+          
+          .features-grid {
+            grid-template-columns: 1fr !important;
+            gap: 16px !important;
+            margin-top: 20px !important;
+          }
+          
+          .about-container {
+            padding: 0 16px !important;
+          }
+          
+          section {
+            padding: 20px !important;
+            margin-bottom: 20px !important;
+          }
+          
+          h3 {
+            font-size: 18px !important;
+            margin-bottom: 12px !important;
+          }
+        }
+        
+        @media (max-width: 480px) {
+          .main-title {
+            font-size: 28px !important;
+            margin-bottom: 20px !important;
+          }
+          
+          .founder-image, .cofounder-image {
+            width: 150px !important;
+            height: 180px !important;
+          }
+          
+          .founder-name, .cofounder-name {
+            font-size: 16px !important;
+          }
+          
+          .section-title {
+            font-size: 18px !important;
+          }
+          
+          .section-text {
+            font-size: 14px !important;
+          }
+          
+          .about-container {
+            padding: 0 12px !important;
+          }
+          
+          section {
+            padding: 16px !important;
+            margin-bottom: 16px !important;
+          }
+          
+          .founder-card, .cofounder-card {
+            padding: 16px !important;
+            margin: 0 4px !important;
+          }
+        }
+      `}</style>
     </div>
   );
 };
