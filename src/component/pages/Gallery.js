@@ -148,22 +148,40 @@ const Gallery = () => {
   };
 
   // Handle keyboard navigation
-  React.useEffect(() => {
-    const handleKeyDown = (event) => {
-      if (!selectedCategory) return;
+  // React.useEffect(() => {
+  //   const handleKeyDown = (event) => {
+  //     if (!selectedCategory) return;
       
-      if (event.key === 'Escape') {
-        closeModal();
-      } else if (event.key === 'ArrowRight') {
-        nextImage();
-      } else if (event.key === 'ArrowLeft') {
-        prevImage();
-      }
-    };
+  //     if (event.key === 'Escape') {
+  //       closeModal();
+  //     } else if (event.key === 'ArrowRight') {
+  //       nextImage();
+  //     } else if (event.key === 'ArrowLeft') {
+  //       prevImage();
+  //     }
+  //   };
 
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [selectedCategory]);
+  //   window.addEventListener('keydown', handleKeyDown);
+  //   return () => window.removeEventListener('keydown', handleKeyDown);
+  // }, [selectedCategory]);
+
+  React.useEffect(() => {
+  const handleKeyDown = (event) => {
+    if (!selectedCategory) return;
+    
+    if (event.key === 'Escape') {
+      closeModal();
+    } else if (event.key === 'ArrowRight') {
+      nextImage();
+    } else if (event.key === 'ArrowLeft') {
+      prevImage();
+    }
+  };
+
+  window.addEventListener('keydown', handleKeyDown);
+  return () => window.removeEventListener('keydown', handleKeyDown);
+}, [selectedCategory, nextImage, prevImage, closeModal]);
+
 
   return (
     <div style={{ 

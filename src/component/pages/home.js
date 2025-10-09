@@ -47,12 +47,12 @@ const Home = () => {
     setCurrentSlide((prev) => (prev - 1 + sliderImages.length) % sliderImages.length);
   };
   // Sample data for notices
-  const notices = [
-    "Admissions open for 2024-25 academic year",
-    "Mid-term exams scheduled for next week",
-    "College will remain closed on Monday for public holiday",
-    "Annual sports day on 15th March"
-  ];
+  // const notices = [
+  //   "Admissions open for 2024-25 academic year",
+  //   "Mid-term exams scheduled for next week",
+  //   "College will remain closed on Monday for public holiday",
+  //   "Annual sports day on 15th March"
+  // ];
 
   // Sample data for achievements (showing only 3 for home page)
   const achievements = [
@@ -77,12 +77,12 @@ const Home = () => {
   ];
 
   // Sample data for events
-  const events = [
-    { name: "Cultural Fest", date: "March 20, 2024" },
-    { name: "NSS Camp", date: "April 5-10, 2024" },
-    { name: "Sports Tournament", date: "March 25, 2024" },
-    { name: "Annual Function", date: "April 15, 2024" }
-  ];
+  // const events = [
+  //   { name: "Cultural Fest", date: "March 20, 2024" },
+  //   { name: "NSS Camp", date: "April 5-10, 2024" },
+  //   { name: "Sports Tournament", date: "March 25, 2024" },
+  //   { name: "Annual Function", date: "April 15, 2024" }
+  // ];
 
   // Sample gallery images
   const galleryImages = [
@@ -129,16 +129,16 @@ const Home = () => {
   ];
 
   // Sample testimonials
-  const testimonials = [
-    {
-      text: "This college provided me with excellent opportunities for growth and learning.",
-      author: "Rahul Sharma, Alumni"
-    },
-    {
-      text: "The faculty is very supportive and the campus environment is wonderful.",
-      author: "Priya Patel, Current Student"
-    }
-  ];
+  // const testimonials = [
+  //   {
+  //     text: "This college provided me with excellent opportunities for growth and learning.",
+  //     author: "Rahul Sharma, Alumni"
+  //   },
+  //   {
+  //     text: "The faculty is very supportive and the campus environment is wonderful.",
+  //     author: "Priya Patel, Current Student"
+  //   }
+  // ];
 
   return (
     <>
