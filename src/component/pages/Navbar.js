@@ -7,7 +7,7 @@ const Navbar = () => {
   const menuItems = [
     {
       name: "Home",
-      href: "/",
+      href: "/school/",
     },
      {
       name: "Achievements",
