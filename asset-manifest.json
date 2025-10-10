@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.js": "/school/static/js/main.d1d00023.js",
+    "main.js": "/school/static/js/main.cd8414f4.js",
     "static/media/chess.webp": "/school/static/media/chess.12418aaae78d965d5e90.webp",
     "static/media/nss2.jpeg": "/school/static/media/nss2.d4453dfef76d40bc8948.jpeg",
     "static/media/india.jpg": "/school/static/media/india.2d499f536c24d23d9767.jpg",
@@ -13,9 +13,9 @@
     "static/media/vollyboll.jpg": "/school/static/media/vollyboll.12914ed9395277fae97e.jpg",
     "static/media/17vilasrao-shinde_201906253646.jpg": "/school/static/media/17vilasrao-shinde_201906253646.1511d5e1191c18d5ec87.jpg",
     "index.html": "/school/index.html",
-    "main.d1d00023.js.map": "/school/static/js/main.d1d00023.js.map"
+    "main.cd8414f4.js.map": "/school/static/js/main.cd8414f4.js.map"
   },
   "entrypoints": [
-    "static/js/main.d1d00023.js"
+    "static/js/main.cd8414f4.js"
   ]
 }
