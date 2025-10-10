@@ -1,6 +1,28 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 const Footer = () => {
+  const navigate = useNavigate();
+
+  // Mobile scroll handler for footer links
+  const handleMobileNavigation = (path) => {
+    const isMobile = window.innerWidth <= 768 || 'ontouchstart' in window;
+    
+    if (isMobile) {
+      // Smooth scroll to top first
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+      
+      // Navigate after a short delay to allow scroll to complete
+      setTimeout(() => {
+        navigate(path);
+      }, 300);
+    } else {
+      // Direct navigation for desktop
+      navigate(path);
+    }
+  };
   return (
     <footer className="bg-gradient-to-br from-slate-800 via-slate-900 to-slate-800 text-white">
       {/* Main Footer Content */}
@@ -44,32 +66,40 @@ const Footer = () => {
               Quick Links
             </h4>
             <ul className="space-y-2">
-              <li>
-                <Link to="/about" className="text-slate-300 hover:text-blue-400 transition-colors duration-200 text-sm flex items-center group"> <span className="w-1.5 h-1.5 bg-blue-400 rounded-full mr-2 group-hover:bg-blue-300"></span>
-                About Us</Link>
-                
-                {/* <a href="/about" className="text-slate-300 hover:text-blue-400 transition-colors duration-200 text-sm flex items-center group">
-                <span className="w-1.5 h-1.5 bg-blue-400 rounded-full mr-2 group-hover:bg-blue-300"></span>
-                About Us
-              </a> */}
+                <li>
+                <button 
+                  onClick={() => handleMobileNavigation('/about')}
+                  className="text-slate-300 hover:text-blue-400 transition-colors duration-200 text-sm flex items-center group w-full text-left"
+                >
+                  <span className="w-1.5 h-1.5 bg-blue-400 rounded-full mr-2 group-hover:bg-blue-300"></span>
+                  About Us
+                </button>
               </li>
               <li>
-                
-                <Link to="/admission" className="text-slate-300 hover:text-blue-400 transition-colors duration-200 text-sm flex items-center group">
-                <span className="w-1.5 h-1.5 bg-blue-400 rounded-full mr-2 group-hover:bg-blue-300"></span>
-                Admissions
-              </Link>
+                <button 
+                  onClick={() => handleMobileNavigation('/admission')}
+                  className="text-slate-300 hover:text-blue-400 transition-colors duration-200 text-sm flex items-center group w-full text-left"
+                >
+                  <span className="w-1.5 h-1.5 bg-blue-400 rounded-full mr-2 group-hover:bg-blue-300"></span>
+                  Admissions
+                </button>
               </li>
 
-              <li><Link to="/academic" className="text-slate-300 hover:text-blue-400 transition-colors duration-200 text-sm flex items-center group">
-                <span className="w-1.5 h-1.5 bg-blue-400 rounded-full mr-2 group-hover:bg-blue-300"></span>
-                Academics
-              </Link></li>
+              <li> <button 
+                  onClick={() => handleMobileNavigation('/academics')}
+                  className="text-slate-300 hover:text-blue-400 transition-colors duration-200 text-sm flex items-center group w-full text-left"
+                >
+                  <span className="w-1.5 h-1.5 bg-blue-400 rounded-full mr-2 group-hover:bg-blue-300"></span>
+                  Academics
+                </button></li>
 
-              <li><Link to="/activities" className="text-slate-300 hover:text-blue-400 transition-colors duration-200 text-sm flex items-center group">
-                <span className="w-1.5 h-1.5 bg-blue-400 rounded-full mr-2 group-hover:bg-blue-300"></span>
-                Activities
-              </Link></li>
+              <li><button 
+                  onClick={() => handleMobileNavigation('/activities')}
+                  className="text-slate-300 hover:text-blue-400 transition-colors duration-200 text-sm flex items-center group w-full text-left"
+                >
+                  <span className="w-1.5 h-1.5 bg-blue-400 rounded-full mr-2 group-hover:bg-blue-300"></span>
+                  Activities
+                </button></li>
             </ul>
           </div>
           
@@ -79,22 +109,22 @@ const Footer = () => {
               Departments
             </h4>
             <ul className="space-y-2">
-              <li><a href="/faculty" className="text-slate-300 hover:text-purple-400 transition-colors duration-200 text-sm flex items-center group">
+              <li><button onClick={() => handleMobileNavigation('/faculty')} className="text-slate-300 hover:text-purple-400 transition-colors duration-200 text-sm flex items-center group w-full text-left">
                 <span className="w-1.5 h-1.5 bg-purple-400 rounded-full mr-2 group-hover:bg-purple-300"></span>
                 Faculty
-              </a></li>
-              <li><a href="/nonteaching" className="text-slate-300 hover:text-purple-400 transition-colors duration-200 text-sm flex items-center group">
+              </button></li>
+              <li><button onClick={() => handleMobileNavigation('/nonteaching')} className="text-slate-300 hover:text-purple-400 transition-colors duration-200 text-sm flex items-center group w-full text-left">
                 <span className="w-1.5 h-1.5 bg-purple-400 rounded-full mr-2 group-hover:bg-purple-300"></span>
                 Non-Teaching Staff
-              </a></li>
-              <li><a href="/nss" className="text-slate-300 hover:text-purple-400 transition-colors duration-200 text-sm flex items-center group">
+              </button></li>
+              <li><button onClick={() => handleMobileNavigation('/nss')} className="text-slate-300 hover:text-purple-400 transition-colors duration-200 text-sm flex items-center group w-full text-left">
                 <span className="w-1.5 h-1.5 bg-purple-400 rounded-full mr-2 group-hover:bg-purple-300"></span>
                 NSS
-              </a></li>
-              <li><a href="/sports" className="text-slate-300 hover:text-purple-400 transition-colors duration-200 text-sm flex items-center group">
+              </button></li>
+              <li><button onClick={() => handleMobileNavigation('/sports')} className="text-slate-300 hover:text-purple-400 transition-colors duration-200 text-sm flex items-center group w-full text-left">
                 <span className="w-1.5 h-1.5 bg-purple-400 rounded-full mr-2 group-hover:bg-purple-300"></span>
                 Sports
-              </a></li>
+              </button></li>
             </ul>
           </div>
           

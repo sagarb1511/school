@@ -3,6 +3,7 @@ import Navbar from './Navbar';
 import founderImage from '../assets/17vilasrao-shinde_201906253646.jpg';
 import coFounderImage from '../assets/vaibhav.JPG';
 import principalImage from '../assets/principal.JPG';
+import { Link } from 'react-router-dom';
 
 
 const Home = () => {
@@ -440,9 +441,10 @@ const Home = () => {
             <button 
               className="primary-button"
               style={styles.achievementButton}
-              onClick={() => window.location.href = '/achivement'}
             >
+              <Link to="/achievements">
               Show More Achievements
+              </Link>
             </button>
           </div>
         </div>
@@ -564,9 +566,12 @@ const Home = () => {
             <button 
               className="primary-button"
               style={styles.activityButton}
-              onClick={() => window.location.href = '/activitie'}
             >
-              View All Activities
+              <Link to="/activities">
+               View All Activities
+
+              </Link>
+             
             </button>
           </div>
         </div>
@@ -642,9 +647,10 @@ const Home = () => {
             <button 
               className="primary-button"
               style={styles.galleryButton}
-              onClick={() => window.location.href = '/gallery'}
             >
+              <Link to="/gallery">
               View Full Gallery
+              </Link>
             </button>
           </div>
         </div>
