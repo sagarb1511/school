@@ -305,7 +305,66 @@ export const translations = {
     // Footer
     quickLinks: "Quick Links",
     followUs: "Follow Us",
-    copyright: "© 2024 Vilasrao Shinde Mahavidyalaya. All rights reserved."
+    copyright: "© 2024 Vilasrao Shinde Mahavidyalaya. All rights reserved.",
+    
+    // Facilities page
+    facilitiesTitle: "Student Facilities",
+    facilitiesSubtitle: "All schemes and educational facilities available to students through the university",
+    scholarshipsTab: "Schemes & Scholarships",
+    nepTab: "National Education Policy 2020",
+    nepIntroTitle: "National Education Policy 2020",
+    nepIntroText: "The following facilities will be available to students. This policy has been implemented to provide students with comprehensive development and greater flexibility.",
+    viewDetails: "View Details",
+    nepFeature: "NEP 2020 Feature",
+    
+    // Scholarship facilities
+    sportsScholarship: "Shivaji University Encouraging Sports Scholarship Scheme",
+    welfareScheme: "Welfare Fund Scheme", 
+    medicalAccident: "Medical Accident Relief Fund Scheme",
+    researchSensitization: "Research Sensitization Scheme",
+    collegeCompetition: "Shivaji University Affiliated College Periodical Competition",
+    barodaAward: "Baroda Achievers Award",
+    presidentMedal: "The President of India Medal for General Proficiency, Shivaji University",
+    meritScholarship: "Shivaji University Merit Scholarship",
+    readingRoom: "Main Reading Room Facilities For Student of UPSC, NET/SET/& CA/CS/ICWE Banking",
+    walkInFacility: "Walk in Users/Reference Facility",
+    youthFestival: "Youth Festival",
+    
+    // NEP facilities
+    majorMinorSelection: "Major & Minor Subject Selection",
+    majorMinorDesc: "Selection of 1 major and 1 minor subject in the second year from the three subjects taken in the first year",
+    subjectContinuity: "Subject Continuity", 
+    subjectContinuityDesc: "Major and minor subjects selected in the second year are mandatory as major and minor in the third year",
+    openElective: "Open Elective (OE)",
+    openElectiveDesc: "Students from other faculties should select excluding their own faculty",
+    oeFlexibility: "OE Paper Flexibility",
+    oeFlexibilityDesc: "O.E papers 1 to O.E paper 5 need not be of the same subject",
+    secCourse: "SEC (Skill Enhancement Course)",
+    secCourseDesc: "SEC papers 1 to 4 can be selected from the same or different subjects",
+    vecCourse: "VEC (Value Education Course)",
+    vecCourseDesc: "As per the regulations issued by the Board of Studies Department",
+    aecCourse: "AEC (Ability Enhancement Course)",
+    aecCourseDesc: "English compulsory paper",
+    iksCourse: "Indian Knowledge System (IKS)",
+    iksCourseDesc: "First year - common curriculum, Part-2 - major specific",
+    ccCourse: "Co-Curricular Course (CC)",
+    ccCourseDesc: "Completion of 60 hours of workload is mandatory",
+    cepProgram: "Community Engagement Program (CEP)",
+    cepProgramDesc: "60 hours of workload, diary and project report mandatory",
+    projectIntegration: "Project Integration",
+    projectIntegrationDesc: "F.P., C.E.P, O.J.T, R.P are related to major subject",
+    ojtTraining: "On Job Training (OJT)",
+    ojtTrainingDesc: "Internship/apprenticeship as per Shivaji University policy",
+    multipleExit: "Multiple Exit Options",
+    multipleExitDesc: "First year - UG Certificate, Second year - UG Diploma, Third year - UG Degree",
+    honorsResearch: "Honors with Research",
+    honorsResearchDesc: "7.5 CGPA required for admission to fourth year",
+    
+    // Footer messages
+    studentDevelopmentTitle: "For Complete Student Development",
+    studentDevelopmentDesc: "Shivaji University is implementing various schemes for the academic, sports, cultural and overall development of students. The university is constantly striving to provide opportunities to every student according to their ability.",
+    modernEducationTitle: "New Direction for Modern Education", 
+    modernEducationDesc: "Under the National Education Policy 2020, students are being provided with greater flexibility, opportunities for multi-disciplinary studies and professional skill development."
   },
   mr: {
     // Organization names
@@ -613,7 +672,66 @@ export const translations = {
     // Footer
     quickLinks: "द्रुत दुवे",
     followUs: "आमचे अनुसरण करा",
-    copyright: "© २०२४ विलासराव शिंदे महाविद्यालय. सर्व हक्क राखीव."
+    copyright: "© २०२४ विलासराव शिंदे महाविद्यालय. सर्व हक्क राखीव.",
+    
+    // Facilities page
+    facilitiesTitle: "शिवाजी विद्यापीठ विद्यार्थी सुविधा",
+    facilitiesSubtitle: "विद्यापीठामार्फत विद्यार्थ्यांसाठी उपलब्ध असलेल्या सर्व योजना आणि शैक्षणिक सुविधा",
+    scholarshipsTab: "योजना आणि शिष्यवृत्ती",
+    nepTab: "राष्ट्रीय शैक्षणिक धोरण २०२०",
+    nepIntroTitle: "राष्ट्रीय शैक्षणिक धोरण २०२०",
+    nepIntroText: "खालील प्रमाणे सुविधा विद्यार्थ्यास उपलब्ध असणार आहेत. हे धोरण विद्यार्थ्यांच्या सर्वांगीण विकासासाठी आणि त्यांना अधिक लवचिकता देण्यासाठी राबविण्यात आले आहे.",
+    viewDetails: "तपशील पहा",
+    nepFeature: "NEP 2020 वैशिष्ट्य",
+    
+    // Scholarship facilities
+    sportsScholarship: "शिवाजी विद्यापीठ प्रोत्साहनपर क्रिडा शिष्यवृत्ती योजना",
+    welfareScheme: "कल्याण निधी योजना",
+    medicalAccident: "वैद्यकिय अपघात मदत निधी योजना",
+    researchSensitization: "Research Sensitization Scheme",
+    collegeCompetition: "शिवाजी विद्यापीठ सलग्न महाविद्यालयीन नियतकालिक स्पर्धा",
+    barodaAward: "Baroda Achievers Award",
+    presidentMedal: "दि प्रेसिंडेंट ऑफ इंडिया मेडल फॉर जनरल प्रोफेशियंसी, शिवाजी विद्यापीठ",
+    meritScholarship: "शिवाजी विद्यापीठ मेरिट स्कॉलरशिप",
+    readingRoom: "Main Reading Room Facilities For Student of UPSC, NET/SET/& CA/CS/ICWE Banking",
+    walkInFacility: "Walk in Users/Reference Facility",
+    youthFestival: "युवक महोत्सव",
+    
+    // NEP facilities
+    majorMinorSelection: "Major & Minor Subject Selection",
+    majorMinorDesc: "प्रथम वर्षामध्ये घेतलेल्या तीन विषयांपैकी दुसऱ्या वर्षी १ मेजर व १ मायनर विषय निवड",
+    subjectContinuity: "Subject Continuity",
+    subjectContinuityDesc: "दुसऱ्या वर्षी निवडलेले मेजर व मायनर विषय तिसऱ्या वर्षी मेजर व मायनर म्हणून बंधनकारक",
+    openElective: "Open Elective (OE)",
+    openElectiveDesc: "ज्या विद्याशाखेचा आहे ती विद्याशाखा सोडून इतर विद्याशाखेच्या विद्याथ्यांनी निवड",
+    oeFlexibility: "OE Paper Flexibility",
+    oeFlexibilityDesc: "O.E पेपर १ ते O.E पेपर ५ हे एकाच विषयाचे असणे बंधनकारक नाही",
+    secCourse: "SEC (Skill Enhancement Course)",
+    secCourseDesc: "SEC पेपर १ ते ४ एकाच किंवा वेगवेगळ्या विषयांचे निवडता येऊ शकतील",
+    vecCourse: "VEC (Value Education Course)",
+    vecCourseDesc: "अभ्यास मंडळे विभागाने निर्गमीत केलेल्या नियमावली प्रमाणे",
+    aecCourse: "AEC (Ability Enhancement Course)",
+    aecCourseDesc: "इंग्रजी आवश्यक पेपर",
+    iksCourse: "Indian Knowledge System (IKS)",
+    iksCourseDesc: "प्रथम वर्ष - समान अभ्यासक्रम, भाग-२ - मेजर स्पेसिपिक",
+    ccCourse: "Co-Curricular Course (CC)",
+    ccCourseDesc: "६० तासांचा कार्यभार पूर्ण करणे आवश्यक",
+    cepProgram: "Community Engagement Program (CEP)",
+    cepProgramDesc: "६० तासांचा कार्यभार, डायरी आणि प्रोजेक्ट रिपोर्ट बंधनकारक",
+    projectIntegration: "Project Integration",
+    projectIntegrationDesc: "F.P., C.E.P, O.J.T, R.P हे मेजर विषयाशी संबंधित",
+    ojtTraining: "On Job Training (OJT)",
+    ojtTrainingDesc: "शिवाजी विद्यापीठाच्या धोरणानुसार इंटर्नशिप/अप्रेंटिसशिप",
+    multipleExit: "Multiple Exit Options",
+    multipleExitDesc: "प्रथम वर्ष - UG Certificate, द्वितीय वर्ष - UG Diploma, तृतीय वर्ष - UG Degree",
+    honorsResearch: "Honors with Research",
+    honorsResearchDesc: "चौथ्या वर्षाला प्रवेशासाठी ७.५ CGPA आवश्यक",
+    
+    // Footer messages
+    studentDevelopmentTitle: "विद्यार्थ्यांच्या संपूर्ण विकासासाठी",
+    studentDevelopmentDesc: "शिवाजी विद्यापीठ विद्यार्थ्यांच्या शैक्षणिक, क्रीडा, सांस्कृतिक आणि सर्वांगीण विकासासाठी विविध योजना राबवत आहे. प्रत्येक विद्यार्थ्याला त्यांच्या क्षमतेनुसार संधी मिळावी यासाठी विद्यापीठ सतत प्रयत्नशील आहे.",
+    modernEducationTitle: "आधुनिक शिक्षणासाठी नवीन दिशा",
+    modernEducationDesc: "राष्ट्रीय शैक्षणिक धोरण २०२० अंतर्गत विद्यार्थ्यांना अधिक लवचिकता, बहु-विषय अभ्यासाची संधी आणि व्यावसायिक कौशल्य विकासाची सोय उपलब्ध करून दिली जात आहे."
   }
 };
 

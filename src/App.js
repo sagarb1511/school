@@ -68,6 +68,7 @@ import Activities from './component/pages/activities';
 import Footer from './component/pages/Footer';
 import { LanguageProvider } from './context/LanguageContext';
 import Facilitie from './component/pages/Facilities';
+import ApprovedPlace from './component/pages/ApprovedPlace';
 // Add this if you have an Organisation component; otherwise, create a placeholder or remove the link
 // import Organisation from './component/pages/Organisation';  // Uncomment if exists
 
@@ -92,6 +93,8 @@ function App() {
         <Route path="/contact" element={<><ContactUs /><Footer /></>} />
         <Route path="/activities" element={<><Activities /> <Footer /></>} />
          <Route path="/Facilities" element={<><Facilitie /> <Footer /></>} />
+           <Route path="/Approver" element={<><ApprovedPlace /> <Footer /></>} />
+
         {/* Add this if you have the component */}
         {/* <Route path="/organisation" element={<Organisation />} /> */}
         </Routes>
