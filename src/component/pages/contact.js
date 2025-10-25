@@ -44,25 +44,25 @@ const ContactUs = () => {
     {
       icon: '📧',
       title: getTranslation('emailUs', language),
-      details: 'info@college.edu',
+      details: 'vsmashta2022@gmail.com',
       description: getTranslation('emailUsDesc', language)
     },
     {
       icon: '📞',
       title: getTranslation('callUs', language),
-      details: '+91 9876543210',
+      details: '(02342) 299433',
       description: getTranslation('callUsDesc', language)
     },
     {
       icon: '🏢',
       title: getTranslation('visitUs', language),
-      details: 'College Road, Education Nagar',
+      details: 'Dudhgoan Road, Asta ., Tal-Walwa, Dist-Sangli, Maharashtra 416301',
       description: getTranslation('visitUsDesc', language)
     },
     {
       icon: '🕒',
       title: getTranslation('workingHours', language),
-      details: 'Monday - Friday',
+      details: 'Monday - Saturday',
       description: getTranslation('workingHoursDesc', language)
     }
   ];
@@ -71,22 +71,22 @@ const ContactUs = () => {
     {
       name: getTranslation('admissionsOffice', language),
       email: 'admissions@college.edu',
-      phone: '+91 9876543211'
+      phone: '+91 9922803535'
     },
     {
       name: getTranslation('academicDepartment', language),
       email: 'academics@college.edu',
-      phone: '+91 9876543212'
+      phone: '(02342) 299433'
     },
     {
       name: getTranslation('studentSupport', language),
       email: 'support@college.edu',
-      phone: '+91 9876543213'
+      phone: '(02342) 299433'
     },
     {
       name: getTranslation('placementCell', language),
       email: 'placement@college.edu',
-      phone: '+91 9876543214'
+      phone: '(02342) 299433'
     }
   ];
 

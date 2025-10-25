@@ -7,6 +7,7 @@ export const translations = {
     // Navigation menu items
     home: "Home",
     achievements: "Achievements",
+    adminLogin: "Admin Login",
     faculty: "Faculty",
     teachingStaff: "Teaching Staff",
     nonTeachingStaff: "Non-Teaching Staff",
@@ -188,9 +189,9 @@ export const translations = {
     visitUs: "Visit Us",
     workingHours: "Working Hours",
     emailUsDesc: "Send us an email anytime",
-    callUsDesc: "Mon to Fri 9am to 6pm",
-    visitUsDesc: "Mumbai, Maharashtra - 400001",
-    workingHoursDesc: "9:00 AM - 6:00 PM",
+    callUsDesc: "Mon to Fri 10am to 6pm",
+    visitUsDesc: "Asta, Sangli - 416301",
+    workingHoursDesc: "10:00 AM - 6:00 PM",
     followUs: "Follow Us",
     departmentContacts: "Department Contacts",
     admissionsOffice: "Admissions Office",
@@ -373,8 +374,9 @@ export const translations = {
     
     // Navigation menu items
     home: "मुख्यपृष्ठ",
-    achievements: "उपलब्धी",
-    faculty: "शिक्षक",
+    achievements: "यशोगाथा",
+    adminLogin: "प्रशासक लॉगिन",
+    faculty: "शिक्षकवृंद",
     teachingStaff: "शिक्षण कर्मचारी",
     nonTeachingStaff: "गैर-शिक्षण कर्मचारी",
     aboutUs: "आमच्याबद्दल",
@@ -386,6 +388,8 @@ export const translations = {
     nss: "राष्ट्रीय सेवा योजना (एनएसएस)",
     sports: "क्रीडा",
     activities: "उपक्रम",
+    studentFacilities: "विद्यार्थी सुविधा",
+    approvedPlace: "मान्यताप्राप्त ठिकाण",
     research: "संशोधन",
     contactUs: "संपर्क साधा",
     
