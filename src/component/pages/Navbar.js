@@ -526,6 +526,9 @@ const Navbar = () => {
                 <div className="absolute -inset-0.5 bg-gradient-to-r from-[#832936] to-[#6e1e2a] rounded-lg blur opacity-0 group-hover:opacity-75 transition duration-300 group-hover:duration-200 animate-pulse"></div>
                 <Link 
                   to="/admin"
+                  target="_blank"
+
+
                   className="relative flex items-center bg-[#832936] hover:bg-[#6e1e2a] text-white text-xs sm:text-sm px-3 py-1.5 sm:px-4 sm:py-2 rounded-md transition-all duration-300 whitespace-nowrap transform hover:scale-105 hover:shadow-lg hover:shadow-[#832936]/30"
                 >
                   <span className="relative z-10">

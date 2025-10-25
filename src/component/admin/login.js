@@ -1,5 +1,23 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { initializeApp } from 'firebase/app';
+import { getDatabase, ref, get } from 'firebase/database';
+
+// Firebase configuration
+const firebaseConfig = {
+  apiKey: "AIzaSyAGpznqp-blzbe076TnNpxLFXh3mawsTQY",
+  authDomain: "nodejs-2d35a.firebaseapp.com",
+  databaseURL: "https://nodejs-2d35a-default-rtdb.firebaseio.com",
+  projectId: "nodejs-2d35a",
+  storageBucket: "nodejs-2d35a.appspot.com",
+  messagingSenderId: "794426375729",
+  appId: "1:794426375729:web:57bc5e05378e03ae9e9f10",
+  measurementId: "G-TTNHEL72TX"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const database = getDatabase(app);
 
 const Login = () => {
   const [formData, setFormData] = useState({
@@ -16,16 +34,97 @@ const Login = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const navigate = useNavigate();
+  const [error, setError] = useState('');
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    setError('');
+    
+    // Basic validation
+    if (!formData.mobile || !formData.password) {
+      setError('Please enter both mobile number and password');
+      return;
+    }
+
     setIsLoading(true);
     
-    // Simulate login process
-    setTimeout(() => {
+    try {
+      // Try both possible paths (check capital S and lowercase s)
+      const pathsToCheck = ['School/admin', 'school/admin', 'admin'];
+      let adminData = null;
+      
+      for (const path of pathsToCheck) {
+        console.log(`Checking path: ${path}`);
+        const adminRef = ref(database, path);
+        const snapshot = await get(adminRef);
+        
+        if (snapshot.exists()) {
+          adminData = snapshot.val();
+          console.log(`Found data at path '${path}':`, adminData);
+          
+          // If we found data but it's not in the expected format, log it but keep looking
+          if (adminData && adminData.mobile && adminData.password) {
+            console.log(`Valid admin data found at path: ${path}`);
+            break;
+          } else {
+            console.log(`Data at '${path}' is missing required fields`);
+            adminData = null; // Reset if data is invalid
+          }
+        } else {
+          console.log(`No data found at path: ${path}`);
+        }
+      }
+      
+      if (!adminData) {
+        console.error('No valid admin data found in any of the checked paths');
+        setError('Admin configuration not found. Please check your database setup.');
+        return;
+      }
+      
+      console.log('Using admin data:', adminData);
+      
+      // Debug logs
+      console.log('Stored mobile:', adminData.mobile, 'Type:', typeof adminData.mobile);
+      console.log('Entered mobile:', formData.mobile, 'Type:', typeof formData.mobile);
+      console.log('Stored password:', adminData.password, 'Type:', typeof adminData.password);
+      console.log('Entered password:', formData.password, 'Type:', typeof formData.password);
+      
+      // Convert both to strings and remove any non-digit characters for comparison
+      const normalizeMobile = (mobile) => String(mobile).replace(/\D/g, '');
+      const storedMobile = normalizeMobile(adminData.mobile);
+      const enteredMobile = normalizeMobile(formData.mobile);
+      
+      console.log('Normalized stored mobile:', storedMobile);
+      console.log('Normalized entered mobile:', enteredMobile);
+      
+      // Check credentials
+      if (storedMobile === enteredMobile && adminData.password === formData.password) {
+        // Store admin data in localStorage if rememberMe is checked
+        if (rememberMe) {
+          localStorage.setItem('admin', JSON.stringify(adminData));
+        } else {
+          sessionStorage.setItem('admin', JSON.stringify(adminData));
+        }
+        
+        // Show success message
+        alert('Admin Login Successfully! ✓');
+        
+        // Redirect to admin dashboard
+        navigate('/admin/dashboard');
+      } else {
+        console.error('Credentials mismatch:', {
+          mobileMatch: storedMobile === enteredMobile,
+          passwordMatch: adminData.password === formData.password
+        });
+        setError('Invalid mobile number or password');
+      }
+    } catch (error) {
+      console.error('Error during login:', error);
+      setError('An error occurred during login. Please try again.');
+    } finally {
       setIsLoading(false);
-      console.log('Login attempted with:', formData);
-      // Add your login logic here
-    }, 2000);
+    }
   };
 
   return (
@@ -138,32 +237,41 @@ const Login = () => {
                 </Link>
               </div>
 
-              {/* Login Button */}
-              <button
-                type="submit"
-                disabled={isLoading}
-                className="w-full py-4 px-6 bg-gradient-to-r from-[#832936] to-[#775448] text-[#e0ddd7] font-bold rounded-xl shadow-lg transform transition-all duration-500 hover:scale-105 hover:shadow-2xl active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed group relative overflow-hidden"
-              >
-                <div className="absolute inset-0 bg-gradient-to-r from-[#977765] to-[#b29990] opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                <span className="relative z-10 flex items-center justify-center">
-                  {isLoading ? (
-                    <>
-                      <div className="w-5 h-5 border-2 border-[#e0ddd7] border-t-transparent rounded-full animate-spin mr-2"></div>
-                      Signing In...
-                    </>
-                  ) : (
-                    <>
-                      <span className="mr-2">🚀</span>
-                      Sign In
-                    </>
-                  )}
-                </span>
-                
-                {/* Button shine effect */}
-                <div className="absolute inset-0 overflow-hidden rounded-xl">
-                  <div className="absolute -inset-full top-0 bg-gradient-to-r from-transparent via-[#e0ddd7] to-transparent group-hover:animate-shine"></div>
+              {/* Error Message */}
+              {error && (
+                <div className="p-3 bg-red-100 border-l-4 border-red-500 text-red-700">
+                  <p>{error}</p>
                 </div>
-              </button>
+              )}
+
+              {/* Login Button */}
+              <div className="relative z-10">
+                <button
+                  type="submit"
+                  disabled={isLoading}
+                  className="w-full py-4 px-6 bg-gradient-to-r from-[#c53030] to-[#9b2c2c] text-white font-bold rounded-xl shadow-lg transform transition-all duration-300 hover:scale-[1.02] hover:shadow-xl hover:from-[#e53e3e] hover:to-[#c53030] active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed group relative overflow-hidden"
+                >
+                  <div className="absolute inset-0 bg-gradient-to-r from-[#e53e3e] to-[#c53030] opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  <span className="relative z-10 flex items-center justify-center">
+                    {isLoading ? (
+                      <>
+                        <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin mr-2"></div>
+                        Signing In...
+                      </>
+                    ) : (
+                      <>
+                        <span className="mr-2">🚀</span>
+                        Sign In
+                      </>
+                    )}
+                  </span>
+                  
+                  {/* Button shine effect */}
+                  <div className="absolute inset-0 overflow-hidden rounded-xl">
+                    <div className="absolute -inset-full top-0 bg-gradient-to-r from-transparent via-white to-transparent opacity-30 group-hover:animate-shine"></div>
+                  </div>
+                </button>
+              </div>
 
               {/* Sign Up Link */}
               <div className="text-center">
