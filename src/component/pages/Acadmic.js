@@ -8,24 +8,26 @@ const Academic = () => {
   // ✅ Department & Courses Data
   const departments = {
     Science: [
-      "B.Sc. Physics",
       "B.Sc. Chemistry",
-      "B.Sc. Mathematics",
-      "M.Sc. Physics",
-      "M.Sc. Chemistry",
+      "B.Sc. Microbiology",
+      "B.Sc. Computer Science",
+      
     ],
     Commerce: [
-      "B.Com (General)",
-      "M.Com (Advanced Accounting)",
-      "Diploma in Business Management",
-      "Certificate in Financial Accounting",
+      "Moder Management Practices",
+      "Business Regulatory Framework",
+      "Co-Operative Development",
+      "Business Environment",
+      "Advance Accountancy",
     ],
     Arts: [
-      "B.A. English",
+      "B.A. Economics",
       "B.A. History",
-      "B.A. Political Science",
-      "M.A. Sociology",
-      "M.A. Marathi",
+      "B.A. Geography",
+    ],
+     BCA: [
+      "Problem Solving Techniques",
+      "Computer Architecture",
     ],
   };
 

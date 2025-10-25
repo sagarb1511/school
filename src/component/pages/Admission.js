@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { useLanguage } from '../../context/LanguageContext';
+import { getTranslation } from '../../translations/translations';
 
 
 // AdmissionDocuments.jsx
@@ -10,41 +12,51 @@ import React, { useState } from 'react';
 // Uses TailwindCSS for styling.
 
 export default function AdmissionDocuments() {
-  const tabs = [
-    { id: 'general', label: 'General Admission' },
-    { id: 'scholarship', label: 'Scholarship' },
-    { id: 'fee', label: 'Fee Concession' },
-    { id: 'form', label: 'Admission Form' },
+  const { language } = useLanguage();
+  
+  const getTabs = () => [
+    { id: 'general', label: getTranslation('admissionProcess', language) },
+    { id: 'scholarship', label: getTranslation('scholarships', language) },
+    { id: 'fee', label: getTranslation('feesStructure', language) },
+    { id: 'form', label: getTranslation('applicationForm', language) },
   ];
 
-  const lists = {
+  const tabs = getTabs();
+
+  const getLists = () => ({
     general: [
-      'Admission Form (duly filled)',
-      'Passport-size Photographs (2-4)',
-      'Birth Certificate (age proof)',
-      'Previous School/College Leaving Certificate (LC/TC)',
-      "Previous Year's Marksheet/Report Card",
-      'Identity Proof (Aadhar/Passport/Other)',
-      'Address Proof (Electricity Bill / Ration Card)',
+      language === 'mr' ? 'प्रवेश फॉर्म (योग्यरित्या भरलेला)' : 'Admission Form (duly filled)',
+      language === 'mr' ? 'पासपोर्ट साइज फोटो (२-४)' : 'Passport-size Photographs (2-4)',
+      language === 'mr' ? 'जन्म प्रमाणपत्र (एसएससी प्रमाणपत्र)' : 'Birth Certificate (SSC Certificate)',
+      language === 'mr' ? 'मागील शाळा/महाविद्यालय सोडल्याचे प्रमाणपत्र (LC/TC)' : 'Previous School/College Leaving Certificate (LC/TC)',
+      language === 'mr' ? 'मागील वर्षाचे गुणपत्रक/रिपोर्ट कार्ड' : "Previous Year's Marksheet/Report Card",
+      language === 'mr' ? 'ओळखपत्र (आधार/पासपोर्ट/इतर)' : 'Identity Proof (Aadhar/Passport/Other)',
+      language === 'mr' ? 'पत्ता पुरावा (वीज बिल / रेशन कार्ड)' : 'Address Proof (Electricity Bill / Ration Card)',
     ],
     scholarship: [
-      'Scholarship Application Form (duly filled)',
-      'Recent Passport-size Photographs',
-      '10th & 12th Marksheets (if applicable)',
-      'Caste Certificate (if applicable)',
-      "Income Certificate of Parents/Guardian",
-      'Bank Account Details / Passbook Copy',
+      `${getTranslation('ebcScholarship', language)} - ${getTranslation('ebcScholarshipDesc', language)}`,
+      `${getTranslation('teacherChildrenScholarship', language)} - ${getTranslation('teacherChildrenScholarshipDesc', language)}`,
+      `${getTranslation('militaryScholarship', language)} - ${getTranslation('militaryScholarshipDesc', language)}`,
+      `${getTranslation('backwardClassScholarship', language)} - ${getTranslation('backwardClassScholarshipDesc', language)} ${getTranslation('freshStudents', language)} | ${getTranslation('marksheetCopy', language)} | ${getTranslation('casteCertificateCopy', language)} | ${getTranslation('incomeCertificateCopy', language)} | ${getTranslation('aadharBankCopy', language)}`,
+      `${getTranslation('shahuScholarship', language)} - ${getTranslation('shahuScholarshipDesc', language)} | ${getTranslation('domicileCertificate', language)} | ${getTranslation('previousMarksheet', language)} | ${getTranslation('familyIncomeCertificate', language)} | ${getTranslation('capAllotmentLetter', language)} | ${getTranslation('gapCertificate', language)}`,
+      `${getTranslation('nationalMeritScholarship', language)} - ${getTranslation('nationalMeritScholarshipDesc', language)}`,
+      `${getTranslation('hindiScholarship', language)} - ${getTranslation('hindiScholarshipDesc', language)}`,
+      `${getTranslation('disabilityScholarship', language)} - ${getTranslation('disabilityScholarshipDesc', language)}`,
+      `${getTranslation('universityMeritScholarship', language)} - ${getTranslation('universityMeritScholarshipDesc', language)}`,
     ],
     fee: [
-      'Fee Concession Application Form',
-      'Income Certificate of Parents/Guardian',
-      'Caste Certificate (if applicable)',
-      'Latest Fee Receipt (if renewing concession)',
-      'Identity Proof and Address Proof',
+      language === 'mr' ? 'फी सवलत अर्ज फॉर्म' : 'Fee Concession Application Form',
+      language === 'mr' ? 'पालक/पालकांचे उत्पन्न प्रमाणपत्र' : 'Income Certificate of Parents/Guardian',
+      language === 'mr' ? 'जात प्रमाणपत्र (लागू असल्यास)' : 'Caste Certificate (if applicable)',
+      language === 'mr' ? 'नवीनतम फी पावती (सवलत नूतनीकरण करत असल्यास)' : 'Latest Fee Receipt (if renewing concession)',
+      language === 'mr' ? 'ओळखपत्र आणि पत्ता पुरावा' : 'Identity Proof and Address Proof',
     ],
-  };
+  });
+
+  const lists = getLists();
 
   const [active, setActive] = useState('general');
+  const [expandedScholarship, setExpandedScholarship] = useState(null);
 
   return (
     <div style={{ 
@@ -170,7 +182,7 @@ export default function AdmissionDocuments() {
           marginBottom: '16px',
           color: '#111827',
           textShadow: '2px 2px 4px rgba(0,0,0,0.1)'
-        }}>Admission — Required Documents</h1>
+        }}>{getTranslation('admissionTitle', language)} — {getTranslation('documentsRequired', language)}</h1>
 
         <div style={{ 
           display: 'flex', 
@@ -213,7 +225,7 @@ export default function AdmissionDocuments() {
         </div>
 
         {/* Document lists */}
-        {active !== 'form' && (
+        {active !== 'form' && active !== 'scholarship' && (
           <div style={{
             backgroundColor: 'rgba(255, 255, 255, 0.9)',
             borderRadius: '16px',
@@ -257,6 +269,196 @@ export default function AdmissionDocuments() {
           </div>
         )}
 
+        {/* Scholarship Section with Better Formatting */}
+        {active === 'scholarship' && (
+          <div style={{
+            backgroundColor: 'rgba(255, 255, 255, 0.9)',
+            borderRadius: '16px',
+            boxShadow: '0 10px 25px rgba(0, 0, 0, 0.1)',
+            padding: '24px',
+            backdropFilter: 'blur(10px)',
+            border: '1px solid rgba(255, 255, 255, 0.2)',
+            transition: 'all 0.3s ease'
+          }}
+          onMouseEnter={(e) => {
+            e.target.style.transform = 'translateY(-5px)';
+            e.target.style.boxShadow = '0 20px 40px rgba(0, 0, 0, 0.15)';
+          }}
+          onMouseLeave={(e) => {
+            e.target.style.transform = 'translateY(0)';
+            e.target.style.boxShadow = '0 10px 25px rgba(0, 0, 0, 0.1)';
+          }}>
+            <h2 style={{
+              fontSize: '1.25rem',
+              fontWeight: '600',
+              marginBottom: '16px',
+              color: '#111827'
+            }}>{getTranslation('scholarships', language)}</h2>
+            
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+              {lists.scholarship.map((item, idx) => {
+                if (item.includes(' - ')) {
+                  // This is a detailed scholarship
+                  const [title, details] = item.split(' - ');
+                  const isExpanded = expandedScholarship === idx;
+                  
+                  return (
+                    <div key={idx} style={{
+                      border: '1px solid #e5e7eb',
+                      borderRadius: '12px',
+                      backgroundColor: 'rgba(249, 250, 251, 0.8)',
+                      transition: 'all 0.3s ease'
+                    }}>
+                      {/* Clickable Header */}
+                      <div 
+                        onClick={() => setExpandedScholarship(isExpanded ? null : idx)}
+                        style={{
+                          padding: '16px',
+                          cursor: 'pointer',
+                          display: 'flex',
+                          justifyContent: 'space-between',
+                          alignItems: 'center'
+                        }}
+                        onMouseEnter={(e) => {
+                          e.currentTarget.style.backgroundColor = 'rgba(243, 244, 246, 0.9)';
+                        }}
+                        onMouseLeave={(e) => {
+                          e.currentTarget.style.backgroundColor = 'transparent';
+                        }}
+                      >
+                        <h3 style={{
+                          fontSize: '1.1rem',
+                          fontWeight: '600',
+                          color: '#1f2937',
+                          margin: 0
+                        }}>📚 {title}</h3>
+                        <span style={{
+                          fontSize: '1.2rem',
+                          color: '#6b7280',
+                          transform: isExpanded ? 'rotate(180deg)' : 'rotate(0deg)',
+                          transition: 'transform 0.3s ease'
+                        }}>▼</span>
+                      </div>
+                      
+                      {/* Expandable Content */}
+                      {isExpanded && (
+                        <div style={{
+                          padding: '0 16px 16px 16px',
+                          borderTop: '1px solid #e5e7eb'
+                        }}>
+                          {/* Check if details contain document points (pipe separated) */}
+                          {details.includes(' | ') ? (
+                            <>
+                              <p style={{
+                                fontSize: '14px',
+                                color: '#6b7280',
+                                lineHeight: '1.6',
+                                marginLeft: '16px',
+                                marginBottom: '12px',
+                                marginTop: '12px'
+                              }}>{details.split(' | ')[0]}</p>
+                              
+                              {/* Document Points */}
+                              <div style={{ marginLeft: '16px' }}>
+                                <p style={{
+                                  fontSize: '14px',
+                                  fontWeight: '600',
+                                  color: '#374151',
+                                  marginBottom: '8px'
+                                }}>{getTranslation('requiredDocuments', language)}:</p>
+                                <ul style={{
+                                  listStyleType: 'disc',
+                                  paddingLeft: '20px',
+                                  display: 'flex',
+                                  flexDirection: 'column',
+                                  gap: '4px'
+                                }}>
+                                  {details.split(' | ').slice(1).map((point, pointIdx) => (
+                                    <li key={pointIdx} style={{
+                                      fontSize: '13px',
+                                      color: '#6b7280',
+                                      lineHeight: '1.5'
+                                    }}>{point.trim()}</li>
+                                  ))}
+                                </ul>
+                              </div>
+                            </>
+                          ) : (
+                            <p style={{
+                              fontSize: '14px',
+                              color: '#6b7280',
+                              lineHeight: '1.6',
+                              marginLeft: '16px',
+                              marginTop: '12px'
+                            }}>{details}</p>
+                          )}
+                        </div>
+                      )}
+                    </div>
+                  );
+                } else {
+                  // Regular scholarship items - also make them clickable
+                  const isExpanded = expandedScholarship === idx;
+                  
+                  return (
+                    <div key={idx} style={{
+                      backgroundColor: 'rgba(243, 244, 246, 0.5)',
+                      borderRadius: '8px',
+                      borderLeft: '4px solid #4f46e5',
+                      transition: 'all 0.3s ease'
+                    }}>
+                      <div 
+                        onClick={() => setExpandedScholarship(isExpanded ? null : idx)}
+                        style={{
+                          padding: '12px 16px',
+                          cursor: 'pointer',
+                          display: 'flex',
+                          justifyContent: 'space-between',
+                          alignItems: 'center'
+                        }}
+                        onMouseEnter={(e) => {
+                          e.currentTarget.style.backgroundColor = 'rgba(229, 231, 235, 0.7)';
+                        }}
+                        onMouseLeave={(e) => {
+                          e.currentTarget.style.backgroundColor = 'transparent';
+                        }}
+                      >
+                        <p style={{
+                          fontSize: '16px',
+                          fontWeight: '500',
+                          color: '#374151',
+                          margin: 0
+                        }}>📋 {item}</p>
+                        <span style={{
+                          fontSize: '1rem',
+                          color: '#6b7280',
+                          transform: isExpanded ? 'rotate(180deg)' : 'rotate(0deg)',
+                          transition: 'transform 0.3s ease'
+                        }}>▼</span>
+                      </div>
+                      
+                      {isExpanded && (
+                        <div style={{
+                          padding: '12px 16px',
+                          borderTop: '1px solid #d1d5db',
+                          backgroundColor: 'rgba(255, 255, 255, 0.5)'
+                        }}>
+                          <p style={{
+                            fontSize: '14px',
+                            color: '#6b7280',
+                            lineHeight: '1.6',
+                            fontStyle: 'italic'
+                          }}>{getTranslation('clickForDetails', language)}</p>
+                        </div>
+                      )}
+                    </div>
+                  );
+                }
+              })}
+            </div>
+          </div>
+        )}
+
         {active === 'form' && (
           <div style={{
             backgroundColor: 'rgba(255, 255, 255, 0.9)',
@@ -280,7 +482,7 @@ export default function AdmissionDocuments() {
               fontWeight: '600',
               marginBottom: '16px',
               color: '#111827'
-            }}>Admission Form</h2>
+            }}>{getTranslation('applicationForm', language)}</h2>
             <form style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
               <div>
                 <input 
@@ -293,7 +495,7 @@ export default function AdmissionDocuments() {
                     fontSize: '16px',
                     transition: 'all 0.3s ease'
                   }}
-                  placeholder="Enter your full name"
+                  placeholder={language === 'mr' ? 'तुमचे पूर्ण नाव टाका' : 'Enter your full name'}
                   onFocus={(e) => {
                     e.target.style.borderColor = '#4f46e5';
                     e.target.style.boxShadow = '0 0 0 3px rgba(79, 70, 229, 0.1)';
@@ -311,7 +513,7 @@ export default function AdmissionDocuments() {
                   fontWeight: '500',
                   marginBottom: '4px',
                   color: '#374151'
-                }}>Date of Birth</label>
+                }}>{language === 'mr' ? 'जन्मतारीख' : 'Date of Birth'}</label>
                 <input 
                   type="date" 
                   style={{
@@ -339,7 +541,7 @@ export default function AdmissionDocuments() {
                   fontWeight: '500',
                   marginBottom: '4px',
                   color: '#374151'
-                }}>Email</label>
+                }}>{language === 'mr' ? 'ईमेल' : 'Email'}</label>
                 <input 
                   type="email" 
                   style={{
@@ -350,7 +552,7 @@ export default function AdmissionDocuments() {
                     fontSize: '16px',
                     transition: 'all 0.3s ease'
                   }}
-                  placeholder="Enter your email"
+                  placeholder={language === 'mr' ? 'तुमचा ईमेल टाका' : 'Enter your email'}
                   onFocus={(e) => {
                     e.target.style.borderColor = '#4f46e5';
                     e.target.style.boxShadow = '0 0 0 3px rgba(79, 70, 229, 0.1)';
@@ -368,7 +570,7 @@ export default function AdmissionDocuments() {
                   fontWeight: '500',
                   marginBottom: '4px',
                   color: '#374151'
-                }}>Phone Number</label>
+                }}>{language === 'mr' ? 'फोन नंबर' : 'Phone Number'}</label>
                 <input 
                   type="tel" 
                   style={{
@@ -379,7 +581,7 @@ export default function AdmissionDocuments() {
                     fontSize: '16px',
                     transition: 'all 0.3s ease'
                   }}
-                  placeholder="Enter your phone number"
+                  placeholder={language === 'mr' ? 'तुमचा फोन नंबर टाका' : 'Enter your phone number'}
                   onFocus={(e) => {
                     e.target.style.borderColor = '#4f46e5';
                     e.target.style.boxShadow = '0 0 0 3px rgba(79, 70, 229, 0.1)';
@@ -397,7 +599,7 @@ export default function AdmissionDocuments() {
                   fontWeight: '500',
                   marginBottom: '4px',
                   color: '#374151'
-                }}>Address</label>
+                }}>{language === 'mr' ? 'पत्ता' : 'Address'}</label>
                 <textarea 
                   style={{
                     width: '100%',
@@ -409,7 +611,7 @@ export default function AdmissionDocuments() {
                     resize: 'vertical',
                     transition: 'all 0.3s ease'
                   }}
-                  placeholder="Enter your address"
+                  placeholder={language === 'mr' ? 'तुमचा पत्ता टाका' : 'Enter your address'}
                   onFocus={(e) => {
                     e.target.style.borderColor = '#4f46e5';
                     e.target.style.boxShadow = '0 0 0 3px rgba(79, 70, 229, 0.1)';
@@ -445,7 +647,7 @@ export default function AdmissionDocuments() {
                   e.target.style.boxShadow = '0 4px 12px rgba(79, 70, 229, 0.3)';
                 }}
               >
-                Submit
+                {getTranslation('submit', language)}
               </button>
             </form>
           </div>

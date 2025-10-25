@@ -1,7 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 
 const Gallery = () => {
+  // Scroll to top when component mounts
+  useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+    document.body.scrollTop = 0; // For Safari
+    document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+  }, []);
+
   // 🧩 Dummy Image Data with multiple images for each category
   const galleryData = [
     {
@@ -196,7 +203,12 @@ const Gallery = () => {
     <div style={{ 
       minHeight: '100vh', 
       position: 'relative',
-      overflow: 'hidden'
+      overflow: 'hidden',
+      paddingTop: '0',
+      display: 'flex',
+      flexDirection: 'column',
+      justifyContent: 'flex-start',
+      alignItems: 'stretch'
     }}>
       {/* 3D Animated Background with Light Colors */}
       <div style={{
@@ -330,12 +342,13 @@ const Gallery = () => {
       </div>
 
       <div style={{ 
-        padding: '48px 24px',
+        padding: '8px 12px 48px 12px',
         position: 'relative',
-        zIndex: 1
+        zIndex: 1,
+        flex: '1'
       }}>
         {/* Header */}
-        <h1 className="text-4xl font-bold text-blue-700 text-center mb-8">
+        <h1 className="text-2xl md:text-4xl font-bold text-blue-700 text-center mb-6 md:mb-10 mt-2 md:mt-0">
           📸 College Gallery
         </h1>
 

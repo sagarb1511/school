@@ -3,25 +3,21 @@ import { Link, useNavigate } from 'react-router-dom';
 const Footer = () => {
   const navigate = useNavigate();
 
-  // Mobile scroll handler for footer links
-  const handleMobileNavigation = (path) => {
-    const isMobile = window.innerWidth <= 768 || 'ontouchstart' in window;
+  // Navigation handler with scroll to top for all devices
+  const handleNavigation = (path) => {
+    // Always scroll to top first for all devices
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: 'instant'
+    });
     
-    if (isMobile) {
-      // Smooth scroll to top first
-      window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
-      });
-      
-      // Navigate after a short delay to allow scroll to complete
-      setTimeout(() => {
-        navigate(path);
-      }, 300);
-    } else {
-      // Direct navigation for desktop
-      navigate(path);
-    }
+    // Also set scroll position directly for better compatibility
+    document.body.scrollTop = 0; // For Safari
+    document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+    
+    // Navigate immediately after scroll
+    navigate(path);
   };
   return (
     <footer className="bg-gradient-to-br from-slate-800 via-slate-900 to-slate-800 text-white">
@@ -68,7 +64,7 @@ const Footer = () => {
             <ul className="space-y-2">
                 <li>
                 <button 
-                  onClick={() => handleMobileNavigation('/about')}
+                  onClick={() => handleNavigation('/about')}
                   className="text-slate-300 hover:text-blue-400 transition-colors duration-200 text-sm flex items-center group w-full text-left"
                 >
                   <span className="w-1.5 h-1.5 bg-blue-400 rounded-full mr-2 group-hover:bg-blue-300"></span>
@@ -77,7 +73,7 @@ const Footer = () => {
               </li>
               <li>
                 <button 
-                  onClick={() => handleMobileNavigation('/admission')}
+                  onClick={() => handleNavigation('/admission')}
                   className="text-slate-300 hover:text-blue-400 transition-colors duration-200 text-sm flex items-center group w-full text-left"
                 >
                   <span className="w-1.5 h-1.5 bg-blue-400 rounded-full mr-2 group-hover:bg-blue-300"></span>
@@ -86,7 +82,7 @@ const Footer = () => {
               </li>
 
               <li> <button 
-                  onClick={() => handleMobileNavigation('/academics')}
+                  onClick={() => handleNavigation('/academics')}
                   className="text-slate-300 hover:text-blue-400 transition-colors duration-200 text-sm flex items-center group w-full text-left"
                 >
                   <span className="w-1.5 h-1.5 bg-blue-400 rounded-full mr-2 group-hover:bg-blue-300"></span>
@@ -94,7 +90,7 @@ const Footer = () => {
                 </button></li>
 
               <li><button 
-                  onClick={() => handleMobileNavigation('/activities')}
+                  onClick={() => handleNavigation('/activities')}
                   className="text-slate-300 hover:text-blue-400 transition-colors duration-200 text-sm flex items-center group w-full text-left"
                 >
                   <span className="w-1.5 h-1.5 bg-blue-400 rounded-full mr-2 group-hover:bg-blue-300"></span>
@@ -109,19 +105,19 @@ const Footer = () => {
               Departments
             </h4>
             <ul className="space-y-2">
-              <li><button onClick={() => handleMobileNavigation('/faculty')} className="text-slate-300 hover:text-purple-400 transition-colors duration-200 text-sm flex items-center group w-full text-left">
+              <li><button onClick={() => handleNavigation('/faculty')} className="text-slate-300 hover:text-purple-400 transition-colors duration-200 text-sm flex items-center group w-full text-left">
                 <span className="w-1.5 h-1.5 bg-purple-400 rounded-full mr-2 group-hover:bg-purple-300"></span>
                 Faculty
               </button></li>
-              <li><button onClick={() => handleMobileNavigation('/nonteaching')} className="text-slate-300 hover:text-purple-400 transition-colors duration-200 text-sm flex items-center group w-full text-left">
+              <li><button onClick={() => handleNavigation('/nonteaching')} className="text-slate-300 hover:text-purple-400 transition-colors duration-200 text-sm flex items-center group w-full text-left">
                 <span className="w-1.5 h-1.5 bg-purple-400 rounded-full mr-2 group-hover:bg-purple-300"></span>
                 Non-Teaching Staff
               </button></li>
-              <li><button onClick={() => handleMobileNavigation('/nss')} className="text-slate-300 hover:text-purple-400 transition-colors duration-200 text-sm flex items-center group w-full text-left">
+              <li><button onClick={() => handleNavigation('/nss')} className="text-slate-300 hover:text-purple-400 transition-colors duration-200 text-sm flex items-center group w-full text-left">
                 <span className="w-1.5 h-1.5 bg-purple-400 rounded-full mr-2 group-hover:bg-purple-300"></span>
                 NSS
               </button></li>
-              <li><button onClick={() => handleMobileNavigation('/sports')} className="text-slate-300 hover:text-purple-400 transition-colors duration-200 text-sm flex items-center group w-full text-left">
+              <li><button onClick={() => handleNavigation('/sports')} className="text-slate-300 hover:text-purple-400 transition-colors duration-200 text-sm flex items-center group w-full text-left">
                 <span className="w-1.5 h-1.5 bg-purple-400 rounded-full mr-2 group-hover:bg-purple-300"></span>
                 Sports
               </button></li>

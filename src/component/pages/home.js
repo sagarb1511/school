@@ -4,34 +4,39 @@ import founderImage from '../assets/17vilasrao-shinde_201906253646.jpg';
 import coFounderImage from '../assets/vaibhav.JPG';
 import principalImage from '../assets/principal.JPG';
 import { Link } from 'react-router-dom';
+import { useLanguage } from '../../context/LanguageContext';
+import { getTranslation } from '../../translations/translations';
 
 
 const Home = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const { language } = useLanguage();
 
   // Slider images data
-  const sliderImages = [
+  const getSliderImages = () => [
     {
       image: "https://images.unsplash.com/photo-1562774053-701939374585?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80",
-      title: "Welcome to Our Campus",
-      description: "Experience world-class education in our modern facilities"
+      title: getTranslation('welcomeToCollege', language),
+      description: getTranslation('collegeDescription', language)
     },
     {
       image: "https://images.unsplash.com/photo-1427504494785-3a9ca7044f45?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80",
-      title: "Excellence in Education",
-      description: "Nurturing minds for a brighter tomorrow"
+      title: getTranslation('qualityEducation', language),
+      description: getTranslation('qualityEducationDesc', language)
     },
     {
       image: "https://images.unsplash.com/photo-1481627834876-b7833e8f5570?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80",
-      title: "State-of-the-Art Library",
-      description: "Modern library with extensive digital and physical resources"
+      title: getTranslation('modernFacilities', language),
+      description: getTranslation('modernFacilitiesDesc', language)
     },
     {
       image: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80",
-      title: "Sports & Extra-curricular",
-      description: "Holistic development through various activities and sports"
+      title: getTranslation('sports', language),
+      description: getTranslation('experiencedFacultyDesc', language)
     }
   ];
+
+  const sliderImages = getSliderImages();
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -56,26 +61,28 @@ const Home = () => {
   // ];
 
   // Sample data for achievements (showing only 3 for home page)
-  const achievements = [
+  const getAchievements = () => [
     {
-      title: "Ranked among top 10 colleges in the state",
+      title: language === 'mr' ? "राज्यातील टॉप 10 महाविद्यालयांमध्ये स्थान" : "Ranked among top 10 colleges in the state",
       image: "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&w=400&q=80",
       icon: "🏆",
-      description: "Recognized for academic excellence and quality education"
+      description: language === 'mr' ? "शैक्षणिक उत्कृष्टता आणि दर्जेदार शिक्षणासाठी मान्यता" : "Recognized for academic excellence and quality education"
     },
     {
-      title: "Student won gold medal in inter-university sports",
+      title: language === 'mr' ? "आंतर-विद्यापीठ क्रीडांमध्ये विद्यार्थ्याने सुवर्णपदक जिंकले" : "Student won gold medal in inter-university sports",
       image: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?auto=format&fit=crop&w=400&q=80",
       icon: "🥇",
-      description: "Outstanding performance in athletics and sports competitions"
+      description: language === 'mr' ? "क्रीडा आणि स्पर्धांमध्ये उत्कृष्ट कामगिरी" : "Outstanding performance in athletics and sports competitions"
     },
     {
-      title: "NAAC Accreditation with 'A' Grade",
+      title: language === 'mr' ? "NAAC मान्यता 'A' ग्रेडसह" : "NAAC Accreditation with 'A' Grade",
       image: "https://images.unsplash.com/photo-1562774053-701939374585?auto=format&fit=crop&w=400&q=80",
       icon: "⭐",
-      description: "Highest quality standards in education and infrastructure"
+      description: language === 'mr' ? "शिक्षण आणि पायाभूत सुविधांमध्ये सर्वोच्च दर्जाचे मानक" : "Highest quality standards in education and infrastructure"
     }
   ];
+
+  const achievements = getAchievements();
 
   // Sample data for events
   // const events = [
@@ -86,48 +93,52 @@ const Home = () => {
   // ];
 
   // Sample gallery images
-  const galleryImages = [
+  const getGalleryImages = () => [
     {
       image: "https://images.unsplash.com/photo-1596495577886-d920f1fb7238?auto=format&fit=crop&w=300&q=80",
-      title: "College Campus",
-      description: "Beautiful view of our main campus building"
+      title: language === 'mr' ? "महाविद्यालय परिसर" : "College Campus",
+      description: language === 'mr' ? "आमच्या मुख्य परिसर इमारतीचे सुंदर दृश्य" : "Beautiful view of our main campus building"
     },
     {
       image: "https://images.unsplash.com/photo-1588072432836-e10032774350?auto=format&fit=crop&w=300&q=80",
-      title: "Library Hall",
-      description: "Quiet and resourceful library for students"
+      title: language === 'mr' ? "ग्रंथालय हॉल" : "Library Hall",
+      description: language === 'mr' ? "विद्यार्थ्यांसाठी शांत आणि संसाधनपूर्ण ग्रंथालय" : "Quiet and resourceful library for students"
     },
     {
       image: "https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&w=300&q=80",
-      title: "Sports Ground",
-      description: "Inter-college sports events held every year"
+      title: language === 'mr' ? "क्रीडा मैदान" : "Sports Ground",
+      description: language === 'mr' ? "दरवर्षी आंतर-महाविद्यालयीन क्रीडा स्पर्धा आयोजित केल्या जातात" : "Inter-college sports events held every year"
     }
   ];
 
+  const galleryImages = getGalleryImages();
+
   // Sample cultural activities (showing only 3 for home page)
-  const culturalActivities = [
+  const getCulturalActivities = () => [
     {
       id: 1,
-      name: "Dance Competition",
-      description: "Students perform classical, folk, and modern dance styles showcasing rhythm and culture.",
+      name: language === 'mr' ? "नृत्य स्पर्धा" : "Dance Competition",
+      description: language === 'mr' ? "विद्यार्थी शास्त्रीय, लोक आणि आधुनिक नृत्य शैलींचे प्रदर्शन करून ताल आणि संस्कृती दाखवतात." : "Students perform classical, folk, and modern dance styles showcasing rhythm and culture.",
       photo: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=80",
       icon: "💃"
     },
     {
       id: 2,
-      name: "Music Night",
-      description: "Solo singers, bands, and instrumentalists create a vibrant evening full of melodies.",
+      name: language === 'mr' ? "संगीत रात्री" : "Music Night",
+      description: language === 'mr' ? "एकल गायक, बँड आणि वादक मधुर संगीताने भरलेली जीवंत संध्या तयार करतात." : "Solo singers, bands, and instrumentalists create a vibrant evening full of melodies.",
       photo: "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=80",
       icon: "🎵"
     },
     {
       id: 3,
-      name: "Drama & Skit",
-      description: "Stage plays and street dramas on social and cultural themes performed by students.",
+      name: language === 'mr' ? "नाटक आणि स्किट" : "Drama & Skit",
+      description: language === 'mr' ? "विद्यार्थ्यांद्वारे सामाजिक आणि सांस्कृतिक विषयांवर रंगमंचीय नाटके आणि रस्त्यावरील नाटके सादर केली जातात." : "Stage plays and street dramas on social and cultural themes performed by students.",
       photo: "https://images.unsplash.com/photo-1507676184212-d03ab07a01bf?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=80",
       icon: "🎭"
     }
   ];
+
+  const culturalActivities = getCulturalActivities();
 
   // Sample testimonials
   // const testimonials = [
@@ -264,20 +275,20 @@ const Home = () => {
 
         {/* Content with higher z-index */}
         <div className="content-container" style={{ position: 'relative', zIndex: 1 }}>
-    <h2 className="section-title" style={{...styles.sectionTitle, textAlign: 'center', color: 'black', width: '100%', display: 'block', margin: '0 auto 40px auto', borderBottom: '2px solid #FF6B35', paddingBottom: '8px'}}>Our Leadership</h2>
+    <h2 className="section-title" style={{...styles.sectionTitle, textAlign: 'center', color: 'black', width: '100%', display: 'block', margin: '0 auto 40px auto', borderBottom: '2px solid #FF6B35', paddingBottom: '8px'}}>{language === 'mr' ? 'आमचे नेतृत्व' : 'Our Leadership'}</h2>
     <div className="grid-container" style={styles.leadershipContainer}>
       <div style={styles.leaderCard}>
         <div style={styles.leaderImageContainer}>
           <img 
             src={founderImage} 
-            alt="Dr. Vilasrao Shinde - Founder" 
+            alt="Honorable Late. Vilasrao Shinde - Founder" 
             style={styles.leaderImage}
           />
         </div>
-        <h3 style={styles.leaderName}>Dr. Vilasrao Shinde</h3>
-        <p style={styles.leaderTitle}>Founder</p>
+        <h3 style={styles.leaderName}>Honorable Late.Vilasrao Shinde</h3>
+        <p style={styles.leaderTitle}>{language === 'mr' ? 'संस्थापक' : 'Founder'}</p>
         <p style={styles.leaderDescription}>
-          Visionary leader who established this institution with a mission to provide quality education to all.
+          {language === 'mr' ? 'दूरदर्शी नेते ज्यांनी सर्वांना दर्जेदार शिक्षण प्रदान करण्याच्या उद्देशाने या संस्थेची स्थापना केली.' : 'Visionary leader who established this institution with a mission to provide quality education to all.'}
         </p>
       </div>
 
@@ -289,10 +300,10 @@ const Home = () => {
             style={styles.leaderImage}
           />
         </div>
-        <h3 style={styles.leaderName}>Shri Vaibhav Shivaji Shinde</h3>
-        <p style={styles.leaderTitle}>Co-Founder</p>
+        <h3 style={styles.leaderName}>Shri Vaibhav Vilasrao  Shinde</h3>
+        <p style={styles.leaderTitle}>{language === 'mr' ? 'सह-संस्थापक' : 'Co-Founder'}</p>
         <p style={styles.leaderDescription}>
-          Dedicated educator and administrator who helped shape the academic vision of our institution.
+          {language === 'mr' ? 'समर्पित शिक्षक आणि प्रशासक ज्यांनी आमच्या संस्थेच्या शैक्षणिक दृष्टिकोनाला आकार देण्यास मदत केली.' : 'Dedicated educator and administrator who helped shape the academic vision of our institution.'}
         </p>
       </div>
 
@@ -304,10 +315,10 @@ const Home = () => {
             style={styles.leaderImage}
           />
         </div>
-        <h3 style={styles.leaderName}>Dr. ManikRao Vishnu Patil</h3>
-        <p style={styles.leaderTitle}>Principal</p>
+        <h3 style={styles.leaderName}>Mr. Manikrao Vishnu Patil</h3>
+        <p style={styles.leaderTitle}>{language === 'mr' ? 'मुख्याध्यापक' : 'Principal'}</p>
         <p style={styles.leaderDescription}>
-          Current principal leading the institution towards excellence in education and student development.
+          {language === 'mr' ? 'सध्याचे मुख्याध्यापक जे संस्थेला शिक्षण आणि विद्यार्थी विकासात उत्कृष्टतेकडे नेत आहेत.' : 'Current principal leading the institution towards excellence in education and student development.'}
         </p>
       </div>
     </div>
@@ -416,7 +427,7 @@ const Home = () => {
 
         {/* Content with higher z-index */}
         <div className="content-container" style={{ position: 'relative', zIndex: 1, padding: '0 20px', maxWidth: '1200px', margin: '0 auto' }}>
-          <h2 className="section-title" style={{...styles.sectionTitle, textAlign: 'center', color: 'black', width: '100%', display: 'block', margin: '0 auto 40px auto', borderBottom: '3px solid #ffd700', paddingBottom: '10px', textShadow: '2px 2px 4px rgba(255,255,255,0.8)'}}>Our Achievements</h2>
+          <h2 className="section-title" style={{...styles.sectionTitle, textAlign: 'center', color: 'black', width: '100%', display: 'block', margin: '0 auto 40px auto', borderBottom: '3px solid #ffd700', paddingBottom: '10px', textShadow: '2px 2px 4px rgba(255,255,255,0.8)'}}>{getTranslation('achievements', language)}</h2>
           <div className="grid-container" style={styles.achievementsGrid}>
             {achievements.map((achievement, index) => (
               <div key={index} className="card-element" style={styles.achievementCard}>
@@ -443,7 +454,7 @@ const Home = () => {
               style={styles.achievementButton}
             >
               <Link to="/achievements">
-              Show More Achievements
+              {language === 'mr' ? 'अधिक उपलब्धी दाखवा' : 'Show More Achievements'}
               </Link>
             </button>
           </div>
@@ -541,7 +552,7 @@ const Home = () => {
 
         {/* Content with higher z-index */}
         <div className="content-container" style={{ position: 'relative', zIndex: 1, padding: '0 20px', maxWidth: '1200px', margin: '0 auto' }}>
-          <h2 className="section-title" style={{...styles.sectionTitle, textAlign: 'center', color: 'black', width: '100%', display: 'block', margin: '0 auto 40px auto', borderBottom: '3px solid #f72585', paddingBottom: '10px', textShadow: '2px 2px 4px rgba(255,255,255,0.8)'}}>Cultural Activities</h2>
+          <h2 className="section-title" style={{...styles.sectionTitle, textAlign: 'center', color: 'black', width: '100%', display: 'block', margin: '0 auto 40px auto', borderBottom: '3px solid #f72585', paddingBottom: '10px', textShadow: '2px 2px 4px rgba(255,255,255,0.8)'}}>{getTranslation('activities', language)}</h2>
           <div className="grid-container" style={styles.activitiesGrid}>
             {culturalActivities.map((activity) => (
               <div key={activity.id} style={styles.activityCard}>
@@ -568,8 +579,7 @@ const Home = () => {
               style={styles.activityButton}
             >
               <Link to="/activities">
-               View All Activities
-
+               {getTranslation('viewAll', language)} {getTranslation('activities', language)}
               </Link>
              
             </button>
@@ -627,7 +637,7 @@ const Home = () => {
 
         {/* Content Container */}
         <div className="content-container" style={{ position: 'relative', zIndex: 1, padding: '0 20px', maxWidth: '1200px', margin: '0 auto' }}>
-          <h2 className="section-title" style={{...styles.sectionTitle, textAlign: 'center', color: 'black', width: '100%', display: 'block', margin: '0 auto 40px auto', borderBottom: '3px solid #00c9ff', paddingBottom: '10px', textShadow: '2px 2px 4px rgba(255,255,255,0.8)'}}>Gallery</h2>
+          <h2 className="section-title" style={{...styles.sectionTitle, textAlign: 'center', color: 'black', width: '100%', display: 'block', margin: '0 auto 40px auto', borderBottom: '3px solid #00c9ff', paddingBottom: '10px', textShadow: '2px 2px 4px rgba(255,255,255,0.8)'}}>{getTranslation('gallery', language)}</h2>
           <div className="grid-container" style={styles.galleryContainer}>
             {galleryImages.map((item, index) => (
               <div key={index} style={styles.galleryItem}>
@@ -649,7 +659,7 @@ const Home = () => {
               style={styles.galleryButton}
             >
               <Link to="/gallery">
-              View Full Gallery
+              {language === 'mr' ? 'संपूर्ण गॅलरी पहा' : 'View Full Gallery'}
               </Link>
             </button>
           </div>

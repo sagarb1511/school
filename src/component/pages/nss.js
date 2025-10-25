@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import { useLanguage } from '../../context/LanguageContext';
+import { getTranslation } from '../../translations/translations';
 import nss1 from '../assets/nss1.jpeg';
 import nss2 from '../assets/nss2.jpeg';
 import nss3 from '../assets/nss3.jpeg';
@@ -6,13 +8,14 @@ import nss4 from '../assets/nss4.jpeg';
 
 
 const NSS = () => {
+  const { language } = useLanguage();
   const [currentSlide, setCurrentSlide] = useState(0);
   
   const slides = [
-    { image: nss1, title: "Community Service", description: "NSS volunteers engaged in community development activities" },
-    { image: nss2, title: "Social Awareness", description: "Spreading awareness about social issues and health" },
-    { image: nss3, title: "Environmental Care", description: "Tree plantation and environmental conservation drives" },
-    { image: nss4, title: "Rural Development", description: "Working with rural communities for sustainable development" }
+    { image: nss1, title: getTranslation('communityService', language), description: getTranslation('communityServiceDesc', language) },
+    { image: nss2, title: getTranslation('socialAwareness', language), description: getTranslation('socialAwarenessDesc', language) },
+    { image: nss3, title: getTranslation('environmentalCare', language), description: getTranslation('environmentalCareDesc', language) },
+    { image: nss4, title: getTranslation('ruralDevelopment', language), description: getTranslation('ruralDevelopmentDesc', language) }
   ];
 
   useEffect(() => {
@@ -56,10 +59,10 @@ const NSS = () => {
             {/* Title and Description */}
             <div className="space-y-4">
               <h1 className="text-4xl lg:text-5xl xl:text-6xl font-bold text-orange-600 leading-tight">
-                NSS Special Camps
+                {getTranslation('nssTitle', language)}
               </h1>
               <p className="text-lg lg:text-xl text-gray-700 max-w-md mx-auto leading-relaxed">
-                Empowering students through community service and social responsibility
+                {getTranslation('nssSubtitle', language)}
               </p>
               <div className="flex items-center justify-center space-x-2 text-orange-500">
                 <span className="w-12 h-0.5 bg-orange-500"></span>
@@ -145,23 +148,21 @@ const NSS = () => {
           <div className="space-y-12">
             <section className="bg-white rounded-2xl shadow-lg p-6 lg:p-8">
               <p className="text-lg text-gray-700 leading-relaxed text-justify">
-                Every NSS volunteer is expected to attend at least one 7-day Special Camp during their course of study. 
-                These camps are usually organized in villages or rural areas to help students experience community life 
-                and contribute to social development.
+                {getTranslation('nssDescription', language)}
               </p>
             </section>
 
             {/* Objectives Section */}
             <section className="bg-white rounded-2xl shadow-lg p-6 lg:p-8">
               <h2 className="text-2xl lg:text-3xl font-bold text-orange-500 mb-6 border-l-4 border-orange-500 pl-4">
-                Objectives of NSS Camps
+                {getTranslation('objectivesOfNss', language)}
               </h2>
               <div className="grid gap-4">
                 {[
-                  "To develop a sense of social responsibility among students.",
-                  "To promote teamwork, leadership, and discipline.",
-                  "To help communities in areas such as health, sanitation, education, and environment.",
-                  "To create awareness on social issues like women empowerment, literacy, and sustainable living."
+                  getTranslation('nssObjective1', language),
+                  getTranslation('nssObjective2', language),
+                  getTranslation('nssObjective3', language),
+                  getTranslation('nssObjective4', language)
                 ].map((objective, index) => (
                   <div key={index} className="flex items-start space-x-3 p-4 bg-orange-50 rounded-lg border-l-4 border-orange-400">
                     <span className="text-orange-500 font-bold mt-1">✓</span>
@@ -174,81 +175,81 @@ const NSS = () => {
             {/* Activities Section */}
             <section className="bg-white rounded-2xl shadow-lg p-6 lg:p-8">
               <h2 className="text-2xl lg:text-3xl font-bold text-orange-500 mb-8 border-l-4 border-orange-500 pl-4">
-                Typical Activities in NSS Camps
+                {getTranslation('typicalActivities', language)}
               </h2>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6">
                 {/* Community Development */}
                 <div className="bg-gray-50 p-6 rounded-xl border-l-4 border-orange-500 hover:shadow-md transition-shadow">
-                  <h3 className="text-xl font-semibold text-orange-500 mb-4">Community Development Work</h3>
+                  <h3 className="text-xl font-semibold text-orange-500 mb-4">{getTranslation('communityDevelopmentWork', language)}</h3>
                   <ul className="space-y-2 text-gray-600">
                     <li className="flex items-start">
                       <span className="text-orange-400 mr-2">•</span>
-                      <span>Cleaning villages and public places.</span>
+                      <span>{getTranslation('cleaningVillages', language)}</span>
                     </li>
                     <li className="flex items-start">
                       <span className="text-orange-400 mr-2">•</span>
-                      <span>Construction/repair of roads, wells, and sanitation facilities.</span>
+                      <span>{getTranslation('constructionRepair', language)}</span>
                     </li>
                     <li className="flex items-start">
                       <span className="text-orange-400 mr-2">•</span>
-                      <span>Plantation drives and water conservation activities.</span>
+                      <span>{getTranslation('plantationDrives', language)}</span>
                     </li>
                   </ul>
                 </div>
 
                 {/* Awareness Campaigns */}
                 <div className="bg-gray-50 p-6 rounded-xl border-l-4 border-orange-500 hover:shadow-md transition-shadow">
-                  <h3 className="text-xl font-semibold text-orange-500 mb-4">Awareness Campaigns</h3>
+                  <h3 className="text-xl font-semibold text-orange-500 mb-4">{getTranslation('awarenessCampaigns', language)}</h3>
                   <ul className="space-y-2 text-gray-600">
                     <li className="flex items-start">
                       <span className="text-orange-400 mr-2">•</span>
-                      <span>Health awareness (HIV/AIDS, malaria, nutrition, hygiene).</span>
+                      <span>{getTranslation('healthAwareness', language)}</span>
                     </li>
                     <li className="flex items-start">
                       <span className="text-orange-400 mr-2">•</span>
-                      <span>Swachh Bharat Abhiyan activities.</span>
+                      <span>{getTranslation('swachhBharat', language)}</span>
                     </li>
                     <li className="flex items-start">
                       <span className="text-orange-400 mr-2">•</span>
-                      <span>Awareness on social issues (child marriage, dowry, drug abuse).</span>
+                      <span>{getTranslation('socialIssuesAwareness', language)}</span>
                     </li>
                   </ul>
                 </div>
 
                 {/* Educational Activities */}
                 <div className="bg-gray-50 p-6 rounded-xl border-l-4 border-orange-500 hover:shadow-md transition-shadow">
-                  <h3 className="text-xl font-semibold text-orange-500 mb-4">Educational Activities</h3>
+                  <h3 className="text-xl font-semibold text-orange-500 mb-4">{getTranslation('educationalActivities', language)}</h3>
                   <ul className="space-y-2 text-gray-600">
                     <li className="flex items-start">
                       <span className="text-orange-400 mr-2">•</span>
-                      <span>Adult literacy programs.</span>
+                      <span>{getTranslation('adultLiteracy', language)}</span>
                     </li>
                     <li className="flex items-start">
                       <span className="text-orange-400 mr-2">•</span>
-                      <span>Workshops for school children.</span>
+                      <span>{getTranslation('workshopsChildren', language)}</span>
                     </li>
                     <li className="flex items-start">
                       <span className="text-orange-400 mr-2">•</span>
-                      <span>Skill development and vocational training sessions.</span>
+                      <span>{getTranslation('skillDevelopment', language)}</span>
                     </li>
                   </ul>
                 </div>
 
                 {/* Cultural & Social Programs */}
                 <div className="bg-gray-50 p-6 rounded-xl border-l-4 border-orange-500 hover:shadow-md transition-shadow">
-                  <h3 className="text-xl font-semibold text-orange-500 mb-4">Cultural & Social Programs</h3>
+                  <h3 className="text-xl font-semibold text-orange-500 mb-4">{getTranslation('culturalSocialPrograms', language)}</h3>
                   <ul className="space-y-2 text-gray-600">
                     <li className="flex items-start">
                       <span className="text-orange-400 mr-2">•</span>
-                      <span>Street plays and folk songs on social themes.</span>
+                      <span>{getTranslation('streetPlays', language)}</span>
                     </li>
                     <li className="flex items-start">
                       <span className="text-orange-400 mr-2">•</span>
-                      <span>Sports and cultural exchange with local villagers.</span>
+                      <span>{getTranslation('sportsExchange', language)}</span>
                     </li>
                     <li className="flex items-start">
                       <span className="text-orange-400 mr-2">•</span>
-                      <span>Interaction sessions to promote unity and cooperation.</span>
+                      <span>{getTranslation('interactionSessions', language)}</span>
                     </li>
                   </ul>
                 </div>
@@ -258,14 +259,14 @@ const NSS = () => {
             {/* Benefits Section */}
             <section className="bg-white rounded-2xl shadow-lg p-6 lg:p-8">
               <h2 className="text-2xl lg:text-3xl font-bold text-orange-500 mb-6 border-l-4 border-orange-500 pl-4">
-                Benefits for Students
+                {getTranslation('benefitsForStudents', language)}
               </h2>
               <div className="grid gap-4">
                 {[
-                  "Earns an NSS Certificate (valuable for jobs and higher studies).",
-                  "Hands-on experience in community service.",
-                  "Development of leadership, communication, and problem-solving skills.",
-                  "Opportunities to represent at State, National, and International NSS Camps."
+                  getTranslation('nssCertificate', language),
+                  getTranslation('handsOnExperience', language),
+                  getTranslation('skillsDevelopment', language),
+                  getTranslation('representationOpportunities', language)
                 ].map((benefit, index) => (
                   <div key={index} className="flex items-start space-x-3 p-4 bg-green-50 rounded-lg border-l-4 border-green-400">
                     <span className="text-green-500 font-bold mt-1">★</span>
@@ -278,7 +279,7 @@ const NSS = () => {
 
           {/* Footer */}
           <footer style={{ textAlign: 'center', padding: '20px', backgroundColor: '#f8f9fa', marginTop: '40px' }}>
-            <p>National Service Scheme - Building Responsible Citizens</p>
+            <p>{getTranslation('nssFooter', language)}</p>
           </footer>
         </div>
       </div>

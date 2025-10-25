@@ -1,7 +1,10 @@
 import React from 'react';
+import { useLanguage } from '../../context/LanguageContext';
+import { getTranslation } from '../../translations/translations';
 
 
 const Vision = () => {
+  const { language } = useLanguage();
   return (
     <div style={{ 
       minHeight: '100vh', 
@@ -118,7 +121,7 @@ const Vision = () => {
               marginBottom: '16px',
               textShadow: '2px 2px 4px rgba(0,0,0,0.1)'
             }}>
-              Vision & Mission
+              {getTranslation('visionMissionTitle', language)}
             </h1>
             <div style={{
               width: '96px',
@@ -173,7 +176,7 @@ const Vision = () => {
                   fontWeight: 'bold',
                   color: '#111827',
                   margin: 0
-                }}>Vision</h2>
+                }}>{getTranslation('vision', language)}</h2>
               </div>
               <p style={{
                 color: '#374151',
@@ -181,7 +184,7 @@ const Vision = () => {
                 lineHeight: '1.7',
                 margin: 0
               }}>
-                We Strive to make the Institute as a dynamic Center with quality education and excellence in academic development of students
+                {getTranslation('visionText', language)}
               </p>
             </div>
           </div>
@@ -230,7 +233,7 @@ const Vision = () => {
                   fontWeight: 'bold',
                   color: '#111827',
                   margin: 0
-                }}>Mission</h2>
+                }}>{getTranslation('mission', language)}</h2>
               </div>
               <p style={{
                 color: '#374151',
@@ -238,7 +241,7 @@ const Vision = () => {
                 lineHeight: '1.7',
                 margin: 0
               }}>
-                We the founder member of this institution have decided to work on expansion of smart education, that brings about moral, Ethical and Physical growth of society and make them up to the sustainable mark with advanced technology
+                {getTranslation('missionText', language)}
               </p>
             </div>
           </div>
@@ -287,15 +290,15 @@ const Vision = () => {
                   fontWeight: 'bold',
                   color: '#111827',
                   margin: 0
-                }}>Our Goals</h2>
+                }}>{getTranslation('ourGoals', language)}</h2>
               </div>
               <div style={{ display: 'grid', gap: '24px' }}>
                 {[
-                  "Promote quality education in Economically, Socially and educationally weaker section of students",
-                  "To Create social, ecological and Environmental awareness by smart education among students",
-                  "To create awareness among the student without discrimination with caste, religion and gender",
-                  "To make the achievement of students towards good citizens with quality education",
-                  "To Implementation of national and secular values among the students by quality education"
+                  getTranslation('goal1', language),
+                  getTranslation('goal2', language),
+                  getTranslation('goal3', language),
+                  getTranslation('goal4', language),
+                  getTranslation('goal5', language)
                 ].map((goal, index) => (
                   <div key={index} style={{ display: 'flex', alignItems: 'flex-start' }}>
                     <div style={{

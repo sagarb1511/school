@@ -66,33 +66,37 @@ import PublicationsList from './component/pages/Publications';
 import ContactUs from './component/pages/contact';
 import Activities from './component/pages/activities';
 import Footer from './component/pages/Footer';
+import { LanguageProvider } from './context/LanguageContext';
+import Facilitie from './component/pages/Facilities';
 // Add this if you have an Organisation component; otherwise, create a placeholder or remove the link
 // import Organisation from './component/pages/Organisation';  // Uncomment if exists
 
 function App() {
   return (
+    <LanguageProvider>
       <Router basename="/">  
-      <Navbar />
+        <Navbar />
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/about" element={<Aboutus />} />
-        <Route path="/vision" element={<Vision />} />
-        <Route path="/achievements" element={<Achievements />} />  {/* Fixed: was /achivement */}
-        <Route path="/faculty" element={<FacultyForm />} />
-        <Route path="/nonteaching" element={<NonTeachingStaff />} />
-        <Route path="/academics" element={<Acadmic />} />  {/* Fixed: was /acadmice */}
-        <Route path="/gallery" element={<Gallery />} />
-        <Route path="/admission" element={<Admission />} />
-        <Route path="/nss" element={<NSS />} />
-        <Route path="/sports" element={<Sports />} />
-        <Route path="/publications" element={<PublicationsList />} />
-        <Route path="/contact" element={<ContactUs />} />
-        <Route path="/activities" element={<Activities />} />  {/* Fixed: was /activitie */}
+        <Route path="/" element={<><Home /><Footer /></>} />
+        <Route path="/about" element={<><Aboutus /><Footer /></>} />
+        <Route path="/vision" element={<><Vision /><Footer /></>} />
+        <Route path="/achievements" element={<Achievements />} />
+        <Route path="/faculty" element={<><FacultyForm /><Footer /></>} />
+        <Route path="/nonteaching" element={<><NonTeachingStaff /><Footer /></>} />
+        <Route path="/academics" element={<><Acadmic /><Footer /></>} />
+        <Route path="/gallery" element={<><Gallery /> <Footer /></>} />
+        <Route path="/admission" element={<><Admission /><Footer /></>} />
+        <Route path="/nss" element={<><NSS /><Footer /></>} />
+        <Route path="/sports" element={<><Sports /><Footer /></>} />
+        <Route path="/publications" element={<><PublicationsList /><Footer /></>} />
+        <Route path="/contact" element={<><ContactUs /><Footer /></>} />
+        <Route path="/activities" element={<><Activities /> <Footer /></>} />
+         <Route path="/Facilities" element={<><Facilitie /> <Footer /></>} />
         {/* Add this if you have the component */}
         {/* <Route path="/organisation" element={<Organisation />} /> */}
-      </Routes>
-      <Footer />
-    </Router>
+        </Routes>
+      </Router>
+    </LanguageProvider>
   );
 }
 

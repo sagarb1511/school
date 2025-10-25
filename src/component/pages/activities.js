@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 
 // Cultural activities data with dummy photos
@@ -58,14 +58,46 @@ const ActivityCard = ({ activity }) => {
 };
 
 const CulturalActivities = () => {
+  // Scroll to top when component mounts
+  useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+    document.body.scrollTop = 0; // For Safari
+    document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+  }, []);
+
   return (
-    <div>
-      <div className="flex flex-wrap justify-center">
-        {activities.map((activity) => (
-          <ActivityCard key={activity.id} activity={activity} />
-        ))}
+    <div className="bg-gray-100" style={{ 
+      minHeight: '100vh', 
+      paddingTop: '0',
+      display: 'flex',
+      flexDirection: 'column',
+      justifyContent: 'flex-start',
+      alignItems: 'stretch'
+    }}>
+      <div className="pt-2 pb-10 px-3 md:pt-6 md:px-6" style={{ flex: '1' }}>
+        <div className="max-w-6xl mx-auto">
+          <h1 className="text-2xl md:text-4xl font-bold text-center text-purple-700 mb-6 md:mb-10 mt-2 md:mt-0">
+            🎭 Cultural Activities
+          </h1>
+          <div className="flex flex-wrap justify-center">
+            {activities.map((activity) => (
+              <ActivityCard key={activity.id} activity={activity} />
+            ))}
+          </div>
+        </div>
       </div>
       
+      {/* Mobile-specific CSS */}
+      <style jsx>{`
+        @media (max-width: 768px) {
+          body {
+            overflow-x: hidden;
+          }
+          * {
+            -webkit-overflow-scrolling: touch;
+          }
+        }
+      `}</style>
     </div>
   );
 };

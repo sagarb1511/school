@@ -1,9 +1,13 @@
 import React from 'react';
 import vilasraoImage from '../assets/17vilasrao-shinde_201906253646.jpg';
 import coFounderImage from '../assets/vaibhav.JPG';
+import { useLanguage } from '../../context/LanguageContext';
+import { getTranslation } from '../../translations/translations';
 
 
 const Aboutus = () => {
+  const { language } = useLanguage();
+  
   return (
     <div className="about-us" style={{
       minHeight: '100vh'
@@ -24,7 +28,7 @@ const Aboutus = () => {
           marginBottom: '40px',
           textShadow: '2px 2px 4px rgba(0,0,0,0.1)',
           fontFamily: 'Arial, sans-serif'
-        }}>About Us</h1>
+        }}>{getTranslation('aboutUsTitle', language)}</h1>
         
         {/* Leadership Section - Founder and Co-Founder Side by Side */}
         <div className="leadership-grid" style={{
@@ -74,7 +78,7 @@ const Aboutus = () => {
               letterSpacing: '2px',
               textTransform: 'uppercase'
             }}>
-              FOUNDER
+              {getTranslation('founder', language)}
             </h3>
             
             <h2 className="founder-name" style={{ 
@@ -85,7 +89,7 @@ const Aboutus = () => {
               textShadow: '1px 1px 2px rgba(0,0,0,0.1)',
               textAlign: 'center'
             }}>
-             माजी आमदार विलासराव शिंदे साहेब
+             {language === 'mr' ? 'माजी आमदार विलासराव शिंदे साहेब' : 'Former MLA Vilasrao Shinde Saheb'}
             </h2>
             
             <div style={{ 
@@ -98,7 +102,7 @@ const Aboutus = () => {
               border: '2px solid #3b82f6',
               marginTop: '10px'
             }}>
-              📅 स्थापना दिनांक: ०३ नोव्हेंबर १९६२
+              {getTranslation('establishmentDate', language)}
             </div>
           </div>
 
@@ -143,7 +147,7 @@ const Aboutus = () => {
               letterSpacing: '2px',
               textTransform: 'uppercase'
             }}>
-              CO-FOUNDER & CHAIRMAN
+              {getTranslation('coFounderChairman', language)}
             </h3>
             
             <h2 className="cofounder-name" style={{ 
@@ -154,7 +158,7 @@ const Aboutus = () => {
               textShadow: '1px 1px 2px rgba(0,0,0,0.1)',
               textAlign: 'center'
             }}>
-              श्री वैभव विलासराव शिंदे (दादा)
+              {language === 'mr' ? 'श्री वैभव विलासराव शिंदे (दादा)' : 'Shri Vaibhav Vilasrao Shinde (Dada)'}
             </h2>
             
             <div style={{ 
@@ -167,7 +171,7 @@ const Aboutus = () => {
               border: '2px solid #10b981',
               marginTop: '10px'
             }}>
-              🎓 राजाराम शिक्षण संस्थेचे चेअरमन
+              {getTranslation('chairmanTitle', language)}
             </div>
           </div>
         </div>
@@ -198,7 +202,7 @@ const Aboutus = () => {
             alignItems: 'center',
             gap: '10px'
           }}>
-            🏛️ Our Heritage
+            {getTranslation('ourHeritage', language)}
           </h2>
           <p style={{
             fontSize: '18px',
@@ -206,7 +210,7 @@ const Aboutus = () => {
             color: '#374151',
             textAlign: 'justify'
           }}>
-            आष्टा या शहराला सामाजिक, राजकिय व शैक्षणिक वारसा आहे. आष्टा शहराची नगरपालिका ही ६ डिसेंबर १८५३ पासूनची असून, महाराष्ट्रातील सर्वात जुनी नगरपालिका आहे.
+            {getTranslation('heritageText', language)}
           </p>
         </section>
 
@@ -233,7 +237,7 @@ const Aboutus = () => {
             alignItems: 'center',
             gap: '10px'
           }}>
-            📚 Founding of Rajaram Shikshan Sanstha
+            {getTranslation('foundingTitle', language)}
           </h2>
           <p style={{
             fontSize: '18px',
@@ -241,7 +245,7 @@ const Aboutus = () => {
             color: '#374151',
             textAlign: 'justify'
           }}>
-            सुसंस्कृत समाज निर्मितीसाठी लोकनेते स्व. राजारामबापू पाटील यांच्यावरील अढळ निष्ठेने स्व. विलासराव शिंदे (साहेब) यांनी ०३ नोव्हेंबर १९६२ रोजी 'राजाराम शिक्षण संस्थेची' स्थापना केली. या शिक्षण संस्थेच्या माध्यमातून ग्रामीण भागातील बहुजनांना शिक्षण देऊन साक्षर बनविण्याचे काम राजाराम शिक्षण संस्थेने केले आहे.
+            {getTranslation('foundingText', language)}
           </p>
         </section>
 
@@ -268,7 +272,7 @@ const Aboutus = () => {
             alignItems: 'center',
             gap: '10px'
           }}>
-            🏫 Current Educational Institutions
+            {getTranslation('currentInstitutionsTitle', language)}
           </h2>
           <p style={{
             fontSize: '18px',
@@ -276,7 +280,7 @@ const Aboutus = () => {
             color: '#374151',
             textAlign: 'justify'
           }}>
-            संस्थेच्या वतीने सध्या सांगली जिल्ह्यात वाळवा, शिराळा, मिरज व कोल्हापूर जिल्ह्यात कागल तालुक्यात वंदूर असे एकूण १० माध्यमिक व उच्च माध्यमिक शाळा सुरू आहेत. तसेच यशवंतराव चव्हाण महाराष्ट्र मुक्त विद्यापीठ नाशिक यांचे केंद्र सुरू आहे.
+            {getTranslation('currentInstitutionsText', language)}
           </p>
         </section>
 
@@ -303,7 +307,7 @@ const Aboutus = () => {
             alignItems: 'center',
             gap: '10px'
           }}>
-            👑 Vision and Leadership
+            {getTranslation('visionLeadershipTitle', language)}
           </h2>
           <p style={{
             fontSize: '18px',
@@ -311,7 +315,7 @@ const Aboutus = () => {
             color: '#374151',
             textAlign: 'justify'
           }}>
-            समाजातील सर्व उपेक्षित घटकांना न्याय देण्याची, माणसाला माणूस जोडण्याची दृष्टी शिंदे साहेबांनी सातत्याने जागृत ठेवली म्हणूनच ते लोकनेते ठरले. या मातीतील खरेखुरे लोकनेते हे अढळपद त्यांना समाजानेच बहाल केले.
+            {getTranslation('visionLeadershipText', language)}
           </p>
         </section>
 
@@ -323,10 +327,13 @@ const Aboutus = () => {
           padding: '40px',
           marginBottom: '30px',
           transition: 'transform 0.3s ease',
-          color: 'white'
+          color: 'white',
+          position: 'relative'
         }}
         onMouseEnter={(e) => e.target.style.transform = 'translateY(-3px)'}
         onMouseLeave={(e) => e.target.style.transform = 'translateY(0)'}>
+          
+
           <h2 className="section-title" style={{
             fontSize: '32px',
             fontWeight: 'bold',
@@ -336,9 +343,10 @@ const Aboutus = () => {
             paddingBottom: '15px',
             display: 'flex',
             alignItems: 'center',
-            gap: '10px'
+            gap: '10px',
+            paddingRight: '250px' // Add space for the principal card
           }}>
-            🎓 Vilasrao Shinde Mahavidyalaya
+            {getTranslation('collegeTitle', language)}
           </h2>
           <p className="section-text" style={{
             fontSize: '18px',
@@ -347,22 +355,118 @@ const Aboutus = () => {
             textAlign: 'justify',
             marginBottom: '20px'
           }}>
-            या संस्थेचे आष्टा शहरातील चिरंतन स्फूर्तीदायक स्मारक म्हणजेच सन २०२२ मध्ये सुरू होत असलेले नवीन विलासराव शिंदे महाविद्यालय (कला, वाणिज्य व विज्ञान) शाखा असणारे महाविद्यालय होय.
+            {getTranslation('collegeMainText', language)}
           </p>
           <div style={{
             backgroundColor: 'rgba(255,255,255,0.1)',
             padding: '20px',
             borderRadius: '15px',
-            border: '1px solid rgba(255,255,255,0.2)'
+            border: '1px solid rgba(255,255,255,0.2)',
+            position: 'relative'
           }}>
             <p className="section-text" style={{
               fontSize: '18px',
               lineHeight: '1.8',
               color: '#e0f2fe',
-              textAlign: 'justify'
+              textAlign: 'justify',
+              marginBottom: '20px'
             }}>
-              आष्टा शहर व परिसरातील ग्रामीण भागातील विद्यार्थ्यांची उच्च शिक्षणाची शैक्षणिक सोय व्हावी व त्यांना दर्जेदार शिक्षण देऊन सक्षम बनवावे तसेच २१ व्या शतकातील माहिती व तंत्रज्ञानाचा उपयोग करून स्पर्धेच्या युगात व्यक्तिमत्व विकास घडवावा या हेतूने आष्टा शहराचे उगवते नेतृत्व व राजाराम शिक्षण संस्थेचे चेअरमन मा. वैभव विलासराव शिंदे (दादा) यांनी कला, वाणिज्य व विज्ञान शाखा असणारे वरिष्ठ महाविद्यालय ०१ सप्टेंबर २०२२ पासून महाराष्ट्र शासन व शिवाजी विद्यापीठ, कोल्हापूर यांच्या मान्यतेने सुरू केले आहे.
+              {getTranslation('collegeDetailedText', language)}
             </p>
+            
+            {/* Principal Text with Enhanced Design */}
+            <div style={{
+              display: 'flex',
+              justifyContent: 'flex-end',
+              marginTop: '25px',
+              paddingTop: '20px',
+              borderTop: '2px solid rgba(251, 191, 36, 0.3)',
+              position: 'relative'
+            }}>
+              {/* Decorative Corner Element */}
+              <div style={{
+                position: 'absolute',
+                top: '-8px',
+                right: '0',
+                width: '60px',
+                height: '4px',
+                background: 'linear-gradient(90deg, transparent, #fbbf24)',
+                borderRadius: '2px'
+              }}></div>
+              
+              <div style={{
+                background: 'linear-gradient(135deg, rgba(251, 191, 36, 0.15), rgba(59, 130, 246, 0.1))',
+                padding: '18px 25px',
+                borderRadius: '12px',
+                border: '1px solid rgba(251, 191, 36, 0.3)',
+                backdropFilter: 'blur(10px)',
+                boxShadow: '0 8px 20px rgba(0, 0, 0, 0.2)',
+                textAlign: 'center',
+                minWidth: '220px',
+                position: 'relative',
+                overflow: 'hidden'
+              }}>
+                {/* Background Pattern */}
+                <div style={{
+                  position: 'absolute',
+                  top: '0',
+                  right: '0',
+                  width: '40px',
+                  height: '40px',
+                  background: 'radial-gradient(circle, rgba(251, 191, 36, 0.1), transparent)',
+                  borderRadius: '50%'
+                }}></div>
+                
+                {/* Principal Title with Icon */}
+                <div style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  gap: '8px',
+                  fontSize: '18px',
+                  fontWeight: 'bold',
+                  marginBottom: '12px',
+                  color: '#fbbf24',
+                  letterSpacing: '1px',
+                  textShadow: '1px 1px 2px rgba(0,0,0,0.3)'
+                }}>
+                  <span style={{ fontSize: '20px' }}>👨‍🎓</span>
+                  {getTranslation('principalTitle', language)}
+                </div>
+                
+                {/* College Details with Enhanced Typography */}
+                <div style={{
+                  fontSize: '13px',
+                  color: 'rgba(255, 255, 255, 0.95)',
+                  lineHeight: '1.6',
+                  fontWeight: '600',
+                  textShadow: '1px 1px 2px rgba(0,0,0,0.2)'
+                }}>
+                  <div style={{
+                    fontSize: '14px',
+                    marginBottom: '4px',
+                    color: '#e0f2fe'
+                  }}>
+                    {getTranslation('collegeName', language)}
+                  </div>
+                  <div style={{
+                    fontSize: '12px',
+                    color: 'rgba(255, 255, 255, 0.8)',
+                    fontStyle: 'italic'
+                  }}>
+                    {getTranslation('collegeAddress', language)}
+                  </div>
+                </div>
+                
+                {/* Decorative Bottom Line */}
+                <div style={{
+                  marginTop: '12px',
+                  height: '2px',
+                  background: 'linear-gradient(90deg, transparent, #fbbf24, transparent)',
+                  borderRadius: '1px'
+                }}></div>
+              </div>
+            </div>
           </div>
         </section>
         <section style={{
@@ -389,7 +493,7 @@ const Aboutus = () => {
             textAlign: 'center',
             justifyContent: 'center'
           }}>
-            🏆 Key Features of the College
+            {getTranslation('keyFeaturesTitle', language)}
           </h2>
           
           <div className="features-grid" style={{
@@ -399,22 +503,22 @@ const Aboutus = () => {
             marginTop: '25px'
           }}>
             {[
-              "१) स्वमालकिची सुसज्ज इमारत",
-              "२) अनुभवी व तज्ञ प्राध्यापक वर्ग", 
-              "३) गरीब व गरजु विद्यार्थ्यांना अर्थसहाय्य",
-              "४) सुसज्ज अभ्यासिका व ग्रंथालय",
-              "५) स्पर्धा परिक्षा अभ्यास केंद्र",
-              "६) सुक्ष्मजीवशास्त्र विषय शिकविण्याची सोय",
-              "७) संगणकशास्त्र (Computer Science) विषयाची सुसज्ज प्रयोगशाळा",
-              "८) विज्ञान विभागाकडे सुसज्ज प्रयोगशाळा",
-              "९) राष्ट्रीय सेवा योजना (NSS)",
-              "१०) मागासवर्गीय, इतर मागासवर्गीय व खुल्या प्रवर्गातील विद्यार्थ्यांना शासनाच्या शिष्यवृत्तीची सोय",
-              "११) विविध विषयांवरील चर्चासत्र व परिसंवाद",
-              "१२) सर्व सोईंनी सुसज्ज क्रिडांगण",
-              "१३) आ. विलासराव शिंदे आंतरमहाविद्यालयीन वत्कृत्व स्पर्धा",
-              "१४) शैक्षणिक व औद्योगिक सहलींचे आयोजन",
-              "१५) यशवंतराव चव्हाण महाराष्ट्र मुक्त विद्यापीठ, नाशिकचे अभ्यासकेंद्र",
-              "१६) शैक्षणिक वर्ष २०२४-२५ पासून B.C.A. अभ्यासक्रम सुरू, प्रवेश सुरू"
+              getTranslation('feature1', language),
+              getTranslation('feature2', language),
+              getTranslation('feature3', language),
+              getTranslation('feature4', language),
+              getTranslation('feature5', language),
+              getTranslation('feature6', language),
+              getTranslation('feature7', language),
+              getTranslation('feature8', language),
+              getTranslation('feature9', language),
+              getTranslation('feature10', language),
+              getTranslation('feature11', language),
+              getTranslation('feature12', language),
+              getTranslation('feature13', language),
+              getTranslation('feature14', language),
+              getTranslation('feature15', language),
+              getTranslation('feature16', language)
             ].map((feature, index) => (
               <div key={index} style={{
                 background: 'linear-gradient(45deg, #f0f9ff, #e0f2fe)',
@@ -545,6 +649,20 @@ const Aboutus = () => {
           .founder-card, .cofounder-card {
             padding: 16px !important;
             margin: 0 4px !important;
+          }
+          
+          /* Principal card responsive */
+          .section-title {
+            padding-right: 0 !important;
+          }
+          
+          div[style*="position: absolute"][style*="bottom: 30px"][style*="right: 30px"] {
+            position: relative !important;
+            bottom: auto !important;
+            right: auto !important;
+            margin: 20px auto 0 auto !important;
+            text-align: center !important;
+            max-width: 250px !important;
           }
         }
       `}</style>

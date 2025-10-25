@@ -1,44 +1,51 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useLanguage } from '../../context/LanguageContext';
+import { getTranslation } from '../../translations/translations';
+import LanguageDropdown from '../LanguageDropdown';
 
 const Navbar = () => {
   const [activeDropdown, setActiveDropdown] = useState(null);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeMobileSubmenu, setActiveMobileSubmenu] = useState(null);
+  const { language } = useLanguage();
 
 
-  const menuItems = [
-  { name: "Home", href: "/" },
-  { name: "Achievements", href: "/achievements" },  // Fixed path
-  {
-    name: "Faculty",
-    submenu: [
-      { name: "Teaching Staff", href: "/faculty" },
-      { name: "Non-Teaching Staff", href: "/nonteaching" }
-    ]
-  },
-  {
-    name: "About Us",
-    submenu: [
-      { name: "About Us", href: "/about" },
-      { name: "Vision & Mission", href: "/vision" },
-      // { name: "Organisation", href: "/organisation" },  // Commented out until route/component exists
-    ]
-  },
-  { name: "Academics", href: "/academics" },  // Fixed path
-  { name: "Admission", href: "/admission" },
-  { name: "Gallery", href: "/gallery" },
-  {
-    name: "Student Life",
-    submenu: [
-      { name: "NSS (National Service Scheme)", href: "/nss" },
-      { name: "Sports", href: "/sports" },
-      { name: "Activities", href: "/activities" }  // Added direct link for consistency
-    ]
-  },
-  { name: "Research", href: "/publications" },
-  { name: "Contact Us", href: "/contact" }
-];
+  const getMenuItems = () => [
+    { name: getTranslation('home', language), href: "/" },
+    { name: getTranslation('achievements', language), href: "/achievements" },
+    {
+      name: getTranslation('faculty', language),
+      submenu: [
+        { name: getTranslation('teachingStaff', language), href: "/faculty" },
+        { name: getTranslation('nonTeachingStaff', language), href: "/nonteaching" }
+      ]
+    },
+    {
+      name: getTranslation('aboutUs', language),
+      submenu: [
+        { name: getTranslation('aboutUs', language), href: "/about" },
+        { name: getTranslation('visionMission', language), href: "/vision" },
+      ]
+    },
+    { name: getTranslation('academics', language), href: "/academics" },
+    { name: getTranslation('admission', language), href: "/admission" },
+    { name: getTranslation('gallery', language), href: "/gallery" },
+    {
+      name: getTranslation('studentLife', language),
+      submenu: [
+        { name: getTranslation('nss', language), href: "/nss" },
+        { name: getTranslation('sports', language), href: "/sports" },
+        { name: getTranslation('activities', language), href: "/activities" },
+        { name: getTranslation('Student Facilities', language), href: "/Facilities" }
+
+      ]
+    },
+    { name: getTranslation('research', language), href: "/publications" },
+    { name: getTranslation('contactUs', language), href: "/contact" }
+  ];
+
+  const menuItems = getMenuItems();
 
   const handleMouseEnter = (menuName) => {
     setActiveDropdown(menuName);
@@ -99,22 +106,30 @@ const Navbar = () => {
 
   return (
     <div>
-      {/* Top Section - Organization Name with Animation */}
-      <div className="bg-gradient-to-r from-emerald-800 via-teal-700 to-emerald-800 text-white py-1 sm:py-0.5 shadow-lg">
+      {/* Top Section - Organization Name with Language Dropdown */}
+      <div className="bg-gradient-to-r from-emerald-800 via-teal-700 to-emerald-800 text-white py-2 sm:py-1.5 shadow-lg relative z-[100]">
         <div className="max-w-7xl mx-auto px-2 sm:px-4 lg:px-8">
-          <h1 className="text-xs sm:text-sm md:text-lg font-semibold text-center animate-pulse tracking-wide">
-            <span className="inline-block transform hover:scale-105 transition-transform duration-300">
-              RAJARAM SHIKSHAN SANSTHA
-            </span>
-          </h1>
+          <div className="flex justify-between items-center min-h-[40px]">
+            <div className="w-1/4"></div>
+            <h1 className="text-xs sm:text-sm md:text-lg font-semibold text-center animate-pulse tracking-wide w-1/2">
+              <span className="inline-block transform hover:scale-105 transition-transform duration-300">
+                {getTranslation('organizationName', language)}
+              </span>
+            </h1>
+            <div className="w-1/4 flex justify-end">
+              <div className="ml-4">
+                <LanguageDropdown />
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
       {/* Middle Section - Animated Marquee */}
-      <div className="bg-gradient-to-r from-blue-100 via-sky-50 to-blue-100 border-y border-blue-300 py-1 sm:py-1.5 shadow-md overflow-hidden">
+      <div className="bg-gradient-to-r from-blue-100 via-sky-50 to-blue-100 border-y border-blue-300 py-2 sm:py-2.5 shadow-md overflow-hidden">
         <div className="animate-marquee-continuous">
-          <span className="text-blue-800 font-semibold text-xs sm:text-sm whitespace-nowrap">
-            🎓 VILASRAO SHINDE MAHAVIDYALAYA (ARTS COMMERCE AND SCIENCE) ASHTA, TAL-WALWA, DIST-SANGLI PIN-416301 🎓 
+          <span className="text-blue-800 font-bold text-sm sm:text-base md:text-lg whitespace-nowrap tracking-wide">
+            🎓 VILASRAO SHINDE MAHAVIDYALAYA (ARTS COMMERCE SCIENCE AND BCA) ASHTA, TAL-WALWA, DIST-SANGLI. PIN-416301 🎓 
           </span>
         </div>
       </div>
@@ -167,10 +182,9 @@ const Navbar = () => {
               ))}
             </div>
 
-            
-
-            {/* Enhanced Mobile/Tablet menu button */}
-            <div className="lg:hidden">
+            {/* Mobile Menu Button */}
+            <div className="lg:hidden flex items-center">
+              {/* Enhanced Mobile/Tablet menu button */}
               <button 
                 onClick={toggleMobileMenu}
                 className="p-2 rounded-lg text-gray-700 hover:bg-gradient-to-r hover:from-emerald-50 hover:to-teal-100 hover:text-emerald-600 transition-all duration-300 transform hover:scale-110 focus:outline-none focus:ring-2 focus:ring-emerald-500"
@@ -275,7 +289,7 @@ const Navbar = () => {
         
         .animate-marquee-continuous {
           display: inline-block;
-          animation: marquee-continuous 35s linear infinite;
+          animation: marquee-continuous 50s linear infinite;
         }
         
         .animate-slideDown {
@@ -316,19 +330,19 @@ const Navbar = () => {
         /* Responsive Improvements */
         @media (max-width: 1024px) {
           .animate-marquee-continuous {
-            animation-duration: 25s;
+            animation-duration: 40s;
           }
         }
         
         @media (max-width: 768px) {
           .animate-marquee-continuous {
-            animation-duration: 20s;
+            animation-duration: 35s;
           }
         }
         
         @media (max-width: 480px) {
           .animate-marquee-continuous {
-            animation-duration: 15s;
+            animation-duration: 30s;
           }
         }
         

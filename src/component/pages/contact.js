@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
+import { useLanguage } from '../../context/LanguageContext';
+import { getTranslation } from '../../translations/translations';
 
 
 const ContactUs = () => {
+  const { language } = useLanguage();
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -40,48 +43,48 @@ const ContactUs = () => {
   const contactInfo = [
     {
       icon: '📧',
-      title: 'Email Us',
+      title: getTranslation('emailUs', language),
       details: 'info@college.edu',
-      description: 'Send us an email anytime'
+      description: getTranslation('emailUsDesc', language)
     },
     {
       icon: '📞',
-      title: 'Call Us',
+      title: getTranslation('callUs', language),
       details: '+91 9876543210',
-      description: 'Mon to Fri 9am to 6pm'
+      description: getTranslation('callUsDesc', language)
     },
     {
       icon: '🏢',
-      title: 'Visit Us',
+      title: getTranslation('visitUs', language),
       details: 'College Road, Education Nagar',
-      description: 'Mumbai, Maharashtra - 400001'
+      description: getTranslation('visitUsDesc', language)
     },
     {
       icon: '🕒',
-      title: 'Working Hours',
+      title: getTranslation('workingHours', language),
       details: 'Monday - Friday',
-      description: '9:00 AM - 6:00 PM'
+      description: getTranslation('workingHoursDesc', language)
     }
   ];
 
   const departments = [
     {
-      name: 'Admissions Office',
+      name: getTranslation('admissionsOffice', language),
       email: 'admissions@college.edu',
       phone: '+91 9876543211'
     },
     {
-      name: 'Academic Department',
+      name: getTranslation('academicDepartment', language),
       email: 'academics@college.edu',
       phone: '+91 9876543212'
     },
     {
-      name: 'Student Support',
+      name: getTranslation('studentSupport', language),
       email: 'support@college.edu',
       phone: '+91 9876543213'
     },
     {
-      name: 'Placement Cell',
+      name: getTranslation('placementCell', language),
       email: 'placement@college.edu',
       phone: '+91 9876543214'
     }
@@ -95,10 +98,10 @@ const ContactUs = () => {
         {/* Header Section */}
         <div className="text-center mb-16">
           <h1 className="text-4xl md:text-5xl font-bold text-gray-800 mb-4">
-            📞 Contact Us
+            📞 {getTranslation('contactUsTitle', language)}
           </h1>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Get in touch with us. We're here to help and answer any questions you might have.
+            {getTranslation('getInTouchSubtitle', language)}
           </p>
         </div>
 
@@ -107,7 +110,7 @@ const ContactUs = () => {
           {/* Contact Information */}
           <div className="lg:col-span-1 space-y-6">
             <div className="bg-white rounded-2xl shadow-lg p-6">
-              <h2 className="text-2xl font-bold text-gray-800 mb-6">Get in Touch</h2>
+              <h2 className="text-2xl font-bold text-gray-800 mb-6">{getTranslation('getInTouch', language)}</h2>
               
               {/* Contact Info Cards */}
               <div className="space-y-4">
@@ -125,7 +128,7 @@ const ContactUs = () => {
 
               {/* Social Media */}
               <div className="mt-8">
-                <h3 className="font-semibold text-gray-800 mb-4">Follow Us</h3>
+                <h3 className="font-semibold text-gray-800 mb-4">{getTranslation('followUs', language)}</h3>
                 <div className="flex space-x-4">
                   {[
                     { icon: '📘', name: 'Facebook', url: '#' },
@@ -148,7 +151,7 @@ const ContactUs = () => {
 
             {/* Department Contacts */}
             <div className="bg-white rounded-2xl shadow-lg p-6">
-              <h2 className="text-2xl font-bold text-gray-800 mb-6">Department Contacts</h2>
+              <h2 className="text-2xl font-bold text-gray-800 mb-6">{getTranslation('departmentContacts', language)}</h2>
               <div className="space-y-4">
                 {departments.map((dept, index) => (
                   <div key={index} className="p-4 border border-gray-200 rounded-lg hover:border-blue-300 transition-colors">
@@ -164,20 +167,20 @@ const ContactUs = () => {
           {/* Contact Form */}
           <div className="lg:col-span-2">
             <div className="bg-white rounded-2xl shadow-lg p-8">
-              <h2 className="text-2xl font-bold text-gray-800 mb-6">Send us a Message</h2>
+              <h2 className="text-2xl font-bold text-gray-800 mb-6">{getTranslation('sendMessage', language)}</h2>
               
               {isSubmitted ? (
                 <div className="text-center py-8">
                   <div className="text-6xl mb-4">✅</div>
-                  <h3 className="text-2xl font-bold text-green-600 mb-2">Message Sent!</h3>
-                  <p className="text-gray-600">Thank you for contacting us. We'll get back to you soon.</p>
+                  <h3 className="text-2xl font-bold text-green-600 mb-2">{getTranslation('messageSent', language)}</h3>
+                  <p className="text-gray-600">{getTranslation('messageSentDesc', language)}</p>
                 </div>
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-6">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
                       <label className="block text-sm font-medium text-gray-700 mb-2">
-                        Full Name *
+                        {getTranslation('fullName', language)} *
                       </label>
                       <input
                         type="text"
@@ -186,13 +189,13 @@ const ContactUs = () => {
                         onChange={handleChange}
                         required
                         className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
-                        placeholder="Enter your full name"
+                        placeholder={getTranslation('enterFullName', language)}
                       />
                     </div>
                     
                     <div>
                       <label className="block text-sm font-medium text-gray-700 mb-2">
-                        Email Address *
+                        {getTranslation('emailAddress', language)} *
                       </label>
                       <input
                         type="email"
@@ -201,7 +204,7 @@ const ContactUs = () => {
                         onChange={handleChange}
                         required
                         className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
-                        placeholder="Enter your email"
+                        placeholder={getTranslation('enterEmail', language)}
                       />
                     </div>
                   </div>
@@ -209,7 +212,7 @@ const ContactUs = () => {
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
                       <label className="block text-sm font-medium text-gray-700 mb-2">
-                        Phone Number
+                        {getTranslation('phoneNumber', language)}
                       </label>
                       <input
                         type="tel"
@@ -217,13 +220,13 @@ const ContactUs = () => {
                         value={formData.phone}
                         onChange={handleChange}
                         className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
-                        placeholder="Enter your phone number"
+                        placeholder={getTranslation('enterPhone', language)}
                       />
                     </div>
                     
                     <div>
                       <label className="block text-sm font-medium text-gray-700 mb-2">
-                        Subject *
+                        {getTranslation('subject', language)} *
                       </label>
                       <select
                         name="subject"
@@ -232,19 +235,19 @@ const ContactUs = () => {
                         required
                         className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
                       >
-                        <option value="">Select a subject</option>
-                        <option value="admission">Admission Inquiry</option>
-                        <option value="academic">Academic Question</option>
-                        <option value="support">Technical Support</option>
-                        <option value="placement">Placement Related</option>
-                        <option value="other">Other</option>
+                        <option value="">{getTranslation('selectSubject', language)}</option>
+                        <option value="admission">{getTranslation('admissionInquiry', language)}</option>
+                        <option value="academic">{getTranslation('academicQuestion', language)}</option>
+                        <option value="support">{getTranslation('technicalSupport', language)}</option>
+                        <option value="placement">{getTranslation('placementRelated', language)}</option>
+                        <option value="other">{getTranslation('other', language)}</option>
                       </select>
                     </div>
                   </div>
 
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-2">
-                      Message *
+                      {getTranslation('message', language)} *
                     </label>
                     <textarea
                       name="message"
@@ -253,7 +256,7 @@ const ContactUs = () => {
                       required
                       rows="6"
                       className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
-                      placeholder="Tell us how we can help you..."
+                      placeholder={getTranslation('tellUsHow', language)}
                     ></textarea>
                   </div>
 
@@ -261,7 +264,7 @@ const ContactUs = () => {
                     type="submit"
                     className="w-full bg-blue-600 text-white py-4 px-6 rounded-lg font-semibold text-lg hover:bg-blue-700 transition-colors shadow-lg hover:shadow-xl"
                   >
-                    Send Message
+                    {getTranslation('sendMessageBtn', language)}
                   </button>
                 </form>
               )}
@@ -269,7 +272,7 @@ const ContactUs = () => {
 
             {/* Map Section */}
             <div className="mt-8 bg-white rounded-2xl shadow-lg p-6">
-              <h2 className="text-2xl font-bold text-gray-800 mb-4">📍 Find Us Here</h2>
+              <h2 className="text-2xl font-bold text-gray-800 mb-4">📍 {getTranslation('findUsHere', language)}</h2>
               <div className="rounded-lg overflow-hidden shadow-lg">
                 <iframe
                   src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3827.123456789!2d74.123456!3d16.123456!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTbCsDA3JzI0LjQiTiA3NMKwMDcnMjQuNCJF!5e0!3m2!1sen!2sin!4v1234567890123!5m2!1sen!2sin"
@@ -283,7 +286,7 @@ const ContactUs = () => {
                 ></iframe>
               </div>
               <div className="mt-4 p-4 bg-blue-50 rounded-lg">
-                <h3 className="font-semibold text-gray-800 mb-2">📍 Our Location</h3>
+                <h3 className="font-semibold text-gray-800 mb-2">📍 {getTranslation('ourLocation', language)}</h3>
                 <p className="text-gray-700 font-medium">WCV5+G74, Ashta-Dudhgaon Rd</p>
                 <p className="text-gray-600">Gandhinagar, Ashta, Maharashtra 416301</p>
                 <div className="mt-3 flex flex-wrap gap-2">
@@ -294,7 +297,7 @@ const ContactUs = () => {
                     className="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
                   >
                     <span className="mr-2">🗺️</span>
-                    Open in Google Maps
+                    {getTranslation('openInGoogleMaps', language)}
                   </a>
                   <a
                     href="https://www.google.com/maps/dir//WCV5%2BG74,+Ashta-Dudhgaon+Rd,+Gandhinagar,+Ashta,+Maharashtra+416301"
@@ -303,7 +306,7 @@ const ContactUs = () => {
                     className="inline-flex items-center px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors"
                   >
                     <span className="mr-2">🧭</span>
-                    Get Directions
+                    {getTranslation('getDirections', language)}
                   </a>
                 </div>
               </div>
@@ -313,24 +316,24 @@ const ContactUs = () => {
 
         {/* FAQ Section */}
         <div className="mt-16 bg-white rounded-2xl shadow-lg p-8">
-          <h2 className="text-3xl font-bold text-center text-gray-800 mb-8">❓ Frequently Asked Questions</h2>
+          <h2 className="text-3xl font-bold text-center text-gray-800 mb-8">❓ {getTranslation('faqTitle', language)}</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {[
               {
-                question: "How do I apply for admission?",
-                answer: "You can apply online through our admission portal or visit the admission office."
+                question: getTranslation('faqQuestion1', language),
+                answer: getTranslation('faqAnswer1', language)
               },
               {
-                question: "What are the office working hours?",
-                answer: "Our office is open from 9:00 AM to 6:00 PM, Monday to Friday."
+                question: getTranslation('faqQuestion2', language),
+                answer: getTranslation('faqAnswer2', language)
               },
               {
-                question: "How can I get my academic transcripts?",
-                answer: "Transcripts can be requested from the academic department with proper documentation."
+                question: getTranslation('faqQuestion3', language),
+                answer: getTranslation('faqAnswer3', language)
               },
               {
-                question: "Is there hostel facility available?",
-                answer: "Yes, we provide separate hostel facilities for boys and girls."
+                question: getTranslation('faqQuestion4', language),
+                answer: getTranslation('faqAnswer4', language)
               }
             ].map((faq, index) => (
               <div key={index} className="p-4 border border-gray-200 rounded-lg hover:border-blue-300 transition-colors">
