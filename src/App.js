@@ -134,6 +134,7 @@ import Facilitie from './component/pages/Facilities';
 import ApprovedPlace from './component/pages/ApprovedPlace';
 import Adminlogin from './component/admin/login';
 import Dashboard from './component/admin/dashboard';
+import Teacherform from './component/admin/Teacher';
 // Add this if you have an Organisation component; otherwise, create a placeholder or remove the link
 // import Organisation from './component/pages/Organisation';  // Uncomment if exists
 
@@ -171,6 +172,7 @@ function App() {
           {/* Admin login route without Navbar and Footer */}
           <Route path="/admin" element={<Adminlogin />} />
           <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/teacher" element={<Teacherform />} />
           {/* Catch-all route */}
           <Route path="*" element={
             <>
