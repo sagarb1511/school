@@ -1,7 +1,12 @@
 import React, { useState, useEffect } from "react";
+import { database } from '../../config/firebase';
+import { ref, onValue } from 'firebase/database';
 
 
 const Gallery = () => {
+  const [galleryData, setGalleryData] = useState([]);
+  const [loading, setLoading] = useState(true);
+
   // Scroll to top when component mounts
   useEffect(() => {
     window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
@@ -9,117 +14,32 @@ const Gallery = () => {
     document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
   }, []);
 
-  // 🧩 Dummy Image Data with multiple images for each category
-  const galleryData = [
-    {
-      id: 1,
-      title: "College Campus",
-      mainImage: "https://images.unsplash.com/photo-1596495577886-d920f1fb7238?auto=format&fit=crop&w=800&q=80",
-      desc: "Beautiful view of our main campus building.",
-      images: [
-        "https://images.unsplash.com/photo-1596495577886-d920f1fb7238?auto=format&fit=crop&w=800&q=80",
-        "https://images.unsplash.com/photo-1562774053-701939374585?auto=format&fit=crop&w=800&q=80",
-        "https://images.unsplash.com/photo-1541339907198-e08756dedf3f?auto=format&fit=crop&w=800&q=80",
-        "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&w=800&q=80"
-      ]
-    },
-    {
-      id: 2,
-      title: "Science Laboratory",
-      mainImage: "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&w=800&q=80",
-      desc: "Modern equipment and practical learning environment.",
-      images: [
-        "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&w=800&q=80",
-        "https://images.unsplash.com/photo-1581093458791-8a0a708b4f5d?auto=format&fit=crop&w=800&q=80",
-        "https://images.unsplash.com/photo-1581093458872-63c6e8c36d1e?auto=format&fit=crop&w=800&q=80",
-        "https://images.unsplash.com/photo-1581093458681-bdc2d4a6a84c?auto=format&fit=crop&w=800&q=80"
-      ]
-    },
-    {
-      id: 3,
-      title: "Library Hall",
-      mainImage: "https://images.unsplash.com/photo-1588072432836-e10032774350?auto=format&fit=crop&w=800&q=80",
-      desc: "Quiet and resourceful library for students.",
-      images: [
-        "https://images.unsplash.com/photo-1588072432836-e10032774350?auto=format&fit=crop&w=800&q=80",
-        "https://images.unsplash.com/photo-1507842217343-583bb7270b66?auto=format&fit=crop&w=800&q=80",
-        "https://images.unsplash.com/photo-1481627834876-b7833e8f5570?auto=format&fit=crop&w=800&q=80",
-        "https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?auto=format&fit=crop&w=800&q=80"
-      ]
-    },
-    {
-      id: 4,
-      title: "Computer Lab",
-      mainImage: "https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=800&q=80",
-      desc: "High-end systems for IT and Computer Science students.",
-      images: [
-        "https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=800&q=80",
-        "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=800&q=80",
-        "https://images.unsplash.com/photo-1542831371-29b0f74f9713?auto=format&fit=crop&w=800&q=80",
-        "https://images.unsplash.com/photo-1518709268805-4e9042af2176?auto=format&fit=crop&w=800&q=80"
-      ]
-    },
-    {
-      id: 5,
-      title: "Cultural Event",
-      mainImage: "https://images.unsplash.com/photo-1596496059846-0e7d89e9a88e?auto=format&fit=crop&w=800&q=80",
-      desc: "Students performing during annual cultural fest.",
-      images: [
-        "https://images.unsplash.com/photo-1596496059846-0e7d89e9a88e?auto=format&fit=crop&w=800&q=80",
-        "https://images.unsplash.com/photo-1501281668745-f7f57925c3b4?auto=format&fit=crop&w=800&q=80",
-        "https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&w=800&q=80",
-        "https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?auto=format&fit=crop&w=800&q=80"
-      ]
-    },
-    {
-      id: 6,
-      title: "Sports Ground",
-      mainImage: "https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&w=800&q=80",
-      desc: "Inter-college sports events held every year.",
-      images: [
-        "https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&w=800&q=80",
-        "https://images.unsplash.com/photo-1461896836934-ffe607ba8211?auto=format&fit=crop&w=800&q=80",
-        "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?auto=format&fit=crop&w=800&q=80",
-        "https://images.unsplash.com/photo-1549060279-7e168fce7090?auto=format&fit=crop&w=800&q=80"
-      ]
-    },
-    {
-      id: 7,
-      title: "Classroom Learning",
-      mainImage: "https://images.unsplash.com/photo-1517520287167-4bbf64a00d66?auto=format&fit=crop&w=800&q=80",
-      desc: "Interactive classroom teaching with modern methods.",
-      images: [
-        "https://images.unsplash.com/photo-1517520287167-4bbf64a00d66?auto=format&fit=crop&w=800&q=80",
-        "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?auto=format&fit=crop&w=800&q=80",
-        "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&w=800&q=80",
-        "https://images.unsplash.com/photo-1498243691581-b145c3f54a5a?auto=format&fit=crop&w=800&q=80"
-      ]
-    },
-    {
-      id: 8,
-      title: "Annual Function",
-      mainImage: "https://images.unsplash.com/photo-1551503766-ac63b6956f9f?auto=format&fit=crop&w=800&q=80",
-      desc: "Award ceremony for academic excellence.",
-      images: [
-        "https://images.unsplash.com/photo-1551503766-ac63b6956f9f?auto=format&fit=crop&w=800&q=80",
-        "https://images.unsplash.com/photo-1511795409834-ef04bbd61622?auto=format&fit=crop&w=800&q=80",
-        "https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&w=800&q=80",
-        "https://images.unsplash.com/photo-1535016120720-40c646be5580?auto=format&fit=crop&w=800&q=80"
-      ]
-    },
-    {
-      id: 9,
-      title: "Campus Garden",
-      mainImage: "https://images.unsplash.com/photo-1541339907198-e08756dedf3f?auto=format&fit=crop&w=800&q=80",
-      desc: "Eco-friendly green environment around campus.",
-      images: [
-        "https://images.unsplash.com/photo-1541339907198-e08756dedf3f?auto=format&fit=crop&w=800&q=80",
-        "https://images.unsplash.com/photo-1560703650-5e35debefb5c?auto=format&fit=crop&w=800&q=80",
-        "https://images.unsplash.com/photo-1573164713714-d95e436ab995?auto=format&fit=crop&w=800&q=80",
-        "https://images.unsplash.com/photo-1573164713988-8665fc963095?auto=format&fit=crop&w=800&q=80"
-      ]
-    },
-  ];
+  // Fetch gallery data from Firebase
+  useEffect(() => {
+    const galleryRef = ref(database, 'School/Gallery');
+    
+    const unsubscribe = onValue(galleryRef, (snapshot) => {
+      const data = snapshot.val();
+      if (data) {
+        // Convert Firebase object to array format matching existing structure
+        const galleryArray = Object.keys(data).map((category, index) => ({
+          id: index + 1,
+          title: data[category].category,
+          mainImage: data[category].images[0] || '',
+          desc: data[category].description || 'No description available',
+          images: data[category].images || [],
+          createdAt: data[category].createdAt,
+          imageCount: data[category].imageCount
+        }));
+        setGalleryData(galleryArray);
+      } else {
+        setGalleryData([]);
+      }
+      setLoading(false);
+    });
+
+    return () => unsubscribe();
+  }, []);
 
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
@@ -352,6 +272,49 @@ const Gallery = () => {
           📸 College Gallery
         </h1>
 
+        {/* Loading State */}
+        {loading ? (
+          <div style={{
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            minHeight: '400px'
+          }}>
+            <div style={{
+              textAlign: 'center'
+            }}>
+              <div style={{
+                width: '60px',
+                height: '60px',
+                border: '4px solid #e5e7eb',
+                borderTop: '4px solid #3b82f6',
+                borderRadius: '50%',
+                animation: 'spin 1s linear infinite',
+                margin: '0 auto 16px'
+              }}></div>
+              <p style={{
+                color: '#6b7280',
+                fontSize: '16px',
+                fontWeight: '500'
+              }}>Loading Gallery...</p>
+            </div>
+          </div>
+        ) : galleryData.length === 0 ? (
+          <div style={{
+            textAlign: 'center',
+            padding: '60px 20px',
+            color: '#6b7280'
+          }}>
+            <div style={{ fontSize: '48px', marginBottom: '16px' }}>📷</div>
+            <h3 style={{ fontSize: '18px', fontWeight: '600', marginBottom: '8px' }}>
+              No Gallery Items
+            </h3>
+            <p style={{ fontSize: '14px' }}>
+              Gallery items will appear here once uploaded from admin panel.
+            </p>
+          </div>
+        ) : (
+        <>
         {/* Filter Dropdown */}
         <div style={{
           maxWidth: '300px',
@@ -647,6 +610,8 @@ const Gallery = () => {
             </div>
           )}
         </div>
+        </>
+        )}
 
         {/* Gallery Stats */}
         
@@ -742,21 +707,28 @@ const Gallery = () => {
       )}
 
       {/* Footer note */}
-      <p style={{
-        textAlign: 'center',
-        color: '#6b7280',
-        marginTop: '40px',
-        fontSize: '0.875rem',
-        position: 'relative',
-        zIndex: 1
-      }}>
-        *All images are for demo purposes (Unsplash © Free Use)*
-      </p>
+      {galleryData.length > 0 && (
+        <p style={{
+          textAlign: 'center',
+          color: '#6b7280',
+          marginTop: '40px',
+          fontSize: '0.875rem',
+          position: 'relative',
+          zIndex: 1
+        }}>
+          📸 Gallery images are fetched from Firebase Storage
+        </p>
+      )}
       
      
       
       {/* CSS Animations */}
       <style jsx>{`
+        @keyframes spin {
+          0% { transform: rotate(0deg); }
+          100% { transform: rotate(360deg); }
+        }
+        
         @keyframes fadeIn {
           from { opacity: 0; transform: translateY(20px); }
           to { opacity: 1; transform: translateY(0); }

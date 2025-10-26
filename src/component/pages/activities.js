@@ -1,56 +1,25 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
+import { database } from '../../config/firebase';
+import { ref, onValue } from 'firebase/database';
 
-
-// Cultural activities data with dummy photos
-const activities = [
-  {
-    id: 1,
-    name: "Dance Competition",
-    description: "Students perform classical, folk, and modern dance styles showcasing rhythm and culture.",
-    photo: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80",
-  },
-  {
-    id: 2,
-    name: "Music Night",
-    description: "Solo singers, bands, and instrumentalists create a vibrant evening full of melodies.",
-    photo: "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80",
-  },
-  {
-    id: 3,
-    name: "Drama & Skit",
-    description: "Stage plays and street dramas on social and cultural themes performed by students.",
-    photo: "https://images.unsplash.com/photo-1507676184212-d03ab07a01bf?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80",
-  },
-  {
-    id: 4,
-    name: "Art & Rangoli",
-    description: "Creative competitions including painting, rangoli, and poster-making to express ideas.",
-    photo: "https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80",
-  },
-  {
-    id: 5,
-    name: "Fashion Show",
-    description: "A cultural runway featuring traditional attire and modern themes with student participation.",
-    photo: "https://images.unsplash.com/photo-1469334031218-e382a71b716b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80",
-  },
-];
+// Fallback image URL
+const FALLBACK_IMAGE = "https://images.unsplash.com/photo-1562774053-701939374585?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80";
 
 const ActivityCard = ({ activity }) => {
   const handleImageError = (e) => {
-    // Fallback image if the original fails to load
-    e.target.src = "https://images.unsplash.com/photo-1562774053-701939374585?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80";
+    e.target.src = FALLBACK_IMAGE;
   };
 
   return (
     <div className="max-w-sm bg-white rounded-2xl shadow-lg overflow-hidden m-4 transform hover:scale-105 transition duration-300">
       <img
         className="w-full h-48 object-cover"
-        src={activity.photo}
-        alt={activity.name}
+        src={activity.image || FALLBACK_IMAGE}
+        alt={activity.heading}
         onError={handleImageError}
       />
       <div className="p-4">
-        <h2 className="text-lg font-semibold text-gray-800">{activity.name}</h2>
+        <h2 className="text-lg font-semibold text-gray-800">{activity.heading}</h2>
         <p className="text-gray-600 text-sm mt-2">{activity.description}</p>
       </div>
     </div>
@@ -58,12 +27,47 @@ const ActivityCard = ({ activity }) => {
 };
 
 const CulturalActivities = () => {
+  const [activities, setActivities] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  // Fetch activities from Firebase
+  useEffect(() => {
+    const activitiesRef = ref(database, 'School/Activity');
+    
+    const unsubscribe = onValue(activitiesRef, (snapshot) => {
+      const data = snapshot.val();
+      if (data) {
+        // Convert the object of activities to an array
+        const activitiesArray = Object.values(data);
+        setActivities(activitiesArray);
+      }
+      setLoading(false);
+    }, (error) => {
+      console.error("Error fetching activities:", error);
+      setLoading(false);
+    });
+
+    // Cleanup subscription on unmount
+    return () => unsubscribe();
+  }, []);
+
   // Scroll to top when component mounts
   useEffect(() => {
     window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
-    document.body.scrollTop = 0; // For Safari
-    document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
   }, []);
+
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gray-100">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-purple-700 mx-auto mb-4"></div>
+          <p className="text-gray-700">Loading activities...</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="bg-gray-100" style={{ 
@@ -77,13 +81,19 @@ const CulturalActivities = () => {
       <div className="pt-2 pb-10 px-3 md:pt-6 md:px-6" style={{ flex: '1' }}>
         <div className="max-w-6xl mx-auto">
           <h1 className="text-2xl md:text-4xl font-bold text-center text-purple-700 mb-6 md:mb-10 mt-2 md:mt-0">
-            🎭 Cultural Activities
+            🎭 School Activities
           </h1>
-          <div className="flex flex-wrap justify-center">
-            {activities.map((activity) => (
-              <ActivityCard key={activity.id} activity={activity} />
-            ))}
-          </div>
+          {activities.length > 0 ? (
+            <div className="flex flex-wrap justify-center">
+              {activities.map((activity, index) => (
+                <ActivityCard key={index} activity={activity} />
+              ))}
+            </div>
+          ) : (
+            <div className="text-center py-10">
+              <p className="text-gray-600">No activities found. Please check back later.</p>
+            </div>
+          )}
         </div>
       </div>
       

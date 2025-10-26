@@ -1,57 +1,38 @@
-import React from "react";
-
+import React, { useState, useEffect } from "react";
+import { database } from '../../config/firebase';
+import { ref, onValue } from 'firebase/database';
 
 const TeachingStaff = () => {
-  const teachingStaff = [
-    {
-      id: 1,
-      name: "Dr. Vilas Shinde",
-      position: "Principal",
-      photo: "https://images.unsplash.com/photo-1582750433449-648ed127bb54?auto=format&fit=crop&w=400&h=400&q=80",
-    },
-    {
-      id: 2,
-      name: "Prof. Priya Patil",
-      position: "Head of Chemistry Department",
-      photo: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=400&h=400&q=80",
-    },
-    {
-      id: 3,
-      name: "Mr. Amit Joshi",
-      position: "Mathematics Lecturer",
-      photo: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=400&h=400&q=80",
-    },
-    {
-      id: 4,
-      name: "Mrs. Sneha Deshmukh",
-      position: "English Lecturer",
-      photo: "https://images.unsplash.com/photo-1551836026-d5c88ac5c4d9?auto=format&fit=crop&w=400&h=400&q=80",
-    },
-    {
-      id: 5,
-      name: "Mr. Rajesh Pawar",
-      position: "Physics Lecturer",
-      photo: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=400&h=400&q=80",
-    },
-    {
-      id: 6,
-      name: "Mrs. Kavita Mane",
-      position: "Computer Science Faculty",
-      photo: "https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=400&h=400&q=80",
-    },
-    {
-      id: 7,
-      name: "Mr. Sunil Patankar",
-      position: "Economics Lecturer",
-      photo: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=400&h=400&q=80",
-    },
-    {
-      id: 8,
-      name: "Mrs. Meena Kulkarni",
-      position: "Biology Lecturer",
-      photo: "https://images.unsplash.com/photo-1494790108755-2616b612b786?auto=format&fit=crop&w=400&h=400&q=80",
-    },
-  ];
+  const [teachingStaff, setTeachingStaff] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  // Fetch staff data from Firebase
+  useEffect(() => {
+    const staffRef = ref(database, 'School/staff');
+    
+    const unsubscribe = onValue(staffRef, (snapshot) => {
+      const data = snapshot.val();
+      if (data) {
+        // Convert object to array
+        const staffArray = Object.keys(data).map((key, index) => ({
+          id: index + 1,
+          name: data[key].name,
+          position: data[key].position,
+          photo: data[key].photoURL || `https://ui-avatars.com/api/?name=${encodeURIComponent(data[key].name)}&background=3B82F6&color=fff&size=200`,
+          staffType: data[key].staffType
+        }));
+        
+        // Filter only teaching staff
+        const teachingOnly = staffArray.filter(staff => staff.staffType === 'Teaching');
+        setTeachingStaff(teachingOnly);
+      } else {
+        setTeachingStaff([]);
+      }
+      setLoading(false);
+    });
+
+    return () => unsubscribe();
+  }, []);
 
   return (
     <div className="min-h-screen bg-gray-900 relative overflow-hidden">
@@ -87,36 +68,53 @@ const TeachingStaff = () => {
             Meet our dedicated and experienced faculty members
           </p>
 
-          <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 max-w-7xl mx-auto">
-            {teachingStaff.map((teacher) => (
-              <div
-                key={teacher.id}
-                className="bg-white/10 backdrop-blur-md rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 text-center p-6 border border-white/20 hover:border-white/40 hover:scale-105 group"
-              >
-                <div className="relative inline-block">
-                  <div className="relative">
-                    <img
-                      src={teacher.photo}
-                      alt={teacher.name}
-                      className="w-32 h-32 object-cover rounded-full mx-auto mb-4 border-4 border-blue-400/50 shadow-lg group-hover:border-blue-400/80 transition-all duration-300"
-                      loading="lazy"
-                      onError={(e) => {
-                        e.target.onerror = null;
-                        e.target.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(teacher.name)}&background=3B82F6&color=fff&size=200`;
-                      }}
-                    />
-                    <div className="absolute inset-0 rounded-full border-2 border-transparent bg-gradient-to-r from-blue-400 to-purple-500 animate-spin-slow opacity-0 group-hover:opacity-75 transition-opacity duration-300 -z-10"></div>
-                  </div>
+          {/* Loading State */}
+          {loading ? (
+            <div className="flex justify-center items-center py-20">
+              <div className="relative">
+                <div className="animate-spin rounded-full h-20 w-20 border-b-4 border-blue-400"></div>
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <span className="text-white text-sm font-semibold">Loading...</span>
                 </div>
-                <h2 className="text-lg font-semibold text-white mb-2 group-hover:text-blue-200 transition-colors duration-300">
-                  {teacher.name}
-                </h2>
-                <p className="text-gray-300 text-sm bg-black/20 rounded-full px-3 py-1 inline-block group-hover:bg-black/30 transition-all duration-300">
-                  {teacher.position}
-                </p>
               </div>
-            ))}
-          </div>
+            </div>
+          ) : teachingStaff.length === 0 ? (
+            <div className="text-center py-20">
+              <p className="text-2xl text-white mb-4">No teaching staff available</p>
+              <p className="text-gray-300">Please add staff members from the admin panel</p>
+            </div>
+          ) : (
+            <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 max-w-7xl mx-auto">
+              {teachingStaff.map((teacher) => (
+                <div
+                  key={teacher.id}
+                  className="bg-white/10 backdrop-blur-md rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 text-center p-6 border border-white/20 hover:border-white/40 hover:scale-105 group"
+                >
+                  <div className="relative inline-block">
+                    <div className="relative">
+                      <img
+                        src={teacher.photo}
+                        alt={teacher.name}
+                        className="w-32 h-32 object-cover rounded-full mx-auto mb-4 border-4 border-blue-400/50 shadow-lg group-hover:border-blue-400/80 transition-all duration-300"
+                        loading="lazy"
+                        onError={(e) => {
+                          e.target.onerror = null;
+                          e.target.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(teacher.name)}&background=3B82F6&color=fff&size=200`;
+                        }}
+                      />
+                      <div className="absolute inset-0 rounded-full border-2 border-transparent bg-gradient-to-r from-blue-400 to-purple-500 animate-spin-slow opacity-0 group-hover:opacity-75 transition-opacity duration-300 -z-10"></div>
+                    </div>
+                  </div>
+                  <h2 className="text-lg font-semibold text-white mb-2 group-hover:text-blue-200 transition-colors duration-300">
+                    {teacher.name}
+                  </h2>
+                  <p className="text-gray-300 text-sm bg-black/20 rounded-full px-3 py-1 inline-block group-hover:bg-black/30 transition-all duration-300">
+                    {teacher.position}
+                  </p>
+                </div>
+              ))}
+            </div>
+          )}
         </div>
       </div>
       

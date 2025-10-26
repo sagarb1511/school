@@ -437,8 +437,8 @@ const Navbar = () => {
         { name: getTranslation('nss', language), href: "/nss" },
         { name: getTranslation('sports', language), href: "/sports" },
         { name: getTranslation('activities', language), href: "/activities" },
-        { name: getTranslation('studentFacilities', language), href: "/Facilities" },
-        { name: getTranslation('approvedPlace', language), href: "/Approver" }
+        { name: getTranslation('Student Facilities', language), href: "/Facilities" },
+        { name: getTranslation('Approved Place', language), href: "/Approver" }
       ]
     },
     { name: getTranslation('research', language), href: "/publications" },

@@ -135,6 +135,11 @@ import ApprovedPlace from './component/pages/ApprovedPlace';
 import Adminlogin from './component/admin/login';
 import Dashboard from './component/admin/dashboard';
 import Teacherform from './component/admin/Teacher';
+import GalleryForm1 from './component/admin/Gallery';
+import Activityform from './component/admin/Activity';
+import AchievementForm1 from './component/admin/Achivmentform';
+
+
 // Add this if you have an Organisation component; otherwise, create a placeholder or remove the link
 // import Organisation from './component/pages/Organisation';  // Uncomment if exists
 
@@ -173,6 +178,9 @@ function App() {
           <Route path="/admin" element={<Adminlogin />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/teacher" element={<Teacherform />} />
+           <Route path="/Gallery1" element={<GalleryForm1 />} />
+           <Route path="/Activity" element={<Activityform />} />
+         <Route path="/AchievementForm" element={<AchievementForm1 />} />
           {/* Catch-all route */}
           <Route path="*" element={
             <>
