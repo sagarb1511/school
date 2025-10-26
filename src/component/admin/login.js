@@ -1,23 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { initializeApp } from 'firebase/app';
-import { getDatabase, ref, get } from 'firebase/database';
-
-// Firebase configuration
-const firebaseConfig = {
-  apiKey: "AIzaSyAGpznqp-blzbe076TnNpxLFXh3mawsTQY",
-  authDomain: "nodejs-2d35a.firebaseapp.com",
-  databaseURL: "https://nodejs-2d35a-default-rtdb.firebaseio.com",
-  projectId: "nodejs-2d35a",
-  storageBucket: "nodejs-2d35a.appspot.com",
-  messagingSenderId: "794426375729",
-  appId: "1:794426375729:web:57bc5e05378e03ae9e9f10",
-  measurementId: "G-TTNHEL72TX"
-};
-
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const database = getDatabase(app);
+import { ref, get } from 'firebase/database';
+import { database } from '../../config/firebase';
 
 const Login = () => {
   const [formData, setFormData] = useState({
@@ -111,7 +95,7 @@ const Login = () => {
         alert('Admin Login Successfully! ✓');
         
         // Redirect to admin dashboard
-        navigate('/admin/dashboard');
+        navigate('/dashboard');
       } else {
         console.error('Credentials mismatch:', {
           mobileMatch: storedMobile === enteredMobile,
