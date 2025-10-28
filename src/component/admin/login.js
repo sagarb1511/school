@@ -95,7 +95,7 @@ const Login = () => {
         alert('Admin Login Successfully! ✓');
         
         // Redirect to admin dashboard
-        navigate('/dashboard');
+        navigate('/dashboard1');
       } else {
         console.error('Credentials mismatch:', {
           mobileMatch: storedMobile === enteredMobile,

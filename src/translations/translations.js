@@ -46,7 +46,7 @@ export const translations = {
     success: "Success",
     
     // Home page
-    welcomeToCollege: "Welcome to Vilasrao Shinde Mahavidyalaya",
+    welcomeToCollege: "Welcome to Vilasrao Shinde Mahavidyalaya, Ashta",
     collegeDescription: "A premier educational institution committed to excellence in Arts, Commerce, and Science education.",
     ourMission: "Our Mission",
     missionText: "To provide quality education and foster holistic development of students through innovative teaching methods and research.",

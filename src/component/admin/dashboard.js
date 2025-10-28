@@ -1,8 +1,22 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 
 
 const Sidebar = () => {
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    // Show confirmation dialog
+    const confirmLogout = window.confirm('Are you sure you want to logout?');
+    
+    if (confirmLogout) {
+      // Clear any authentication data if needed
+      // localStorage.removeItem('authToken'); // Uncomment if you use tokens
+      
+      // Navigate to home page
+      navigate('/');
+    }
+  };
   return (
     <div className="w-64 bg-gradient-to-b from-blue-900 to-purple-900 text-white h-screen fixed left-0 top-0 shadow-xl overflow-y-auto">
       {/* Header */}
@@ -15,9 +29,34 @@ const Sidebar = () => {
         </p>
       </div>
 
+
+      
+
       {/* Navigation Menu */}
-      <nav className="p-4">
+      <nav className="p-4 pb-24">
         <ul className="space-y-2">
+
+<li>
+            <NavLink
+              to="/dashboard1"
+              className={({ isActive }) =>
+                `flex items-center gap-3 px-4 py-3 rounded-lg transition-all duration-200 group ${
+                  isActive
+                    ? 'bg-white text-blue-900 shadow-lg transform scale-105'
+                    : 'text-blue-100 hover:bg-blue-800 hover:text-white hover:translate-x-1'
+                }`
+              }
+            >
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+              </svg>
+              <span className="font-medium">Dashboard</span>
+              {({ isActive }) => isActive && (
+                <div className="ml-auto w-2 h-2 bg-blue-900 rounded-full"></div>
+              )}
+            </NavLink>
+          </li>
+
           <li>
             <NavLink
               to="/Gallery1"
@@ -105,7 +144,17 @@ const Sidebar = () => {
       </nav>
 
       {/* Footer Section */}
-      
+      <div className="absolute bottom-0 left-0 right-0 p-4 border-t border-blue-700">
+        <button
+          onClick={handleLogout}
+          className="w-full flex items-center justify-center gap-3 px-4 py-3 rounded-lg bg-red-600 hover:bg-red-700 text-white transition-all duration-200 transform hover:scale-105 shadow-lg"
+        >
+          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+          </svg>
+          <span className="font-semibold">Logout</span>
+        </button>
+      </div>
     </div>
   );
 };

@@ -334,10 +334,10 @@ const ApprovedPlace = () => {
             </div>
           </div>
           <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-            {getTranslation('approvedPlaces', language) || 'Approved Places'}
+            {getTranslation('ApprovedPlaces', language) || 'Approved Places'}
           </h1>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-            {getTranslation('viewApprovedLocations', language) || 'Comprehensive overview of approved educational institutions and their program capacities'}
+            {getTranslation('ViewApprovedLocations', language) || 'Comprehensive overview of approved educational institutions and their program capacities'}
           </p>
           <div className="w-32 h-1.5 bg-gradient-to-r from-blue-600 to-purple-600 mx-auto mt-6 rounded-full shadow-sm"></div>
         </div>

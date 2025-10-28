@@ -174,10 +174,6 @@ const Teacher = () => {
       if (!validTypes.includes(formData.photo.type)) {
         newErrors.photo = 'Please upload a valid image (JPEG, PNG, GIF, WebP)';
       }
-      
-      if (formData.photo.size > 2 * 1024 * 1024) {
-        newErrors.photo = 'Image size must be less than 2MB';
-      }
     }
 
     setErrors(newErrors);
@@ -711,7 +707,7 @@ const Teacher = () => {
                 )}
                 
                 <p className="mt-2 text-xs text-gray-500">
-                  Supported formats: JPEG, PNG, GIF, WebP (Max: 2MB)
+                  Supported formats: JPEG, PNG, GIF, WebP
                 </p>
               </div>
 

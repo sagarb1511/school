@@ -19,11 +19,14 @@ const NonTeachingStaff = () => {
           name: data[key].name,
           position: data[key].position,
           photo: data[key].photoURL || `https://ui-avatars.com/api/?name=${encodeURIComponent(data[key].name)}&background=10B981&color=fff&size=200`,
-          staffType: data[key].staffType
+          staffType: data[key].staffType,
+          status: data[key].status || 'active' // Default to active if status not set
         }));
         
-        // Filter only non-teaching staff
-        const nonTeachingOnly = staffArray.filter(staff => staff.staffType === 'Non-Teaching');
+        // Filter only non-teaching staff with active status
+        const nonTeachingOnly = staffArray.filter(staff => 
+          staff.staffType === 'Non-Teaching' && staff.status !== 'inactive'
+        );
         setNonTeachingStaff(nonTeachingOnly);
       } else {
         setNonTeachingStaff([]);

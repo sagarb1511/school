@@ -138,6 +138,7 @@ import Teacherform from './component/admin/Teacher';
 import GalleryForm1 from './component/admin/Gallery';
 import Activityform from './component/admin/Activity';
 import AchievementForm1 from './component/admin/Achivmentform';
+import Dashboard1 from './component/admin/Dashboard1';
 
 
 // Add this if you have an Organisation component; otherwise, create a placeholder or remove the link
@@ -175,6 +176,7 @@ function App() {
           } />
           
           {/* Admin login route without Navbar and Footer */}
+          <Route path="/dashboard1" element={<Dashboard1 />} />
           <Route path="/admin" element={<Adminlogin />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/teacher" element={<Teacherform />} />
