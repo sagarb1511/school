@@ -6,6 +6,7 @@ import principalImage from '../assets/principal.JPG';
 import { Link } from 'react-router-dom';
 import { useLanguage } from '../../context/LanguageContext';
 import { getTranslation } from '../../translations/translations';
+import img1 from '../assets/slider1.jpg';
 
 
 const Home = () => {
@@ -15,7 +16,7 @@ const Home = () => {
   // Slider images data
   const getSliderImages = () => [
     {
-      image: "https://images.unsplash.com/photo-1562774053-701939374585?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80",
+      image: require('../assets/slider1.jpg'),
       title: getTranslation('welcomeToCollege', language),
       description: getTranslation('collegeDescription', language)
     },
