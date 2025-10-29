@@ -136,10 +136,10 @@ const Navbar = () => {
               </h1>
             </div>
             <div className="w-1/6 flex justify-end items-center space-x-3">
-              <div className="relative">
+              <div className="relative hidden lg:block">
                 <LanguageDropdown />
               </div>
-              <div className="relative group">
+              <div className="relative group hidden lg:block">
                 <div className="absolute -inset-0.5 bg-gradient-to-r from-[#832936] to-[#6e1e2a] rounded-lg blur opacity-0 group-hover:opacity-75 transition duration-300 group-hover:duration-200 animate-pulse"></div>
                 <Link 
                   to="/admin"
@@ -186,18 +186,36 @@ const Navbar = () => {
 
       {/* Bottom Section - Enhanced Navigation Menu - Always visible */}
       <nav className={`bg-white/30 backdrop-blur-sm transition-all duration-300 ${isScrolled ? 'fixed top-0 left-0 right-0' : 'relative'}`}>
-        {/* Logo outside the menu bar when scrolled - positioned at far left */}
+        {/* Logo outside menubar - Laptop/Desktop view only */}
         {isScrolled && (
-          <div className="absolute left-10 top-1/2 transform -translate-y-1/2 z-20">
+          <div className="hidden lg:block absolute left-10 top-1/2 transform -translate-y-1/2 z-20">
             <img 
               src={require('../assets/VSMAST.png')} 
               alt="Logo" 
-              className="w-16 h-16 sm:w-20 sm:h-20 object-contain drop-shadow-lg"
+              className="w-[76px] h-[76px] object-contain drop-shadow-lg"
             />
           </div>
         )}
         <div className="max-w-7xl mx-auto px-2 sm:px-4 lg:px-8 relative">
-          <div className={`relative flex justify-between items-center ${isScrolled ? 'h-20 sm:h-24' : 'h-16 sm:h-18'} rounded-full border-2 border-[#832936]/20 bg-gradient-to-r from-[#f0ede8] via-[#e0ddd7] to-[#f0ede8] shadow-inner`}>
+          <div className={`relative flex justify-between items-center h-16 ${isScrolled ? 'sm:h-20' : 'sm:h-18'} lg:rounded-full lg:border-2 lg:border-[#832936]/20 lg:bg-gradient-to-r lg:from-[#f0ede8] lg:via-[#e0ddd7] lg:to-[#f0ede8] lg:shadow-inner`}>
+            {/* Logo inside menubar - Mobile view only */}
+            <div className="flex items-center lg:hidden">
+              {isScrolled && (
+                <img 
+                  src={require('../assets/VSMAST.png')} 
+                  alt="Logo" 
+                  className="w-12 h-12 object-contain drop-shadow-lg ml-2"
+                />
+              )}
+            </div>
+
+            {/* Language Selector - Mobile Only - Center */}
+            <div className="lg:hidden flex-1 flex justify-center">
+              <div className="relative">
+                <LanguageDropdown />
+              </div>
+            </div>
+
             {/* Enhanced Navigation Menu - Desktop/Tablet */}
             <div className="hidden lg:flex items-center space-x-1 xl:space-x-2 flex-1 justify-center">
               {menuItems.map((item, index) => (
@@ -232,11 +250,11 @@ const Navbar = () => {
               ))}
             </div>
 
-            {/* Mobile Menu Button */}
-            <div className="lg:hidden flex items-center">
+            {/* Mobile Menu Button - Right Side */}
+            <div className="lg:hidden flex items-center justify-end">
               <button 
                 onClick={toggleMobileMenu}
-                className="p-2 rounded-lg text-[#3c2d2d] hover:bg-gradient-to-r hover:from-[#b29990] hover:to-[#977765] hover:text-[#e0ddd7] transition-all duration-300 transform hover:scale-110 focus:outline-none focus:ring-2 focus:ring-[#832936]"
+                className="p-2 rounded-lg text-[#3c2d2d] hover:bg-gradient-to-r hover:from-[#b29990] hover:to-[#977765] hover:text-[#e0ddd7] transition-all duration-300 transform hover:scale-110 focus:outline-none focus:ring-2 focus:ring-[#832936] mr-2"
                 aria-label="Toggle menu"
               >
                 <svg className="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">

@@ -140,13 +140,13 @@ const Footer = () => {
                 <div className="w-5 h-5 bg-emerald-500 rounded-full flex items-center justify-center mt-0.5">
                   <span className="text-xs">📞</span>
                 </div>
-                <p className="text-slate-300 text-sm">+91-XXXXXXXXXX</p>
+                <p className="text-slate-300 text-sm">(02342) 299433</p>
               </div>
               <div className="flex items-start space-x-3">
                 <div className="w-5 h-5 bg-emerald-500 rounded-full flex items-center justify-center mt-0.5">
                   <span className="text-xs">✉️</span>
                 </div>
-                <p className="text-slate-300 text-sm">info@vsmcollege.edu.in</p>
+                <p className="text-slate-300 text-sm">vsmashta2022@gmail.com</p>
               </div>
             </div>
           </div>
