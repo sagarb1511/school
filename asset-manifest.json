@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/school/static/css/main.2a9a26f2.css",
-    "main.js": "/school/static/js/main.76fa549a.js",
+    "main.js": "/school/static/js/main.f60760aa.js",
     "static/media/chess.webp": "/school/static/media/chess.12418aaae78d965d5e90.webp",
+    "static/media/VSMAST.png": "/school/static/media/VSMAST.0b766f8ffb66842851dc.png",
     "static/media/slider1.jpg": "/school/static/media/slider1.5b0281c108b95d6e9491.jpg",
     "static/media/nss2.jpeg": "/school/static/media/nss2.d4453dfef76d40bc8948.jpeg",
     "static/media/india.jpg": "/school/static/media/india.2d499f536c24d23d9767.jpg",
     "static/media/vaibhav.JPG": "/school/static/media/vaibhav.aaca765713d5b6981e0f.JPG",
-    "static/media/logo.jpg": "/school/static/media/logo.04b383e1a17ef15ba45a.jpg",
     "static/media/nss1.jpeg": "/school/static/media/nss1.1597ba5d8559d3f8b171.jpeg",
     "static/media/principal.JPG": "/school/static/media/principal.4221951615783e1f82da.JPG",
     "static/media/nss3.jpeg": "/school/static/media/nss3.65ad3bc61e22e27b5c53.jpeg",
@@ -17,10 +17,10 @@
     "static/media/17vilasrao-shinde_201906253646.jpg": "/school/static/media/17vilasrao-shinde_201906253646.1511d5e1191c18d5ec87.jpg",
     "index.html": "/school/index.html",
     "main.2a9a26f2.css.map": "/school/static/css/main.2a9a26f2.css.map",
-    "main.76fa549a.js.map": "/school/static/js/main.76fa549a.js.map"
+    "main.f60760aa.js.map": "/school/static/js/main.f60760aa.js.map"
   },
   "entrypoints": [
     "static/css/main.2a9a26f2.css",
-    "static/js/main.76fa549a.js"
+    "static/js/main.f60760aa.js"
   ]
 }
