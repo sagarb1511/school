@@ -125,9 +125,9 @@ const Navbar = () => {
             <div className="w-1/6"></div>
             <div className="flex items-center justify-center gap-2 sm:gap-3 w-2/3">
               <img 
-                src={require('../assets/logo.jpg')} 
+                src={require('../assets/VSMAST.png')} 
                 alt="Organization Logo" 
-                className="w-8 h-8 sm:w-10 sm:h-10 object-contain rounded-lg shadow-md transform hover:scale-110 transition-all duration-300"
+                className="w-10 h-10 sm:w-14 sm:h-14 object-contain transform hover:scale-110 transition-all duration-300"
               />
               <h1 className="text-[10px] xs:text-xs sm:text-sm md:text-lg font-semibold text-center animate-pulse tracking-tight whitespace-nowrap overflow-hidden text-ellipsis">
                 <span className="inline-block transform hover:scale-105 transition-transform duration-300">
@@ -186,8 +186,18 @@ const Navbar = () => {
 
       {/* Bottom Section - Enhanced Navigation Menu - Always visible */}
       <nav className={`bg-white/30 backdrop-blur-sm transition-all duration-300 ${isScrolled ? 'fixed top-0 left-0 right-0' : 'relative'}`}>
-        <div className="max-w-7xl mx-auto px-2 sm:px-4 lg:px-8">
-          <div className="flex justify-between items-center h-16 sm:h-18 rounded-full border-2 border-[#832936]/20 bg-gradient-to-r from-[#f0ede8] via-[#e0ddd7] to-[#f0ede8] shadow-inner">
+        {/* Logo outside the menu bar when scrolled - positioned at far left */}
+        {isScrolled && (
+          <div className="absolute left-10 top-1/2 transform -translate-y-1/2 z-20">
+            <img 
+              src={require('../assets/VSMAST.png')} 
+              alt="Logo" 
+              className="w-16 h-16 sm:w-20 sm:h-20 object-contain drop-shadow-lg"
+            />
+          </div>
+        )}
+        <div className="max-w-7xl mx-auto px-2 sm:px-4 lg:px-8 relative">
+          <div className={`relative flex justify-between items-center ${isScrolled ? 'h-20 sm:h-24' : 'h-16 sm:h-18'} rounded-full border-2 border-[#832936]/20 bg-gradient-to-r from-[#f0ede8] via-[#e0ddd7] to-[#f0ede8] shadow-inner`}>
             {/* Enhanced Navigation Menu - Desktop/Tablet */}
             <div className="hidden lg:flex items-center space-x-1 xl:space-x-2 flex-1 justify-center">
               {menuItems.map((item, index) => (
@@ -241,7 +251,7 @@ const Navbar = () => {
           </div>
         </div>
 
-        {/* Mobile/Tablet Menu */}
+      {/* Mobile/Tablet Menu */}
         {isMobileMenuOpen && (
           <div className="lg:hidden bg-[#e0ddd7] border-t border-[#cecbc6] shadow-xl animate-slideDown max-h-screen overflow-y-auto">
             <div className="px-2 sm:px-4 py-2 space-y-1">
