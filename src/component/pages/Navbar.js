@@ -124,11 +124,6 @@ const Navbar = () => {
           <div className="flex justify-between items-center min-h-[40px]">
             <div className="w-1/6"></div>
             <div className="flex items-center justify-center gap-2 sm:gap-3 w-2/3">
-              <img 
-                src={require('../assets/VSMAST.png')} 
-                alt="Organization Logo" 
-                className="w-10 h-10 sm:w-14 sm:h-14 object-contain transform hover:scale-110 transition-all duration-300"
-              />
               <h1 className="text-[10px] xs:text-xs sm:text-sm md:text-lg font-semibold text-center animate-pulse tracking-tight whitespace-nowrap overflow-hidden text-ellipsis">
                 <span className="inline-block transform hover:scale-105 transition-transform duration-300">
                   {getTranslation('organizationName', language)}

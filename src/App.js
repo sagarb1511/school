@@ -139,6 +139,9 @@ import GalleryForm1 from './component/admin/Gallery';
 import Activityform from './component/admin/Activity';
 import AchievementForm1 from './component/admin/Achivmentform';
 import Dashboard1 from './component/admin/Dashboard1';
+import Sport from './component/admin/Sports';
+import Activities12 from './component/admin/Activities1';
+import Research from './component/admin/Research';
 
 
 // Add this if you have an Organisation component; otherwise, create a placeholder or remove the link
@@ -176,13 +179,17 @@ function App() {
           } />
           
           {/* Admin login route without Navbar and Footer */}
-          <Route path="/dashboard1" element={<Dashboard1 />} />
           <Route path="/admin" element={<Adminlogin />} />
-          <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/teacher" element={<Teacherform />} />
-           <Route path="/Gallery1" element={<GalleryForm1 />} />
-           <Route path="/Activity" element={<Activityform />} />
-         <Route path="/AchievementForm" element={<AchievementForm1 />} />
+          
+          {/* Admin routes with Sidebar */}
+          <Route path="/dashboard1" element={<><Dashboard /><Dashboard1 /></>} />
+          <Route path="/teacher" element={<><Dashboard /><Teacherform /></>} />
+          <Route path="/Gallery1" element={<><Dashboard /><GalleryForm1 /></>} />
+          <Route path="/Activity" element={<><Dashboard /><Activityform /></>} />
+          <Route path="/AchievementForm" element={<><Dashboard /><AchievementForm1 /></>} />
+          <Route path="/Sports1" element={<><Dashboard /><Sport /></>} />
+          <Route path="/Activities1" element={<><Dashboard /><Activities12 /></>} />
+          <Route path="/Research" element={<><Dashboard /><Research /></>} />
           {/* Catch-all route */}
           <Route path="*" element={
             <>

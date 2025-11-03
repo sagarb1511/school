@@ -89,7 +89,11 @@ const Aboutus = () => {
               textShadow: '1px 1px 2px rgba(0,0,0,0.1)',
               textAlign: 'center'
             }}>
-             {language === 'mr' ? 'माजी आमदार विलासराव शिंदे साहेब' : 'Former MLA Vilasrao Shinde Saheb'}
+             {language === 'mr' ? 'माजी आमदार तथा आमदार परिषद सदस्य (एम.एल.सी.) स्वर्गीय विलासराव शिंदे (साहेब)' : (
+               <>
+                 Late Hon. Vilasrao Shinde(Saheb) <span style={{ whiteSpace: 'nowrap' }}>Ex. MLA & MLC</span>
+               </>
+             )}
             </h2>
             
             <div style={{ 

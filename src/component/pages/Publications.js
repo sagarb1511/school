@@ -1,79 +1,89 @@
-import React, { useState } from 'react';
-
-
-// Sample data for papers and books with publisher information
-const publications = [
-  {
-    id: 1,
-    title: "Advanced Mathematics in Engineering",
-    authors: ["Dr. Rajesh Kumar", "Prof. Priya Sharma"],
-    type: "Research Paper",
-    journal: "International Journal of Mathematics",
-    year: 2023,
-    publisher: "Academic Press",
-    image: "https://images.unsplash.com/photo-1509228468518-180dd4864904?auto=format&fit=crop&w=800&q=60"
-  },
-  {
-    id: 2,
-    title: "Environmental Science and Sustainability",
-    authors: ["Dr. Meena Kulkarni", "Mr. Sunil Patankar"],
-    type: "Book",
-    journal: "Environmental Studies Quarterly",
-    year: 2023,
-    publisher: "Green Publications",
-    image: "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&w=800&q=60"
-  },
-  {
-    id: 3,
-    title: "Computer Science Fundamentals",
-    authors: ["Mrs. Kavita Mane"],
-    type: "Textbook",
-    journal: "Tech Education Review",
-    year: 2022,
-    publisher: "Tech Books Ltd",
-    image: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=800&q=60"
-  },
-  {
-    id: 4,
-    title: "Modern Physics Applications",
-    authors: ["Mr. Rajesh Pawar", "Dr. Amit Joshi"],
-    type: "Research Paper",
-    journal: "Physics Today",
-    year: 2023,
-    publisher: "Science Publications",
-    image: "https://images.unsplash.com/photo-1635070041078-e363dbe005cb?auto=format&fit=crop&w=800&q=60"
-  }
-];
+import React, { useState, useEffect } from 'react';
+import { ref, onValue } from 'firebase/database';
+import { database } from '../../config/firebase';
 
 const Publications = () => {
+  const [publications, setPublications] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [selectedType, setSelectedType] = useState('All');
-  const [selectedPublisher, setSelectedPublisher] = useState(null);
 
-  const types = ['All', 'Research Paper', 'Book', 'Textbook'];
+  // Function to handle PDF viewing
+  const handleViewPdf = (pdfBase64, pdfName) => {
+    try {
+      // Extract base64 data (remove data:application/pdf;base64, prefix if present)
+      const base64Data = pdfBase64.includes('base64,') 
+        ? pdfBase64.split('base64,')[1] 
+        : pdfBase64;
+      
+      // Convert base64 to binary
+      const binaryString = window.atob(base64Data);
+      const bytes = new Uint8Array(binaryString.length);
+      for (let i = 0; i < binaryString.length; i++) {
+        bytes[i] = binaryString.charCodeAt(i);
+      }
+      
+      // Create blob from binary data
+      const blob = new Blob([bytes], { type: 'application/pdf' });
+      
+      // Create object URL
+      const blobUrl = URL.createObjectURL(blob);
+      
+      // Open in new tab
+      window.open(blobUrl, '_blank');
+      
+      // Clean up the URL after a delay
+      setTimeout(() => URL.revokeObjectURL(blobUrl), 100);
+    } catch (error) {
+      console.error('Error viewing PDF:', error);
+      alert('Unable to view PDF. Please try downloading instead.');
+    }
+  };
+
+  // Fetch publications from Firebase
+  useEffect(() => {
+    const researchRef = ref(database, 'School/research');
+    
+    const unsubscribe = onValue(researchRef, (snapshot) => {
+      const data = snapshot.val();
+      if (data) {
+        const publicationsArray = Object.keys(data).map(key => {
+          const item = data[key];
+          const publication = {
+            id: key,
+            title: item.headingName || 'Untitled Research',
+            authors: item.authorsName ? item.authorsName.split(',').map(a => a.trim()) : ['Unknown'],
+            type: item.publicationType || 'Research Paper', // Use actual type from Firebase
+            journal: item.publishedIn || 'Not specified',
+            year: item.createdAt ? new Date(item.createdAt).getFullYear() : new Date().getFullYear(),
+            image: item.image || 'https://images.unsplash.com/photo-1509228468518-180dd4864904?auto=format&fit=crop&w=800&q=60',
+            pdf: item.pdf || null,
+            pdfName: item.pdfName || 'research.pdf'
+          };
+          console.log('Loaded publication:', publication.title, 'Type:', publication.type, 'Raw publicationType:', item.publicationType);
+          return publication;
+        });
+        setPublications(publicationsArray);
+      } else {
+        setPublications([]);
+      }
+      setLoading(false);
+    }, (error) => {
+      console.error('Error fetching publications:', error);
+      setLoading(false);
+    });
+
+    return () => unsubscribe();
+  }, []);
+
+  const types = ['All', 'Research Paper', 'Book', 'Others'];
   
   const filteredPublications = selectedType === 'All' 
     ? publications 
-    : publications.filter(pub => pub.type === selectedType);
-
-  const PublisherModal = ({ publisher, onClose }) => {
-    if (!publisher) return null;
-    
-    return (
-      <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-        <div className="bg-white rounded-lg max-w-md w-full p-6">
-          <div className="flex justify-between items-center mb-4">
-            <h3 className="text-xl font-bold">Publisher Information</h3>
-            <button onClick={onClose} className="text-gray-500 hover:text-gray-700">
-              ×
-            </button>
-          </div>
-          <p className="text-gray-700">Publisher: {publisher}</p>
-          <p className="text-gray-600 mt-2">Contact information and details would be displayed here.</p>
-        </div>
-      </div>
-    );
-  };
-
+    : publications.filter(pub => {
+        console.log('Filtering:', pub.title, 'Type:', pub.type, 'Selected:', selectedType, 'Match:', pub.type === selectedType);
+        return pub.type === selectedType;
+      });
+  
   return (
     <div style={{ 
       minHeight: '100vh', 
@@ -241,7 +251,23 @@ const Publications = () => {
             ))}
           </div>
 
+          {/* Loading State */}
+          {loading && (
+            <div className="text-center py-12">
+              <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
+              <p className="mt-4 text-gray-600">Loading publications...</p>
+            </div>
+          )}
+
+          {/* Empty State */}
+          {!loading && publications.length === 0 && (
+            <div className="text-center py-12">
+              <p className="text-gray-600 text-lg">No publications available yet.</p>
+            </div>
+          )}
+
           {/* Publications Grid */}
+          {!loading && publications.length > 0 && (
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
             {filteredPublications.map((publication) => (
               <div
@@ -277,22 +303,42 @@ const Publications = () => {
                     <p className="text-sm font-medium text-gray-800">{publication.journal}</p>
                   </div>
                   
-                  <button
-                    onClick={() => setSelectedPublisher(publication.publisher)}
-                    className="w-full bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition-colors text-sm font-medium"
-                  >
-                    View Publisher Info
-                  </button>
+                  {publication.pdf ? (
+                    <div className="flex gap-2">
+                      <button
+                        onClick={() => handleViewPdf(publication.pdf, publication.pdfName)}
+                        className="flex-1 bg-green-600 text-white py-2 px-4 rounded-lg hover:bg-green-700 transition-colors text-sm font-medium flex items-center justify-center gap-2"
+                      >
+                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                        </svg>
+                        View
+                      </button>
+                      <a
+                        href={publication.pdf}
+                        download={publication.pdfName}
+                        className="flex-1 bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition-colors text-sm font-medium flex items-center justify-center gap-2"
+                      >
+                        <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                          <path fillRule="evenodd" d="M6 2a2 2 0 00-2 2v12a2 2 0 002 2h8a2 2 0 002-2V7.414A2 2 0 0015.414 6L12 2.586A2 2 0 0010.586 2H6zm5 6a1 1 0 10-2 0v3.586l-1.293-1.293a1 1 0 10-1.414 1.414l3 3a1 1 0 001.414 0l3-3a1 1 0 00-1.414-1.414L11 11.586V8z" clipRule="evenodd" />
+                        </svg>
+                        Download
+                      </a>
+                    </div>
+                  ) : (
+                    <button
+                      disabled
+                      className="w-full bg-gray-300 text-gray-500 py-2 px-4 rounded-lg text-sm font-medium cursor-not-allowed"
+                    >
+                      No PDF Available
+                    </button>
+                  )}
                 </div>
               </div>
             ))}
           </div>
-
-          {/* Publisher Modal */}
-          <PublisherModal 
-            publisher={selectedPublisher} 
-            onClose={() => setSelectedPublisher(null)} 
-          />
+          )}
         </div>
       </div>
       

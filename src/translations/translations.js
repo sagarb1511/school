@@ -232,7 +232,7 @@ export const translations = {
     faqAnswer4: "Yes, we provide separate hostel facilities for boys and girls.",
     
     // Additional Admission/Scholarship content
-    ebcScholarship: "Fee concession for economically backward students (EBC) as per government rules",
+    ebcScholarship: "Fee concession for Economically Backward Students (EBC) as per government rules",
     ebcScholarshipDesc: "For this fee concession, the annual income of the parents of the students should be within Rs. 1,00,000/- and the income should be from the previous financial year, otherwise the fee concession will not be approved. Students should bring an income certificate signed by the Honorable Tehsildar. This concession is approved only for students from Maharashtra. For this concession, the attendance of the students in the college should be 80 percent, otherwise the fee concession will be canceled",
     teacherChildrenScholarship: "Fee concession for children of primary and secondary teachers",
     teacherChildrenScholarshipDesc: "If your mother/father is a primary teacher, you need to provide a signed education certificate from the Group Development Officer. If your mother/father is a secondary teacher, you need to provide a signed education certificate from the school principal",
@@ -605,7 +605,7 @@ export const translations = {
     ebcScholarship: "आर्थिकदृष्ट्या मागासलेल्या विद्यार्थ्यांसाठी (EBC) सरकारी नियमांनुसार फी सवलत",
     ebcScholarshipDesc: "या फी सवलतीसाठी विद्यार्थ्यांच्या पालकांचे वार्षिक उत्पन्न रु. १,००,०००/- च्या आत असावे आणि उत्पन्न मागील आर्थिक वर्षाचे असावे, अन्यथा फी सवलत मंजूर होणार नाही. विद्यार्थ्यांनी माननीय तहसीलदार यांच्या स्वाक्षरी असलेले उत्पन्न प्रमाणपत्र आणावे. ही सवलत फक्त महाराष्ट्रातील विद्यार्थ्यांसाठी मंजूर आहे. या सवलतीसाठी विद्यार्थ्यांची महाविद्यालयात उपस्थिती ८० टक्के असावी, अन्यथा फी सवलत रद्द केली जाईल",
     teacherChildrenScholarship: "प्राथमिक आणि माध्यमिक शिक्षकांच्या मुलांसाठी फी सवलत",
-    teacherChildrenScholarshipDesc: "जर तुमची आई/वडील प्राथमिक शिक्षक असतील तर तुम्हाला गट विकास अधिकारी यांच्याकडून स्वाक्षरी केलेले शिक्षण प्रमाणपत्र द्यावे लागेल. जर तुमची आई/वडील माध्यमिक शिक्षक असतील तर तुम्हाला शाळेच्या मुख्याध्यापकांकडून स्वाक्षरी केलेले शिक्षण प्रमाणपत्र द्यावे लागेल",
+    teacherChildrenScholarshipDesc: "जर तुमची आई/वडील प्राथमिक शिक्षक असतील तर तुम्हाला गट विकास अधिकारी यांच्याकडून स्वाक्षरी केलेले शिक्षण प्रमाणपत्र द्यावे लागेल. जर तुमची आई/वडील माध्यमिक शिक्षक असतील तर तुम्हाला शाळेच्या प्राचार्यांकडून स्वाक्षरी केलेले शिक्षण प्रमाणपत्र द्यावे लागेल",
     militaryScholarship: "सैनिक आणि माजी सैनिकांच्या मुलांना उपलब्ध सवलती",
     militaryScholarshipDesc: "ज्या विद्यार्थ्यांचे पालक लष्करी सेवेत होते किंवा आहेत. त्यांना सरकारकडून शैक्षणिक फी सवलत दिली जाते. अशा विद्यार्थ्यांनी आवश्यक कागदपत्रांसह विहित नमुन्यात अर्ज कार्यालयात सादर करावा",
     backwardClassScholarship: "मागासवर्गीय विद्यार्थ्यांसाठी उपलब्ध फी सवलत आणि शिष्यवृत्ती (SC/ST/OBC/SBC)",

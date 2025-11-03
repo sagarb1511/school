@@ -178,7 +178,14 @@ const Home = () => {
               />
               <div style={styles.slideOverlay}>
                 <div style={styles.slideContent}>
-                  <h2 style={styles.slideTitle}>{slide.title}</h2>
+                  {index === 0 ? (
+                    <h2 style={styles.slideTitle}>
+                      <div>{language === 'mr' ? 'येथे आपले स्वागत आहे' : 'Welcome To'}</div>
+                      <div style={{marginTop: '10px', whiteSpace: 'nowrap'}}>{language === 'mr' ? 'विलासराव शिंदे महाविद्यालय, आष्टा' : 'Vilasrao Shinde Mahavidyalaya, Ashta'}</div>
+                    </h2>
+                  ) : (
+                    <h2 style={styles.slideTitle}>{slide.title}</h2>
+                  )}
                   <p style={styles.slideDescription}>{slide.description}</p>
                 </div>
               </div>
@@ -282,11 +289,11 @@ const Home = () => {
         <div style={styles.leaderImageContainer}>
           <img 
             src={founderImage} 
-            alt="Honorable Late. Vilasrao Shinde - Founder" 
+            alt="Late Hon. Vilasrao Shinde(Saheb) Ex. MLA & MLC" 
             style={styles.leaderImage}
           />
         </div>
-        <h3 style={styles.leaderName}>Honorable Late.Vilasrao Shinde</h3>
+        <h3 style={styles.leaderName}>{language === 'mr' ? 'माजी आमदार तथा आमदार परिषद सदस्य (एम.एल.सी.) स्वर्गीय विलासराव शिंदे (साहेब)' : 'Late Hon. Vilasrao Shinde(Saheb) Ex. MLA & MLC'}</h3>
         <p style={styles.leaderTitle}>{language === 'mr' ? 'संस्थापक' : 'Founder'}</p>
         <p style={styles.leaderDescription}>
           {language === 'mr' ? 'दूरदर्शी नेते ज्यांनी सर्वांना दर्जेदार शिक्षण प्रदान करण्याच्या उद्देशाने या संस्थेची स्थापना केली.' : 'Visionary leader who established this institution with a mission to provide quality education to all.'}
@@ -301,7 +308,7 @@ const Home = () => {
             style={styles.leaderImage}
           />
         </div>
-        <h3 style={styles.leaderName}>Shri Vaibhav Vilasrao  Shinde</h3>
+        <h3 style={styles.leaderName}>{language === 'mr' ? 'श्री वैभव विलासराव शिंदे (दादा)' : 'Shri Vaibhav Vilasrao Shinde (Dada)'}</h3>
         <p style={styles.leaderTitle}>{language === 'mr' ? 'सह-संस्थापक' : 'Co-Founder'}</p>
         <p style={styles.leaderDescription}>
           {language === 'mr' ? 'समर्पित शिक्षक आणि प्रशासक ज्यांनी आमच्या संस्थेच्या शैक्षणिक दृष्टिकोनाला आकार देण्यास मदत केली.' : 'Dedicated educator and administrator who helped shape the academic vision of our institution.'}
@@ -316,8 +323,8 @@ const Home = () => {
             style={styles.leaderImage}
           />
         </div>
-        <h3 style={styles.leaderName}>Mr. Manikrao Vishnu Patil</h3>
-        <p style={styles.leaderTitle}>{language === 'mr' ? 'मुख्याध्यापक' : 'Principal'}</p>
+        <h3 style={styles.leaderName}>{language === 'mr' ? 'डॉ. माणिकराव विष्णु पाटील' : 'Dr. Manikrao Vishnu Patil'}</h3>
+        <p style={styles.leaderTitle}>{language === 'mr' ? 'प्राचार्य' : 'Principal'}</p>
         <p style={styles.leaderDescription}>
           {language === 'mr' ? 'सध्याचे मुख्याध्यापक जे संस्थेला शिक्षण आणि विद्यार्थी विकासात उत्कृष्टतेकडे नेत आहेत.' : 'Current principal leading the institution towards excellence in education and student development.'}
         </p>

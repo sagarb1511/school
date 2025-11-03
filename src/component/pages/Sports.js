@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { database } from '../../config/firebase';
+import { ref, get } from 'firebase/database';
 
 import chessImage from '../assets/chess.webp';
 import messiImage from '../assets/messi.webp';
@@ -6,38 +8,79 @@ import volleyballImage from '../assets/vollyboll.jpg';
 import indiaImage from '../assets/india.jpg';
 
 const Sports = () => {
-  const winnersData = [
-    {
-      sport: "Cricket 🏏",
-      winner: "Team India",
-      image: indiaImage
-    },
-    {
-      sport: "Football ⚽",
-      winner: "Messi Team", 
-      image: messiImage
-    },
-    {
-      sport: "Volleyball 🏐",
-      winner: "Team Tigers",
-      image: volleyballImage
-    },
-    {
-      sport: "Badminton 🏸",
-      winner: "Rahul Sharma",
-      image: "https://images.unsplash.com/photo-1626224583764-f87db24ac4ea?auto=format&fit=crop&w=800&q=80"
-    },
-    {
-      sport: "Chess ♟️",
-      winner: "Sneha Joshi", 
-      image: chessImage
-    },
-    {
-      sport: "Athletics 🏃",
-      winner: "Priya Singh",
-      image: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?auto=format&fit=crop&w=800&q=80"
-    }
-  ];
+  const [winnersData, setWinnersData] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [selectedSport, setSelectedSport] = useState(null);
+
+  useEffect(() => {
+    const fetchSportsData = async () => {
+      try {
+        const sportsRef = ref(database, 'School/sports');
+        const snapshot = await get(sportsRef);
+        
+        if (snapshot.exists()) {
+          const data = snapshot.val();
+          // Convert object to array if needed
+          const dataArray = Array.isArray(data) ? data : Object.values(data);
+          console.log('Fetched sports data:', dataArray);
+          console.log('First item structure:', dataArray[0]);
+          setWinnersData(dataArray);
+        } else {
+          console.log('No data found at School/sports');
+          setWinnersData([]);
+        }
+        setLoading(false);
+      } catch (err) {
+        console.error('Error fetching sports data:', err);
+        console.error('Error details:', err.message);
+        setError(`Failed to load sports data: ${err.message}`);
+        setLoading(false);
+      }
+    };
+
+    fetchSportsData();
+  }, []);
+
+  if (loading) {
+    return (
+      <div style={{
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        minHeight: '100vh',
+        fontSize: '1.5rem',
+        color: '#4b5563',
+        background: 'linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%)'
+      }}>
+        <div style={{ textAlign: 'center' }}>
+          <div style={{ fontSize: '3rem', marginBottom: '16px' }}>🏆</div>
+          <div>Loading sports data...</div>
+        </div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div style={{
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        minHeight: '100vh',
+        color: '#ef4444',
+        fontSize: '1.2rem',
+        textAlign: 'center',
+        padding: '20px',
+        background: 'linear-gradient(135deg, #fee2e2 0%, #fecaca 100%)'
+      }}>
+        <div>
+          <div style={{ fontSize: '3rem', marginBottom: '16px' }}>⚠️</div>
+          <div>{error}</div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div style={{ 
@@ -176,7 +219,7 @@ const Sports = () => {
         }}></div>
       </div>
 
-      <div style={{ 
+      <div className="sports-container" style={{ 
         padding: '32px 16px',
         position: 'relative',
         zIndex: 1
@@ -187,11 +230,11 @@ const Sports = () => {
         }}>
           
           {/* Header */}
-          <div style={{ 
+          <div className="sports-header" style={{ 
             textAlign: 'center', 
             marginBottom: '48px' 
           }}>
-            <h1 style={{
+            <h1 className="sports-title" style={{
               fontSize: '2.25rem',
               fontWeight: 'bold',
               color: '#1f2937',
@@ -200,7 +243,7 @@ const Sports = () => {
             }}>
               🏆 Sports Winners
             </h1>
-            <p style={{
+            <p className="sports-subtitle" style={{
               fontSize: '1.25rem',
               color: '#4b5563'
             }}>
@@ -209,14 +252,15 @@ const Sports = () => {
           </div>
 
           {/* Winners Grid */}
-          <div style={{
+          <div className="sports-grid" style={{
             display: 'grid',
             gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
             gap: '32px'
           }}>
-            {winnersData.map((item, index) => (
+            {winnersData.length > 0 ? winnersData.map((item, index) => (
               <div 
                 key={index} 
+                onClick={() => setSelectedSport(item)}
                 style={{
                   backgroundColor: 'rgba(255, 255, 255, 0.95)',
                   borderRadius: '12px',
@@ -224,15 +268,16 @@ const Sports = () => {
                   overflow: 'hidden',
                   transition: 'all 0.3s ease',
                   backdropFilter: 'blur(10px)',
-                  border: '1px solid rgba(255, 255, 255, 0.2)'
+                  border: '1px solid rgba(255, 255, 255, 0.2)',
+                  cursor: 'pointer'
                 }}
                 onMouseEnter={(e) => {
-                  e.target.style.transform = 'translateY(-8px)';
-                  e.target.style.boxShadow = '0 20px 40px rgba(0, 0, 0, 0.15)';
+                  e.currentTarget.style.transform = 'translateY(-8px)';
+                  e.currentTarget.style.boxShadow = '0 20px 40px rgba(0, 0, 0, 0.15)';
                 }}
                 onMouseLeave={(e) => {
-                  e.target.style.transform = 'translateY(0)';
-                  e.target.style.boxShadow = '0 10px 25px rgba(0, 0, 0, 0.1)';
+                  e.currentTarget.style.transform = 'translateY(0)';
+                  e.currentTarget.style.boxShadow = '0 10px 25px rgba(0, 0, 0, 0.1)';
                 }}
               >
                 
@@ -248,7 +293,7 @@ const Sports = () => {
                 }}>
                   <img 
                     src={item.image} 
-                    alt={`${item.winner} - ${item.sport} winner`}
+                    alt={`${item.teamName || item.team || 'Team'} - ${item.sportName || item.sport || 'Sport'}`}
                     style={{
                       width: '100%',
                       height: '100%',
@@ -261,7 +306,7 @@ const Sports = () => {
                   />
                 </div>
 
-                {/* Winner Info */}
+                {/* Sport and Team Info */}
                 <div style={{ padding: '24px' }}>
                   <h3 style={{
                     fontSize: '1.25rem',
@@ -269,27 +314,279 @@ const Sports = () => {
                     color: '#1f2937',
                     marginBottom: '8px'
                   }}>
-                    {item.sport}
+                    {item.sportName || item.sport || item.Sport || 'Sport Name'}
                   </h3>
                   <p style={{
                     fontSize: '1.125rem',
                     fontWeight: '600',
                     color: '#2563eb'
                   }}>
-                    {item.winner}
+                    {item.teamName || item.team || item.Team || 'Team Name'}
                   </p>
                 </div>
               </div>
-            ))}
+            )) : (
+              <div style={{
+                gridColumn: '1 / -1',
+                textAlign: 'center',
+                padding: '60px 20px',
+                color: '#6b7280',
+                fontSize: '1.2rem'
+              }}>
+                <div style={{ fontSize: '4rem', marginBottom: '16px' }}>🏆</div>
+                <div>No sports data available.</div>
+                <div style={{ fontSize: '0.9rem', marginTop: '8px' }}>Please add data to Firebase Realtime Database at School/sports</div>
+              </div>
+            )}
           </div>
 
         </div>
       </div>
+
+      {/* Modal for displaying full details */}
+      {selectedSport && (
+        <div 
+          className="modal-overlay"
+          style={{
+            position: 'fixed',
+            top: 0,
+            left: 0,
+            width: '100%',
+            height: '100%',
+            backgroundColor: 'rgba(0, 0, 0, 0.7)',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            zIndex: 1000,
+            padding: '20px',
+            backdropFilter: 'blur(5px)'
+          }}
+          onClick={() => setSelectedSport(null)}
+        >
+          <div 
+            className="modal-content"
+            style={{
+              backgroundColor: 'white',
+              borderRadius: '16px',
+              maxWidth: '700px',
+              width: '100%',
+              maxHeight: '90vh',
+              overflow: 'auto',
+              position: 'relative',
+              boxShadow: '0 25px 50px rgba(0, 0, 0, 0.3)'
+            }}
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Close Button */}
+            <button
+              onClick={() => setSelectedSport(null)}
+              style={{
+                position: 'absolute',
+                top: '16px',
+                right: '16px',
+                width: '40px',
+                height: '40px',
+                borderRadius: '50%',
+                border: 'none',
+                backgroundColor: '#ef4444',
+                color: 'white',
+                fontSize: '1.5rem',
+                cursor: 'pointer',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                transition: 'all 0.2s ease',
+                zIndex: 10
+              }}
+              onMouseEnter={(e) => {
+                e.target.style.backgroundColor = '#dc2626';
+                e.target.style.transform = 'scale(1.1)';
+              }}
+              onMouseLeave={(e) => {
+                e.target.style.backgroundColor = '#ef4444';
+                e.target.style.transform = 'scale(1)';
+              }}
+            >
+              ×
+            </button>
+
+            {/* Image */}
+            <div className="modal-image" style={{
+              width: '100%',
+              height: '350px',
+              backgroundColor: '#f3f4f6',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              borderTopLeftRadius: '16px',
+              borderTopRightRadius: '16px',
+              overflow: 'hidden'
+            }}>
+              {selectedSport.image ? (
+                <img 
+                  src={selectedSport.image} 
+                  alt={selectedSport.sportName || selectedSport.sport}
+                  style={{
+                    width: '100%',
+                    height: '100%',
+                    objectFit: 'cover'
+                  }}
+                />
+              ) : (
+                <div style={{ fontSize: '5rem' }}>🏆</div>
+              )}
+            </div>
+
+            {/* Content */}
+            <div className="modal-body" style={{ padding: '32px' }}>
+              {/* Sport Name */}
+              <h2 className="modal-sport-name" style={{
+                fontSize: '2rem',
+                fontWeight: 'bold',
+                color: '#1f2937',
+                marginBottom: '12px'
+              }}>
+                {selectedSport.sportName || selectedSport.sport || selectedSport.Sport || 'Sport'}
+              </h2>
+
+              {/* Team Name */}
+              <div className="modal-team-name" style={{
+                fontSize: '1.5rem',
+                fontWeight: '600',
+                color: '#2563eb',
+                marginBottom: '24px',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '8px'
+              }}>
+                <span style={{ fontSize: '1.3rem' }}>🏆</span>
+                {selectedSport.teamName || selectedSport.team || selectedSport.Team || 'Team'}
+              </div>
+
+              {/* Description */}
+              {(selectedSport.description || selectedSport.Description) && (
+                <div style={{
+                  marginTop: '24px',
+                  padding: '20px',
+                  backgroundColor: '#f9fafb',
+                  borderRadius: '12px',
+                  border: '1px solid #e5e7eb'
+                }}>
+                  <h3 style={{
+                    fontSize: '1.2rem',
+                    fontWeight: '600',
+                    color: '#374151',
+                    marginBottom: '12px'
+                  }}>
+                    📝 Description
+                  </h3>
+                  <p style={{
+                    fontSize: '1rem',
+                    color: '#4b5563',
+                    lineHeight: '1.6',
+                    whiteSpace: 'pre-wrap'
+                  }}>
+                    {selectedSport.description || selectedSport.Description}
+                  </p>
+                </div>
+              )}
+
+              
+            </div>
+          </div>
+        </div>
+      )}
       
      
       
-      {/* CSS Animations */}
+      {/* CSS Animations and Responsive Styles */}
       <style jsx>{`
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+          .sports-container {
+            padding: 20px 12px !important;
+          }
+          
+          .sports-header {
+            margin-bottom: 32px !important;
+          }
+          
+          .sports-title {
+            font-size: 1.75rem !important;
+          }
+          
+          .sports-subtitle {
+            font-size: 1rem !important;
+          }
+          
+          .sports-grid {
+            grid-template-columns: 1fr !important;
+            gap: 20px !important;
+          }
+          
+          .modal-overlay {
+            padding: 10px !important;
+          }
+          
+          .modal-content {
+            border-radius: 12px !important;
+            max-height: 95vh !important;
+          }
+          
+          .modal-image {
+            height: 250px !important;
+            border-radius: 12px 12px 0 0 !important;
+          }
+          
+          .modal-body {
+            padding: 20px !important;
+          }
+          
+          .modal-sport-name {
+            font-size: 1.5rem !important;
+          }
+          
+          .modal-team-name {
+            font-size: 1.2rem !important;
+          }
+        }
+        
+        @media (max-width: 480px) {
+          .sports-title {
+            font-size: 1.5rem !important;
+          }
+          
+          .sports-subtitle {
+            font-size: 0.9rem !important;
+          }
+          
+          .sports-grid {
+            gap: 16px !important;
+          }
+          
+          .modal-image {
+            height: 200px !important;
+          }
+          
+          .modal-body {
+            padding: 16px !important;
+          }
+          
+          .modal-sport-name {
+            font-size: 1.3rem !important;
+          }
+          
+          .modal-team-name {
+            font-size: 1.1rem !important;
+          }
+        }
+        
+        @media (min-width: 769px) and (max-width: 1024px) {
+          .sports-grid {
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)) !important;
+          }
+        }
+        
         @keyframes sportsGradient {
           0% { background-position: 0% 50%; }
           50% { background-position: 100% 50%; }
