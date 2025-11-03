@@ -116,49 +116,46 @@ const Navbar = () => {
 
   return (
     <div className="sticky top-0 z-50">
-      {/* Top Section - Organization Name with Language Dropdown - Hidden on scroll */}
-      <div 
-        className={`bg-gradient-to-r from-[#775448] via-[#832936] to-[#775448] text-[#e0ddd7] py-2 sm:py-1.5 shadow-lg transition-all duration-300 ${isScrolled ? 'h-0 py-0 opacity-0 overflow-hidden' : 'h-auto py-2 opacity-100'}`}
-      >
-        <div className="max-w-7xl mx-auto px-2 sm:px-4 lg:px-8">
-          <div className="flex justify-between items-center min-h-[40px]">
-            <div className="w-1/6"></div>
-            <div className="flex items-center justify-center gap-2 sm:gap-3 w-2/3">
-              <h1 className="text-[10px] xs:text-xs sm:text-sm md:text-lg font-semibold text-center animate-pulse tracking-tight whitespace-nowrap overflow-hidden text-ellipsis">
-                <span className="inline-block transform hover:scale-105 transition-transform duration-300">
-                  {getTranslation('organizationName', language)}
-                </span>
-              </h1>
+      {/* Header Section - Logo and College Info */}
+      <div className="bg-gradient-to-r from-[#f5f5dc] via-[#faf0e6] to-[#f5f5dc] shadow-md">
+        <div className="max-w-7xl mx-auto px-4 lg:px-8">
+          <div className="flex items-center justify-between py-2">
+            {/* Logo Section - Left */}
+            <div className="flex items-center">
+              <img 
+                src={require('../assets/VSMAST.png')} 
+                alt="Logo" 
+                className="w-12 h-12 lg:w-16 lg:h-16 object-contain drop-shadow-lg"
+              />
             </div>
-            <div className="w-1/6 flex justify-end items-center space-x-3">
+
+            {/* College Name and Details - Center */}
+            <div className="flex-1 text-center mx-8">
+              <p className="text-xs lg:text-sm text-black font-bold mb-1">
+                RAJARAM SHIKSHAN SANSTHA
+              </p>
+              <h1 className="text-lg lg:text-xl xl:text-2xl font-bold text-red-800 mb-1 tracking-widest">
+                VILASRAO SHINDE MAHAVIDYALAYA
+              </h1>
+              <p className="text-xs lg:text-sm text-gray-600 font-medium tracking-widest">
+                (ARTS, COMMERCE, SCIENCE AND BCA) ASHTA, TAL-WALWA, DIST-SANGLI. PIN-416301
+              </p>
+            </div>
+
+            {/* Language and Admin Section - Right */}
+            <div className="flex items-center space-x-3">
               <div className="relative hidden lg:block">
                 <LanguageDropdown />
               </div>
               <div className="relative group hidden lg:block">
-                <div className="absolute -inset-0.5 bg-gradient-to-r from-[#832936] to-[#6e1e2a] rounded-lg blur opacity-0 group-hover:opacity-75 transition duration-300 group-hover:duration-200 animate-pulse"></div>
                 <Link 
                   to="/admin"
                   target="_blank"
-
-
-                  className="relative flex items-center bg-[#832936] hover:bg-[#6e1e2a] text-white text-xs sm:text-sm px-3 py-1.5 sm:px-4 sm:py-2 rounded-md transition-all duration-300 whitespace-nowrap transform hover:scale-105 hover:shadow-lg hover:shadow-[#832936]/30"
+                  className="flex items-center bg-[#832936] hover:bg-[#6e1e2a] text-white text-sm px-4 py-2 rounded-md transition-all duration-300 transform hover:scale-105"
                 >
-                  <span className="relative z-10">
-                    {getTranslation('adminLogin', language)}
-                  </span>
-                  <svg 
-                    className="w-4 h-4 ml-1.5 transition-transform duration-300 group-hover:translate-x-1" 
-                    fill="none" 
-                    stroke="currentColor" 
-                    viewBox="0 0 24 24" 
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path 
-                      strokeLinecap="round" 
-                      strokeLinejoin="round" 
-                      strokeWidth={2} 
-                      d="M14 5l7 7m0 0l-7 7m7-7H3" 
-                    />
+                  <span>{getTranslation('adminLogin', language)}</span>
+                  <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
                   </svg>
                 </Link>
               </div>
@@ -167,92 +164,64 @@ const Navbar = () => {
         </div>
       </div>
 
-      {/* Middle Section - Animated Marquee - Hidden on scroll */}
-      <div className={`bg-gradient-to-r from-[#e0ddd7] via-[#cecbc6] to-[#e0ddd7] py-2 sm:py-2.5 shadow-md overflow-hidden transition-all duration-300 ${isScrolled ? 'h-0 py-0 opacity-0 overflow-hidden' : 'h-auto py-2 opacity-100'}`}>
-        <div className="animate-marquee-continuous">
-          <span className="text-black font-bold text-sm sm:text-base md:text-lg whitespace-nowrap tracking-wider">
-            🎓 VILASRAO SHINDE MAHAVIDYALAYA (ARTS COMMERCE SCIENCE AND BCA) ASHTA, TAL-WALWA, DIST-SANGLI. PIN-416301 🎓
-          </span>
-        </div>
-      </div>
-
-      {/* Separator - Hidden on scroll */}
-      <div className={`h-px bg-gradient-to-r from-transparent via-[#832936] to-transparent my-1 transition-all duration-300 ${isScrolled ? 'h-0 my-0 opacity-0' : 'h-px my-1 opacity-100'}`}></div>
-
-      {/* Bottom Section - Enhanced Navigation Menu - Always visible */}
-      <nav className={`bg-white/30 backdrop-blur-sm transition-all duration-300 ${isScrolled ? 'fixed top-0 left-0 right-0' : 'relative'}`}>
-        {/* Logo outside menubar - Laptop/Desktop view only */}
-        {isScrolled && (
-          <div className="hidden lg:block absolute left-10 top-1/2 transform -translate-y-1/2 z-20">
-            <img 
-              src={require('../assets/VSMAST.png')} 
-              alt="Logo" 
-              className="w-[76px] h-[76px] object-contain drop-shadow-lg"
-            />
+      {/* Navigation Menu Bar */}
+      <nav className="bg-[#832936] shadow-lg">
+        <div className="max-w-7xl mx-auto px-4 lg:px-8">
+          {/* Desktop Menu */}
+          <div className="hidden lg:flex items-center justify-center space-x-6 py-2">
+            {menuItems.map((item, index) => (
+              <div
+                key={index}
+                className="relative group"
+                onMouseEnter={() => handleMouseEnter(item.name)}
+                onMouseLeave={handleMouseLeave}
+              >
+                <Link
+                  to={item.href}
+                  className={`flex items-center px-3 py-1.5 text-sm font-semibold text-white hover:text-[#e0ddd7] hover:bg-white/10 rounded-md transition-all duration-300 ${
+                    activeDropdown === item.name ? 'bg-white/20 text-[#e0ddd7]' : ''
+                  }`}
+                >
+                  {item.name}
+                  {item.submenu && (
+                    <span className={`ml-2 text-xs transition-all duration-300 ${
+                      activeDropdown === item.name ? 'rotate-180' : ''
+                    }`}>▼</span>
+                  )}
+                </Link>
+                
+                {item.submenu && activeDropdown === item.name && (
+                  <div className="animate-fadeIn">
+                    {renderSubmenu(item.submenu)}
+                  </div>
+                )}
+              </div>
+            ))}
           </div>
-        )}
-        <div className="max-w-7xl mx-auto px-2 sm:px-4 lg:px-8 relative">
-          <div className={`relative flex justify-between items-center h-16 ${isScrolled ? 'sm:h-20' : 'sm:h-18'} lg:rounded-full lg:border-2 lg:border-[#832936]/20 lg:bg-gradient-to-r lg:from-[#f0ede8] lg:via-[#e0ddd7] lg:to-[#f0ede8] lg:shadow-inner`}>
-            {/* Logo inside menubar - Mobile view only */}
-            <div className="flex items-center lg:hidden">
-              {isScrolled && (
-                <img 
-                  src={require('../assets/VSMAST.png')} 
-                  alt="Logo" 
-                  className="w-12 h-12 object-contain drop-shadow-lg ml-2"
-                />
-              )}
-            </div>
 
-            {/* Language Selector - Mobile Only - Center */}
-            <div className="lg:hidden flex-1 flex justify-center">
+          {/* Mobile Menu Header */}
+          <div className="lg:hidden flex items-center justify-between py-2">
+            <div className="flex items-center">
+              <img 
+                src={require('../assets/VSMAST.png')} 
+                alt="Logo" 
+                className="w-10 h-10 object-contain mr-3"
+              />
+              <div className="text-white">
+                <h2 className="text-sm font-bold">VSMAST</h2>
+              </div>
+            </div>
+            
+            <div className="flex items-center space-x-3">
               <div className="relative">
                 <LanguageDropdown />
               </div>
-            </div>
-
-            {/* Enhanced Navigation Menu - Desktop/Tablet */}
-            <div className="hidden lg:flex items-center space-x-1 xl:space-x-2 flex-1 justify-center">
-              {menuItems.map((item, index) => (
-                <div
-                  key={index}
-                  className="relative group"
-                  onMouseEnter={() => handleMouseEnter(item.name)}
-                  onMouseLeave={handleMouseLeave}
-                >
-                  <Link
-                    to={item.href}
-                    className={`flex items-center px-4 py-2 text-sm font-semibold rounded-lg transition-all duration-300 transform hover:scale-105 ${
-                      activeDropdown === item.name
-                        ? 'text-[#e0ddd7] bg-gradient-to-r from-[#832936] to-[#775448] shadow-lg scale-105'
-                        : 'text-[#3c2d2d] hover:text-[#e0ddd7] hover:bg-gradient-to-r hover:from-[#832936] hover:to-[#977765] hover:shadow-md'
-                    }`}
-                  >
-                    {item.name}
-                    {item.submenu && (
-                      <span className={`ml-2 text-xs transition-all duration-300 ${
-                        activeDropdown === item.name ? 'rotate-180 text-[#e0ddd7]' : 'group-hover:text-[#e0ddd7]'
-                      }`}>▼</span>
-                    )}
-                  </Link>
-                  
-                  {item.submenu && activeDropdown === item.name && (
-                    <div className="animate-fadeIn">
-                      {renderSubmenu(item.submenu)}
-                    </div>
-                  )}
-                </div>
-              ))}
-            </div>
-
-            {/* Mobile Menu Button - Right Side */}
-            <div className="lg:hidden flex items-center justify-end">
               <button 
                 onClick={toggleMobileMenu}
-                className="p-2 rounded-lg text-[#3c2d2d] hover:bg-gradient-to-r hover:from-[#b29990] hover:to-[#977765] hover:text-[#e0ddd7] transition-all duration-300 transform hover:scale-110 focus:outline-none focus:ring-2 focus:ring-[#832936] mr-2"
+                className="p-2 rounded-lg text-white hover:bg-white/10 transition-all duration-300"
                 aria-label="Toggle menu"
               >
-                <svg className="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   {isMobileMenuOpen ? (
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
                   ) : (
@@ -263,18 +232,17 @@ const Navbar = () => {
             </div>
           </div>
         </div>
-
-      {/* Mobile/Tablet Menu */}
+        {/* Mobile Menu Dropdown */}
         {isMobileMenuOpen && (
-          <div className="lg:hidden bg-[#e0ddd7] border-t border-[#cecbc6] shadow-xl animate-slideDown max-h-screen overflow-y-auto">
-            <div className="px-2 sm:px-4 py-2 space-y-1">
+          <div className="lg:hidden bg-[#6e1e2a] border-t border-[#832936] shadow-xl animate-slideDown max-h-screen overflow-y-auto">
+            <div className="px-4 py-2 space-y-1">
               {menuItems.map((item, index) => (
-                <div key={index} className="border-b border-[#cecbc6] last:border-b-0">
+                <div key={index} className="border-b border-[#832936]/30 last:border-b-0">
                   {item.submenu ? (
                     <div>
                       <button
                         onClick={() => toggleMobileSubmenu(item.name)}
-                        className="w-full flex items-center justify-between px-3 py-3 text-left text-[#3c2d2d] hover:bg-gradient-to-r hover:from-[#b29990] hover:to-[#977765] hover:text-[#e0ddd7] transition-all duration-300 rounded-lg font-medium"
+                        className="w-full flex items-center justify-between px-3 py-3 text-left text-white hover:bg-white/10 transition-all duration-300 rounded-lg font-medium"
                       >
                         <span>{item.name}</span>
                         <svg
@@ -296,7 +264,7 @@ const Navbar = () => {
                               key={subIndex}
                               to={subItem.href}
                               onClick={closeMobileMenu}
-                              className="block px-3 py-2 text-sm text-[#3c2d2d] hover:bg-gradient-to-r hover:from-[#b29990] hover:to-[#977765] hover:text-[#e0ddd7] transition-all duration-300 rounded-lg transform hover:translate-x-2"
+                              className="block px-3 py-2 text-sm text-white/80 hover:text-white hover:bg-white/10 transition-all duration-300 rounded-lg transform hover:translate-x-2"
                             >
                               • {subItem.name}
                             </Link>
@@ -308,7 +276,7 @@ const Navbar = () => {
                     <Link
                       to={item.href}
                       onClick={closeMobileMenu}
-                      className="block px-3 py-3 text-[#3c2d2d] hover:bg-gradient-to-r hover:from-[#b29990] hover:to-[#977765] hover:text-[#e0ddd7] transition-all duration-300 rounded-lg font-medium transform hover:translate-x-2"
+                      className="block px-3 py-3 text-white hover:bg-white/10 transition-all duration-300 rounded-lg font-medium transform hover:translate-x-2"
                     >
                       {item.name}
                     </Link>
