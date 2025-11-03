@@ -119,42 +119,42 @@ const Navbar = () => {
       {/* Header Section - Logo and College Info */}
       <div className="bg-gradient-to-r from-[#f5f5dc] via-[#faf0e6] to-[#f5f5dc] shadow-md">
         <div className="max-w-7xl mx-auto px-4 lg:px-8">
-          <div className="flex items-center justify-between py-2">
+          <div className="flex items-center justify-between py-1 lg:py-2">
             {/* Logo Section - Left */}
             <div className="flex items-center">
               <img 
                 src={require('../assets/VSMAST.png')} 
                 alt="Logo" 
-                className="w-12 h-12 lg:w-16 lg:h-16 object-contain drop-shadow-lg"
+                className="w-8 h-8 sm:w-10 sm:h-10 lg:w-16 lg:h-16 object-contain drop-shadow-lg"
               />
             </div>
 
             {/* College Name and Details - Center */}
-            <div className="flex-1 text-center mx-8">
-              <p className="text-xs lg:text-sm text-black font-bold mb-1">
+            <div className="flex-1 text-center mx-2 sm:mx-4 lg:mx-8">
+              <p className="text-[8px] sm:text-xs lg:text-sm text-black font-bold mb-0.5 lg:mb-1">
                 RAJARAM SHIKSHAN SANSTHA
               </p>
-              <h1 className="text-lg lg:text-xl xl:text-2xl font-bold text-red-800 mb-1 tracking-widest">
+              <h1 className="text-xs sm:text-sm md:text-base lg:text-xl xl:text-2xl font-bold text-red-800 mb-0.5 lg:mb-1 tracking-wide lg:tracking-widest">
                 VILASRAO SHINDE MAHAVIDYALAYA
               </h1>
-              <p className="text-xs lg:text-sm text-gray-600 font-medium tracking-widest">
+              <p className="text-[8px] sm:text-xs lg:text-sm text-gray-600 font-medium tracking-tight sm:tracking-normal lg:tracking-widest">
                 (ARTS, COMMERCE, SCIENCE AND BCA) ASHTA, TAL-WALWA, DIST-SANGLI. PIN-416301
               </p>
             </div>
 
             {/* Language and Admin Section - Right */}
-            <div className="flex items-center space-x-3">
+            <div className="flex items-center space-x-1 sm:space-x-2 lg:space-x-3">
               <div className="relative hidden lg:block">
                 <LanguageDropdown />
               </div>
-              <div className="relative group hidden lg:block">
+              <div className="relative group hidden sm:block">
                 <Link 
                   to="/admin"
                   target="_blank"
-                  className="flex items-center bg-[#832936] hover:bg-[#6e1e2a] text-white text-sm px-4 py-2 rounded-md transition-all duration-300 transform hover:scale-105"
+                  className="flex items-center bg-[#832936] hover:bg-[#6e1e2a] text-white text-[10px] sm:text-xs lg:text-sm px-2 py-1 sm:px-3 sm:py-1.5 lg:px-4 lg:py-2 rounded-md transition-all duration-300 transform hover:scale-105"
                 >
                   <span>{getTranslation('adminLogin', language)}</span>
-                  <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg className="w-3 h-3 sm:w-4 sm:h-4 ml-1 sm:ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
                   </svg>
                 </Link>
@@ -200,28 +200,28 @@ const Navbar = () => {
           </div>
 
           {/* Mobile Menu Header */}
-          <div className="lg:hidden flex items-center justify-between py-2">
+          <div className="lg:hidden flex items-center justify-between py-1.5">
             <div className="flex items-center">
               <img 
                 src={require('../assets/VSMAST.png')} 
                 alt="Logo" 
-                className="w-10 h-10 object-contain mr-3"
+                className="w-8 h-8 object-contain mr-2"
               />
               <div className="text-white">
-                <h2 className="text-sm font-bold">VSMAST</h2>
+                <h2 className="text-xs font-bold">VSMAST</h2>
               </div>
             </div>
             
-            <div className="flex items-center space-x-3">
+            <div className="flex items-center space-x-2">
               <div className="relative">
                 <LanguageDropdown />
               </div>
               <button 
                 onClick={toggleMobileMenu}
-                className="p-2 rounded-lg text-white hover:bg-white/10 transition-all duration-300"
+                className="p-1.5 rounded-lg text-white hover:bg-white/10 transition-all duration-300"
                 aria-label="Toggle menu"
               >
-                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   {isMobileMenuOpen ? (
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
                   ) : (
@@ -232,10 +232,39 @@ const Navbar = () => {
             </div>
           </div>
         </div>
-        {/* Mobile Menu Dropdown */}
+        {/* Mobile Menu Side Drawer */}
         {isMobileMenuOpen && (
-          <div className="lg:hidden bg-[#6e1e2a] border-t border-[#832936] shadow-xl animate-slideDown max-h-screen overflow-y-auto">
-            <div className="px-4 py-2 space-y-1">
+          <>
+            {/* Backdrop */}
+            <div 
+              className="lg:hidden fixed inset-0 bg-black bg-opacity-50 z-40"
+              onClick={closeMobileMenu}
+            ></div>
+            
+            {/* Side Drawer */}
+            <div className="lg:hidden fixed top-0 left-0 h-full w-64 bg-[#6e1e2a] shadow-xl z-50 transform transition-transform duration-300 ease-in-out overflow-y-auto animate-slideInFromLeft">
+              {/* Drawer Header */}
+              <div className="flex items-center justify-between p-4 border-b border-[#832936]/30">
+                <div className="flex items-center">
+                  <img 
+                    src={require('../assets/VSMAST.png')} 
+                    alt="Logo" 
+                    className="w-8 h-8 object-contain mr-3"
+                  />
+                  <h2 className="text-white text-sm font-bold">VSMAST</h2>
+                </div>
+                <button 
+                  onClick={closeMobileMenu}
+                  className="text-white hover:bg-white/10 p-2 rounded-lg"
+                >
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+                </button>
+              </div>
+              
+              {/* Menu Items */}
+              <div className="px-4 py-2 space-y-1">
               {menuItems.map((item, index) => (
                 <div key={index} className="border-b border-[#832936]/30 last:border-b-0">
                   {item.submenu ? (
@@ -284,7 +313,8 @@ const Navbar = () => {
                 </div>
               ))}
             </div>
-          </div>
+            </div>
+          </>
         )}
       </nav>
 
@@ -383,8 +413,21 @@ const Navbar = () => {
           }
         }
         
+        @keyframes slideInFromLeft {
+          0% { 
+            transform: translateX(-100%); 
+          }
+          100% { 
+            transform: translateX(0); 
+          }
+        }
+        
         .animate-mobileSlideIn {
           animation: mobileSlideIn 0.3s ease-out forwards;
+        }
+        
+        .animate-slideInFromLeft {
+          animation: slideInFromLeft 0.3s ease-out forwards;
         }
         
         /* Touch-friendly hover states for mobile */
