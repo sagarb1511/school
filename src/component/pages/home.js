@@ -161,7 +161,7 @@ const Home = () => {
 
       {/* 2. Image Slider */}
       <div style={styles.sliderSection}>
-        <div style={styles.sliderContainer}>
+        <div className="slider-container" style={styles.sliderContainer}>
           {sliderImages.map((slide, index) => (
             <div
               key={index}
@@ -177,26 +177,35 @@ const Home = () => {
                 style={styles.sliderImage}
               />
               <div style={styles.slideOverlay}>
-                <div style={styles.slideContent}>
+                <div className="slide-content" style={styles.slideContent}>
                   {index === 0 ? (
-                    <h2 style={styles.slideTitle}>
-                      <div>{language === 'mr' ? 'येथे आपले स्वागत आहे' : 'Welcome To'}</div>
-                      <div style={{marginTop: '10px', whiteSpace: 'nowrap'}}>{language === 'mr' ? 'विलासराव शिंदे महाविद्यालय, आष्टा' : 'Vilasrao Shinde Mahavidyalaya, Ashta'}</div>
+                    <h2 className="slide-title" style={styles.slideTitle}>
+                      {language === 'mr' ? (
+                        <>
+                          <div className="college-name-text" style={{whiteSpace: 'nowrap'}}>विलासराव शिंदे महाविद्यालय, आष्टा</div>
+                          <div className="welcome-text-mr" style={{marginTop: '10px', whiteSpace: 'nowrap'}}>आपले सहर्ष स्वागत आहे</div>
+                        </>
+                      ) : (
+                        <>
+                          <div>Welcome To</div>
+                          <div className="college-name-text" style={{marginTop: '10px', whiteSpace: 'nowrap'}}>Vilasrao Shinde Mahavidyalaya, Ashta</div>
+                        </>
+                      )}
                     </h2>
                   ) : (
-                    <h2 style={styles.slideTitle}>{slide.title}</h2>
+                    <h2 className="slide-title" style={styles.slideTitle}>{slide.title}</h2>
                   )}
-                  <p style={styles.slideDescription}>{slide.description}</p>
+                  <p className="slide-description" style={styles.slideDescription}>{slide.description}</p>
                 </div>
               </div>
             </div>
           ))}
           
           {/* Navigation Arrows */}
-          <button onClick={prevSlide} style={{...styles.sliderArrow, ...styles.sliderArrowLeft}}>
+          <button className="slider-arrow slider-arrow-left" onClick={prevSlide} style={{...styles.sliderArrow, ...styles.sliderArrowLeft}}>
             &#8249;
           </button>
-          <button onClick={nextSlide} style={{...styles.sliderArrow, ...styles.sliderArrowRight}}>
+          <button className="slider-arrow slider-arrow-right" onClick={nextSlide} style={{...styles.sliderArrow, ...styles.sliderArrowRight}}>
             &#8250;
           </button>
           
@@ -293,9 +302,9 @@ const Home = () => {
             style={styles.leaderImage}
           />
         </div>
-        <h3 style={styles.leaderName}>{language === 'mr' ? 'माजी आमदार तथा आमदार परिषद सदस्य (एम.एल.सी.) स्वर्गीय विलासराव शिंदे (साहेब)' : 'Late Hon. Vilasrao Shinde(Saheb) Ex. MLA & MLC'}</h3>
+        <h3 className="leader-name" style={styles.leaderName}>{language === 'mr' ? 'माजी आमदार तथा आमदार परिषद सदस्य (एम.एल.सी.) स्वर्गीय विलासराव शिंदे (साहेब)' : 'Late Hon. Vilasrao Shinde(Saheb) Ex. MLA & MLC'}</h3>
         <p style={styles.leaderTitle}>{language === 'mr' ? 'संस्थापक' : 'Founder'}</p>
-        <p style={styles.leaderDescription}>
+        <p className="leader-description" style={styles.leaderDescription}>
           {language === 'mr' ? 'दूरदर्शी नेते ज्यांनी सर्वांना दर्जेदार शिक्षण प्रदान करण्याच्या उद्देशाने या संस्थेची स्थापना केली.' : 'Visionary leader who established this institution with a mission to provide quality education to all.'}
         </p>
       </div>
@@ -308,9 +317,9 @@ const Home = () => {
             style={styles.leaderImage}
           />
         </div>
-        <h3 style={styles.leaderName}>{language === 'mr' ? 'श्री वैभव विलासराव शिंदे (दादा)' : 'Shri Vaibhav Vilasrao Shinde (Dada)'}</h3>
+        <h3 className="leader-name" style={styles.leaderName}>{language === 'mr' ? 'श्री वैभव विलासराव शिंदे (दादा)' : 'Shri Vaibhav Vilasrao Shinde (Dada)'}</h3>
         <p style={styles.leaderTitle}>{language === 'mr' ? 'सह-संस्थापक' : 'Co-Founder'}</p>
-        <p style={styles.leaderDescription}>
+        <p className="leader-description" style={styles.leaderDescription}>
           {language === 'mr' ? 'समर्पित शिक्षक आणि प्रशासक ज्यांनी आमच्या संस्थेच्या शैक्षणिक दृष्टिकोनाला आकार देण्यास मदत केली.' : 'Dedicated educator and administrator who helped shape the academic vision of our institution.'}
         </p>
       </div>
@@ -323,9 +332,9 @@ const Home = () => {
             style={styles.leaderImage}
           />
         </div>
-        <h3 style={styles.leaderName}>{language === 'mr' ? 'डॉ. माणिकराव विष्णु पाटील' : 'Dr. Manikrao Vishnu Patil'}</h3>
+        <h3 className="leader-name" style={styles.leaderName}>{language === 'mr' ? 'डॉ. माणिकराव विष्णु पाटील' : 'Dr. Manikrao Vishnu Patil'}</h3>
         <p style={styles.leaderTitle}>{language === 'mr' ? 'प्राचार्य' : 'Principal'}</p>
-        <p style={styles.leaderDescription}>
+        <p className="leader-description" style={styles.leaderDescription}>
           {language === 'mr' ? 'सध्याचे मुख्याध्यापक जे संस्थेला शिक्षण आणि विद्यार्थी विकासात उत्कृष्टतेकडे नेत आहेत.' : 'Current principal leading the institution towards excellence in education and student development.'}
         </p>
       </div>
@@ -675,8 +684,113 @@ const Home = () => {
       </div>
       
       
-      {/* 3D Animation CSS */}
+      {/* 3D Animation CSS and Responsive Styles */}
       <style jsx>{`
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+          .slider-container {
+            height: 70vh !important;
+          }
+          .slide-title {
+            font-size: 2.2rem !important;
+            margin-bottom: 15px !important;
+          }
+          .slide-description {
+            font-size: 1.1rem !important;
+          }
+          .slider-arrow {
+            font-size: 1.5rem !important;
+            padding: 12px 15px !important;
+          }
+          .slide-content {
+            max-width: 90% !important;
+            padding: 0 15px !important;
+          }
+          .college-name-text {
+            font-size: 1.8rem !important;
+            white-space: normal !important;
+            line-height: 1.3 !important;
+          }
+          .welcome-text-mr {
+            font-size: 1.8rem !important;
+            white-space: normal !important;
+            line-height: 1.3 !important;
+          }
+          .leader-name {
+            font-size: 1.2rem !important;
+          }
+          .leader-description {
+            font-size: 0.95rem !important;
+          }
+        }
+        
+        @media (max-width: 480px) {
+          .slider-container {
+            height: 60vh !important;
+          }
+          .slide-title {
+            font-size: 1.8rem !important;
+            margin-bottom: 10px !important;
+            line-height: 1.2 !important;
+          }
+          .slide-description {
+            font-size: 1rem !important;
+            line-height: 1.4 !important;
+          }
+          .slider-arrow {
+            font-size: 1.2rem !important;
+            padding: 10px 12px !important;
+          }
+          .slider-arrow-left {
+            left: 10px !important;
+          }
+          .slider-arrow-right {
+            right: 10px !important;
+          }
+          .slide-content {
+            max-width: 95% !important;
+            padding: 0 10px !important;
+          }
+          .college-name-text {
+            font-size: 1.3rem !important;
+            line-height: 1.4 !important;
+            white-space: normal !important;
+            word-wrap: break-word !important;
+          }
+          .welcome-text-mr {
+            font-size: 1.3rem !important;
+            line-height: 1.4 !important;
+            white-space: normal !important;
+            word-wrap: break-word !important;
+          }
+          .leader-name {
+            font-size: 1.1rem !important;
+            line-height: 1.3 !important;
+          }
+          .leader-description {
+            font-size: 0.9rem !important;
+            line-height: 1.5 !important;
+          }
+        }
+        
+        @media (max-width: 360px) {
+          .college-name-text {
+            font-size: 1.1rem !important;
+            line-height: 1.5 !important;
+            white-space: normal !important;
+            word-wrap: break-word !important;
+            hyphens: auto !important;
+          }
+          .welcome-text-mr {
+            font-size: 1.1rem !important;
+            line-height: 1.5 !important;
+            white-space: normal !important;
+            word-wrap: break-word !important;
+            hyphens: auto !important;
+          }
+        }
+        
+        /* 3D Animations */
         @keyframes backgroundRotate {
           0% { background-position: 0% 50%; }
           50% { background-position: 100% 50%; }
@@ -1333,6 +1447,13 @@ const styles = {
     color: '#2E7D32',
     marginBottom: '8px',
     margin: '0 0 8px 0',
+    '@media (max-width: 768px)': {
+      fontSize: '1.2rem',
+    },
+    '@media (max-width: 480px)': {
+      fontSize: '1.1rem',
+      lineHeight: '1.3',
+    },
   },
   leaderTitle: {
     fontSize: '1.1rem',
@@ -1346,6 +1467,13 @@ const styles = {
     color: '#666',
     lineHeight: '1.6',
     margin: '0',
+    '@media (max-width: 768px)': {
+      fontSize: '0.95rem',
+    },
+    '@media (max-width: 480px)': {
+      fontSize: '0.9rem',
+      lineHeight: '1.5',
+    },
   },
   sliderSection: {
     padding: '0',
@@ -1358,6 +1486,12 @@ const styles = {
     height: '100vh',
     overflow: 'hidden',
     margin: '0 auto',
+    '@media (max-width: 768px)': {
+      height: '70vh',
+    },
+    '@media (max-width: 480px)': {
+      height: '60vh',
+    },
   },
   slide: {
     position: 'absolute',
@@ -1388,6 +1522,14 @@ const styles = {
     color: 'white',
     maxWidth: '800px',
     padding: '0 20px',
+    '@media (max-width: 768px)': {
+      maxWidth: '90%',
+      padding: '0 15px',
+    },
+    '@media (max-width: 480px)': {
+      maxWidth: '95%',
+      padding: '0 10px',
+    },
   },
   slideTitle: {
     fontSize: '3rem',
@@ -1395,12 +1537,28 @@ const styles = {
     marginBottom: '20px',
     textShadow: '2px 2px 4px rgba(0,0,0,0.5)',
     margin: '0 0 20px 0',
+    '@media (max-width: 768px)': {
+      fontSize: '2.2rem',
+      marginBottom: '15px',
+    },
+    '@media (max-width: 480px)': {
+      fontSize: '1.8rem',
+      marginBottom: '10px',
+      lineHeight: '1.2',
+    },
   },
   slideDescription: {
     fontSize: '1.3rem',
     fontWeight: '300',
     textShadow: '1px 1px 2px rgba(0,0,0,0.5)',
     margin: '0',
+    '@media (max-width: 768px)': {
+      fontSize: '1.1rem',
+    },
+    '@media (max-width: 480px)': {
+      fontSize: '1rem',
+      lineHeight: '1.4',
+    },
   },
   sliderArrow: {
     position: 'absolute',
@@ -1415,12 +1573,26 @@ const styles = {
     borderRadius: '5px',
     transition: 'background-color 0.3s',
     zIndex: 10,
+    '@media (max-width: 768px)': {
+      fontSize: '1.5rem',
+      padding: '12px 15px',
+    },
+    '@media (max-width: 480px)': {
+      fontSize: '1.2rem',
+      padding: '10px 12px',
+    },
   },
   sliderArrowLeft: {
     left: '20px',
+    '@media (max-width: 480px)': {
+      left: '10px',
+    },
   },
   sliderArrowRight: {
     right: '20px',
+    '@media (max-width: 480px)': {
+      right: '10px',
+    },
   },
   sliderIndicators: {
     position: 'absolute',

@@ -47,7 +47,7 @@ export const translations = {
     
     // Home page
     welcomeToCollege: "Welcome to Vilasrao Shinde Mahavidyalaya, Ashta",
-    collegeDescription: "A premier educational institution committed to excellence in Arts, Commerce, and Science education.",
+    collegeDescription: "A premier educational institution committed to excellence in Arts, Commerce, Science and BCA.",
     ourMission: "Our Mission",
     missionText: "To provide quality education and foster holistic development of students through innovative teaching methods and research.",
     whyChooseUs: "Why Choose Us",
@@ -417,7 +417,7 @@ export const translations = {
     
     // Home page
     welcomeToCollege: "विलासराव शिंदे महाविद्यालयात आपले स्वागत",
-    collegeDescription: "कला, वाणिज्य आणि विज्ञान शिक्षणात उत्कृष्टतेसाठी वचनबद्ध असलेली एक प्रमुख शैक्षणिक संस्था.",
+    collegeDescription: "कला, वाणिज्य, विज्ञान आणि बीसीए या शाखांमध्ये उत्कृष्टतेसाठी वचनबद्ध असलेली एक अग्रगण्य शैक्षणिक संस्था.",
     ourMission: "आमचे ध्येय",
     missionText: "नाविन्यपूर्ण शिक्षण पद्धती आणि संशोधनाद्वारे दर्जेदार शिक्षण प्रदान करणे आणि विद्यार्थ्यांचा सर्वांगीण विकास करणे.",
     whyChooseUs: "आम्हाला का निवडावे",
