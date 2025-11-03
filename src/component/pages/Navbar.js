@@ -200,17 +200,7 @@ const Navbar = () => {
           </div>
 
           {/* Mobile Menu Header */}
-          <div className="lg:hidden flex items-center justify-between py-1.5">
-            <div className="flex items-center">
-              <img 
-                src={require('../assets/VSMAST.png')} 
-                alt="Logo" 
-                className="w-8 h-8 object-contain mr-2"
-              />
-              <div className="text-white">
-                <h2 className="text-xs font-bold">VSMAST</h2>
-              </div>
-            </div>
+          <div className="lg:hidden flex items-center justify-end py-1.5">
             
             <div className="flex items-center space-x-2">
               <div className="relative">
