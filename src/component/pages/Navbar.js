@@ -239,7 +239,7 @@ const Navbar = () => {
                   <img 
                     src={require('../assets/VSMAST.png')} 
                     alt="Logo" 
-                    className="w-8 h-8 object-contain mr-3"
+                    className="w-8 h-8 object-contain mr-3 bg-white rounded p-1"
                   />
                   <h2 className="text-white text-sm font-bold">VSMAST</h2>
                 </div>
