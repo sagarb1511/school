@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/school/static/css/main.2a9a26f2.css",
-    "main.js": "/school/static/js/main.5f4041a4.js",
+    "main.js": "/school/static/js/main.3cef4953.js",
     "static/media/chess.webp": "/school/static/media/chess.12418aaae78d965d5e90.webp",
     "static/media/VSMAST.png": "/school/static/media/VSMAST.0b766f8ffb66842851dc.png",
     "static/media/slider1.jpg": "/school/static/media/slider1.5b0281c108b95d6e9491.jpg",
@@ -17,10 +17,10 @@
     "static/media/17vilasrao-shinde_201906253646.jpg": "/school/static/media/17vilasrao-shinde_201906253646.1511d5e1191c18d5ec87.jpg",
     "index.html": "/school/index.html",
     "main.2a9a26f2.css.map": "/school/static/css/main.2a9a26f2.css.map",
-    "main.5f4041a4.js.map": "/school/static/js/main.5f4041a4.js.map"
+    "main.3cef4953.js.map": "/school/static/js/main.3cef4953.js.map"
   },
   "entrypoints": [
     "static/css/main.2a9a26f2.css",
-    "static/js/main.5f4041a4.js"
+    "static/js/main.3cef4953.js"
   ]
 }
