@@ -302,7 +302,19 @@ const Home = () => {
             style={styles.leaderImage}
           />
         </div>
-        <h3 className="leader-name" style={styles.leaderName}>{language === 'mr' ? 'माजी आमदार तथा आमदार परिषद सदस्य (एम.एल.सी.) स्वर्गीय विलासराव शिंदे (साहेब)' : 'Late Hon. Vilasrao Shinde(Saheb) Ex. MLA & MLC'}</h3>
+        <h3 className="leader-name" style={styles.leaderName}>
+          {language === 'mr' ? (
+            <>
+              <div>स्वर्गीय विलासराव शिंदे (साहेब)</div>
+              <div>माजी आमदार तथा आमदार परिषद सदस्य (एम.एल.सी.)</div>
+            </>
+          ) : (
+            <>
+              <div>Late Hon. Vilasrao Shinde(Saheb)</div>
+              <div>Ex. MLA & MLC</div>
+            </>
+          )}
+        </h3>
         <p style={styles.leaderTitle}>{language === 'mr' ? 'संस्थापक' : 'Founder'}</p>
         <p className="leader-description" style={styles.leaderDescription}>
           {language === 'mr' ? 'दूरदर्शी नेते ज्यांनी सर्वांना दर्जेदार शिक्षण प्रदान करण्याच्या उद्देशाने या संस्थेची स्थापना केली.' : 'Visionary leader who established this institution with a mission to provide quality education to all.'}
@@ -317,8 +329,8 @@ const Home = () => {
             style={styles.leaderImage}
           />
         </div>
-        <h3 className="leader-name" style={styles.leaderName}>{language === 'mr' ? 'श्री वैभव विलासराव शिंदे (दादा)' : 'Shri Vaibhav Vilasrao Shinde (Dada)'}</h3>
-        <p style={styles.leaderTitle}>{language === 'mr' ? 'सह-संस्थापक' : 'Co-Founder'}</p>
+        <h3 className="leader-name" style={styles.leaderName}>{language === 'mr' ? 'श्री वैभव विलासराव शिंदे (दादा)' : 'Shri.Vaibhav Vilasrao Shinde (Dada)'}</h3>
+        <p style={styles.leaderTitle}>{language === 'mr' ? 'सह-संस्थापक' : 'Chairman & Director of D.C.C Bank, Sangli'}</p>
         <p className="leader-description" style={styles.leaderDescription}>
           {language === 'mr' ? 'समर्पित शिक्षक आणि प्रशासक ज्यांनी आमच्या संस्थेच्या शैक्षणिक दृष्टिकोनाला आकार देण्यास मदत केली.' : 'Dedicated educator and administrator who helped shape the academic vision of our institution.'}
         </p>
@@ -335,7 +347,7 @@ const Home = () => {
         <h3 className="leader-name" style={styles.leaderName}>{language === 'mr' ? 'डॉ. माणिकराव विष्णु पाटील' : 'Dr. Manikrao Vishnu Patil'}</h3>
         <p style={styles.leaderTitle}>{language === 'mr' ? 'प्राचार्य' : 'Principal'}</p>
         <p className="leader-description" style={styles.leaderDescription}>
-          {language === 'mr' ? 'सध्याचे मुख्याध्यापक जे संस्थेला शिक्षण आणि विद्यार्थी विकासात उत्कृष्टतेकडे नेत आहेत.' : 'Current principal leading the institution towards excellence in education and student development.'}
+          {language === 'mr' ? 'सध्याचे मुख्याध्यापक जे संस्थेला शिक्षण आणि विद्यार्थी विकासात उत्कृष्टतेकडे नेत आहेत.' : 'Current Principal leading the institution towards excellence in education and student development.'}
         </p>
       </div>
     </div>

@@ -249,7 +249,7 @@ export default function AdmissionDocuments() {
               marginBottom: '16px',
               color: '#111827'
             }}>
-              {tabs.find(t => t.id === active).label}
+              {tabs.find(t => t.id === active).label} :
             </h2>
             <ul style={{
               listStyleType: 'disc',

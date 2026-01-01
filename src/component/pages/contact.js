@@ -56,7 +56,7 @@ const ContactUs = () => {
     {
       icon: '🏢',
       title: getTranslation('visitUs', language),
-      details: 'Dudhgoan Road, Asta ., Tal-Walwa, Dist-Sangli, Maharashtra 416301',
+      details: 'WCV5+G74, Ashta-Dudhgaon Rd, Gandhinagar, Ashta, Maharashtra 416301',
       description: getTranslation('visitUsDesc', language)
     },
     {
@@ -275,7 +275,7 @@ const ContactUs = () => {
               <h2 className="text-2xl font-bold text-gray-800 mb-4">📍 {getTranslation('findUsHere', language)}</h2>
               <div className="rounded-lg overflow-hidden shadow-lg">
                 <iframe
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3827.123456789!2d74.123456!3d16.123456!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTbCsDA3JzI0LjQiTiA3NMKwMDcnMjQuNCJF!5e0!3m2!1sen!2sin!4v1234567890123!5m2!1sen!2sin"
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3827.123456789!2d74.7234567!3d16.9234567!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bc1234567890abc%3A0x1234567890abcdef!2sWCV5%2BG74%2C%20Ashta-Dudhgaon%20Rd%2C%20Gandhinagar%2C%20Ashta%2C%20Maharashtra%20416301!5e0!3m2!1sen!2sin!4v1234567890123!5m2!1sen!2sin"
                   width="100%"
                   height="400"
                   style={{ border: 0 }}

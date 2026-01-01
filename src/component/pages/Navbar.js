@@ -132,13 +132,17 @@ const Navbar = () => {
             {/* College Name and Details - Center */}
             <div className="flex-1 text-center mx-2 sm:mx-4 lg:mx-8">
               <p className="text-[8px] sm:text-xs lg:text-sm text-black font-bold mb-0.5 lg:mb-1">
-                RAJARAM SHIKSHAN SANSTHA
+                RAJARAM SHIKSHAN SANSTHA'S
               </p>
-              <h1 className="text-xs sm:text-sm md:text-base lg:text-xl xl:text-2xl font-bold text-red-800 mb-0.5 lg:mb-1 tracking-wide lg:tracking-widest">
-                VILASRAO SHINDE MAHAVIDYALAYA
+              <h1 className="text-[10px] sm:text-sm md:text-base lg:text-xl xl:text-2xl font-bold text-red-800 mb-0.5 lg:mb-1 tracking-tight sm:tracking-wide lg:tracking-widest whitespace-nowrap sm:whitespace-normal">
+                VILASRAO SHINDE MAHAVIDYALAYA ,ASHTA
               </h1>
               <p className="text-[8px] sm:text-xs lg:text-sm text-gray-600 font-medium tracking-tight sm:tracking-normal lg:tracking-widest">
-                (ARTS, COMMERCE, SCIENCE AND BCA) ASHTA, TAL-WALWA, DIST-SANGLI. PIN-416301
+                <span className="hidden sm:inline">(ARTS, COMMERCE, SCIENCE AND BCA) , TAL-WALWA, DIST-SANGLI. PIN-416301</span>
+                <span className="sm:hidden">
+                  (ARTS, COMMERCE, SCIENCE AND BCA) ,<br />
+                  TAL-WALWA, DIST-SANGLI. PIN-416301
+                </span>
               </p>
             </div>
 

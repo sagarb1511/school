@@ -23,7 +23,7 @@ const Academic = () => {
     
     Science: [
       "B.Sc. Chemistry",
-      // "B.Sc. Microbiology",
+      "B.Sc. Microbiology",
       "B.Sc. Computer Science",
       
     ],

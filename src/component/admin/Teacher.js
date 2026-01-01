@@ -12,7 +12,8 @@ const Teacher = () => {
     name: '',
     position: '',
     photo: null,
-    staffType: '' // New field for teaching/non-teaching
+    staffType: '', // New field for teaching/non-teaching
+    gender: '' // New field for gender (Male/Female)
   });
 
   const [preview, setPreview] = useState(null);
@@ -26,12 +27,16 @@ const Teacher = () => {
   const [newPositionType, setNewPositionType] = useState('Teaching');
   const [showAddPosition, setShowAddPosition] = useState(false);
   const [showManageModal, setShowManageModal] = useState(false);
+  const [staffList, setStaffList] = useState([]);
+  const [editMode, setEditMode] = useState(false);
+  const [editingStaffId, setEditingStaffId] = useState(null);
 
-  // Load positions from Firebase on component mount
+  // Load positions and staff from Firebase on component mount
   useEffect(() => {
     // Reference to teaching positions
     const teachingRef = ref(database, 'School/positions/teaching');
     const nonTeachingRef = ref(database, 'School/positions/nonTeaching');
+    const staffRef = ref(database, 'School/staff');
 
     // Listen for teaching positions
     const unsubscribeTeaching = onValue(teachingRef, (snapshot) => {
@@ -55,10 +60,25 @@ const Teacher = () => {
       }
     });
 
+    // Listen for staff members
+    const unsubscribeStaff = onValue(staffRef, (snapshot) => {
+      const data = snapshot.val();
+      if (data) {
+        const staffArray = Object.keys(data).map((key) => ({
+          id: key,
+          ...data[key]
+        }));
+        setStaffList(staffArray);
+      } else {
+        setStaffList([]);
+      }
+    });
+
     // Cleanup listeners on unmount
     return () => {
       unsubscribeTeaching();
       unsubscribeNonTeaching();
+      unsubscribeStaff();
     };
   }, []);
 
@@ -167,7 +187,8 @@ const Teacher = () => {
       newErrors.position = 'Please select a position';
     }
 
-    if (!formData.photo) {
+    // Photo validation: only required when adding new staff OR when editing but no existing photo
+    if (!editMode && !formData.photo) {
       newErrors.photo = 'Please upload a photo';
     } else if (formData.photo) {
       const validTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/gif', 'image/webp'];
@@ -253,47 +274,83 @@ const Teacher = () => {
       // Sanitize name for Firebase key (remove special characters, replace spaces with underscores)
       const sanitizedName = formData.name.trim().replace(/[.#$[\]]/g, '').replace(/\s+/g, '_');
       
-      // Upload photo to Firebase Storage
+      // Upload photo to Firebase Storage (if new photo is uploaded)
       let photoURL = '';
       if (formData.photo) {
         const imageRef = storageRef(storage, `School/staff/${sanitizedName}/${formData.photo.name}`);
         await uploadBytes(imageRef, formData.photo);
         photoURL = await getDownloadURL(imageRef);
+      } else if (editMode && editingStaffId) {
+        // Keep existing photo if in edit mode and no new photo uploaded
+        const existingStaff = staffList.find(s => s.id === editingStaffId);
+        photoURL = existingStaff?.photoURL || '';
       }
       
       const staffData = {
         name: formData.name,
         position: formData.position,
         staffType: staffType,
+        gender: formData.gender,
         photoURL: photoURL,
-       
+        status: 'active'
       };
 
-      // Save to Firebase Database using name as key
-      const dbRef = ref(database, `School/staff/${sanitizedName}`);
+      // Save to Firebase Database
+      const dbRef = ref(database, `School/staff/${editMode ? editingStaffId : sanitizedName}`);
       await set(dbRef, staffData);
 
       console.log('Staff data saved successfully:', staffData);
       
       // Show success message
-      toast.success('Staff added successfully!');
+      toast.success(editMode ? 'Staff updated successfully!' : 'Staff added successfully!');
       
       // Reset form
       setFormData({
         name: '',
         position: '',
         photo: null,
-        staffType: ''
+        staffType: '',
+        gender: ''
       });
       setPreview(null);
       setErrors({});
+      setEditMode(false);
+      setEditingStaffId(null);
       e.target.reset();
       
     } catch (error) {
       console.error('Error submitting form:', error);
-      toast.error('Error submitting form. Please try again.');
+      toast.error(`Error ${editMode ? 'updating' : 'submitting'} form. Please try again.`);
     } finally {
       setIsSubmitting(false);
+    }
+  };
+
+  const handleEdit = (staff) => {
+    setEditMode(true);
+    setEditingStaffId(staff.id);
+    setFormData({
+      name: staff.name,
+      position: staff.position,
+      photo: null,
+      staffType: staff.staffType,
+      gender: staff.gender
+    });
+    setPreview(staff.photoURL || null);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    toast.info('Editing mode activated. Update the details and submit.');
+  };
+
+  const handleDelete = async (staff) => {
+    if (window.confirm(`Are you sure you want to delete ${staff.name}?`)) {
+      try {
+        const dbRef = ref(database, `School/staff/${staff.id}`);
+        await remove(dbRef);
+        toast.success('Staff deleted successfully!');
+      } catch (error) {
+        console.error('Error deleting staff:', error);
+        toast.error('Failed to delete staff. Please try again.');
+      }
     }
   };
 
@@ -302,10 +359,13 @@ const Teacher = () => {
       name: '',
       position: '',
       photo: null,
-      staffType: ''
+      staffType: '',
+      gender: ''
     });
     setPreview(null);
     setErrors({});
+    setEditMode(false);
+    setEditingStaffId(null);
   };
 
   const removePhoto = () => {
@@ -346,11 +406,19 @@ const Teacher = () => {
               <div className="flex items-start justify-between mb-4">
                 <div>
                   <h1 className="text-3xl font-bold text-gray-900 mb-2">
-                    Teacher Registration
+                    {editMode ? 'Edit Staff Member' : 'Teacher Registration'}
                   </h1>
                   <p className="text-gray-600">
-                    Please fill in the teacher's details below
+                    {editMode ? 'Update the staff member details below' : 'Please fill in the teacher\'s details below'}
                   </p>
+                  {editMode && (
+                    <div className="mt-2 px-3 py-2 bg-blue-100 border border-blue-200 rounded-lg text-blue-800 text-sm inline-flex items-center gap-2">
+                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                      </svg>
+                      Editing Mode Active
+                    </div>
+                  )}
                 </div>
                 <button
                   type="button"
@@ -661,6 +729,46 @@ const Teacher = () => {
                 )}
               </div>
 
+              {/* Gender Field */}
+              <div>
+                <label htmlFor="gender" className="block text-sm font-medium text-gray-700 mb-2">
+                  Gender <span className="text-red-500">*</span>
+                </label>
+                <div className="grid grid-cols-2 gap-4">
+                  <button
+                    type="button"
+                    onClick={() => setFormData(prev => ({ ...prev, gender: 'Male' }))}
+                    className={`p-4 border-2 rounded-lg text-center transition-all ${
+                      formData.gender === 'Male'
+                        ? 'border-blue-500 bg-blue-50 text-blue-700 shadow-md'
+                        : 'border-gray-300 bg-gray-50 text-gray-700 hover:border-blue-400'
+                    } ${isSubmitting ? 'opacity-50 cursor-not-allowed' : ''}`}
+                    disabled={isSubmitting}
+                  >
+                    <svg className="w-8 h-8 mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                    </svg>
+                    <span className="font-medium">Male (Mr.)</span>
+                  </button>
+                  
+                  <button
+                    type="button"
+                    onClick={() => setFormData(prev => ({ ...prev, gender: 'Female' }))}
+                    className={`p-4 border-2 rounded-lg text-center transition-all ${
+                      formData.gender === 'Female'
+                        ? 'border-pink-500 bg-pink-50 text-pink-700 shadow-md'
+                        : 'border-gray-300 bg-gray-50 text-gray-700 hover:border-pink-400'
+                    } ${isSubmitting ? 'opacity-50 cursor-not-allowed' : ''}`}
+                    disabled={isSubmitting}
+                  >
+                    <svg className="w-8 h-8 mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                    </svg>
+                    <span className="font-medium">Female (Miss)</span>
+                  </button>
+                </div>
+              </div>
+
               {/* Photo Upload Field */}
               <div>
                 <label htmlFor="photo" className="block text-sm font-medium text-gray-700 mb-2">
@@ -768,9 +876,9 @@ const Teacher = () => {
                   ) : (
                     <>
                       <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d={editMode ? "M5 13l4 4L19 7" : "M12 4v16m8-8H4"} />
                       </svg>
-                      Register Staff
+                      {editMode ? 'Update Staff' : 'Register Staff'}
                     </>
                   )}
                 </button>
@@ -779,6 +887,125 @@ const Teacher = () => {
 
             {/* Form Status */}
          
+          </div>
+
+          {/* Staff List Table */}
+          <div className="bg-white rounded-2xl shadow-xl p-6 sm:p-8 mt-8">
+            <h2 className="text-2xl font-bold text-gray-900 mb-6">All Staff Members</h2>
+            
+            {staffList.length === 0 ? (
+              <div className="text-center py-12 text-gray-500">
+                <svg className="w-16 h-16 mx-auto mb-4 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                </svg>
+                <p className="text-lg">No staff members added yet</p>
+              </div>
+            ) : (
+              <div className="overflow-x-auto">
+                <table className="min-w-full divide-y divide-gray-200">
+                  <thead className="bg-gray-50">
+                    <tr>
+                      <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        Sr. No.
+                      </th>
+                      <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        Photo
+                      </th>
+                      <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        Name
+                      </th>
+                      <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        Position
+                      </th>
+                      <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        Staff Type
+                      </th>
+                      <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        Gender
+                      </th>
+                      <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        Status
+                      </th>
+                      <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        Actions
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody className="bg-white divide-y divide-gray-200">
+                    {staffList.map((staff, index) => (
+                      <tr key={staff.id} className="hover:bg-gray-50">
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                          {index + 1}
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap">
+                          <img 
+                            src={staff.photoURL || `https://ui-avatars.com/api/?name=${encodeURIComponent(staff.name)}&background=random&color=fff&size=100`}
+                            alt={staff.name}
+                            className="w-12 h-12 rounded-full object-cover border-2 border-gray-200"
+                            onError={(e) => {
+                              e.target.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(staff.name)}&background=random&color=fff&size=100`;
+                            }}
+                          />
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap">
+                          <div className="text-sm font-medium text-gray-900">
+                            {staff.gender === 'Male' ? 'Mr. ' : staff.gender === 'Female' ? 'Miss ' : ''}{staff.name}
+                          </div>
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-700">
+                          {staff.position}
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap">
+                          <span className={`px-2 py-1 inline-flex text-xs leading-5 font-semibold rounded-full ${
+                            staff.staffType === 'Teaching' 
+                              ? 'bg-green-100 text-green-800' 
+                              : 'bg-blue-100 text-blue-800'
+                          }`}>
+                            {staff.staffType}
+                          </span>
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap">
+                          <span className={`px-2 py-1 inline-flex text-xs leading-5 font-semibold rounded-full ${
+                            staff.gender === 'Male' 
+                              ? 'bg-blue-100 text-blue-800' 
+                              : 'bg-pink-100 text-pink-800'
+                          }`}>
+                            {staff.gender}
+                          </span>
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap">
+                          <span className="px-2 py-1 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+                            {staff.status || 'Active'}
+                          </span>
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                          <div className="flex items-center gap-2">
+                            <button
+                              onClick={() => handleEdit(staff)}
+                              className="text-blue-600 hover:text-blue-900 p-2 hover:bg-blue-50 rounded-lg transition-colors"
+                              title="Edit"
+                            >
+                              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                              </svg>
+                            </button>
+                            <button
+                              onClick={() => handleDelete(staff)}
+                              className="text-red-600 hover:text-red-900 p-2 hover:bg-red-50 rounded-lg transition-colors"
+                              title="Delete"
+                            >
+                              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                              </svg>
+                            </button>
+                          </div>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            )}
           </div>
         </div>
       </div>

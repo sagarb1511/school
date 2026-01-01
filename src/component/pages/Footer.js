@@ -27,18 +27,13 @@ const Footer = () => {
           
           {/* College Info Section */}
           <div className="space-y-4">
-            <div className="flex items-center space-x-2 mb-4">
-              <div className="w-10 h-10 bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg flex items-center justify-center">
-                <span className="text-white font-bold text-lg">V</span>
-              </div>
-              <div>
-                <h3 className="text-xl font-bold bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
-                  Vilasrao Sinde Mahavidyalaya
-                </h3>
-              </div>
+            <div className="mb-4">
+              <h3 className="text-[15px] sm:text-[10px] md:text-xs lg:text-sm font-bold bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent whitespace-nowrap overflow-visible">
+                Vilasrao Shinde Mahavidyalaya, Ashta
+              </h3>
             </div>
             <p className="text-slate-300 text-sm leading-relaxed">
-              Asta, Maharashtra
+              Ashta, Maharashtra
             </p>
             <p className="text-slate-300 text-sm leading-relaxed">
               Committed to academic excellence and all-round development of students through quality education.
@@ -134,7 +129,7 @@ const Footer = () => {
                 <div className="w-5 h-5 bg-emerald-500 rounded-full flex items-center justify-center mt-0.5">
                   <span className="text-xs">📍</span>
                 </div>
-                <p className="text-slate-300 text-sm">Asta, Maharashtra, India</p>
+                <p className="text-slate-300 text-sm">Dudhgoan road, ashta</p>
               </div>
               <div className="flex items-start space-x-3">
                 <div className="w-5 h-5 bg-emerald-500 rounded-full flex items-center justify-center mt-0.5">
@@ -156,7 +151,7 @@ const Footer = () => {
         <div className="border-t border-slate-700 pt-6">
           <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
             <p className="text-slate-400 text-sm text-center md:text-left">
-              © 2024 Vilasrao Sinde Mahavidyalaya, Asta. All rights reserved.
+              © 2024 Vilasrao Sinde Mahavidyalaya, Ashta. All rights reserved.
             </p>
             <div className="flex items-center space-x-6">
               <span className="text-slate-400 text-sm">Follow us:</span>
