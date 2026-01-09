@@ -59,6 +59,27 @@ const Sidebar = () => {
 
           <li>
             <NavLink
+              to="/fee-structure"
+              className={({ isActive }) =>
+                `flex items-center gap-3 px-4 py-3 rounded-lg transition-all duration-200 group ${
+                  isActive
+                    ? 'bg-white text-blue-900 shadow-lg transform scale-105'
+                    : 'text-blue-100 hover:bg-blue-800 hover:text-white hover:translate-x-1'
+                }`
+              }
+            >
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 14l9-5-9-5-9 5 9 5z" />
+              </svg>
+              <span className="font-medium">Fee Structure</span>
+              {({ isActive }) => isActive && (
+                <div className="ml-auto w-2 h-2 bg-blue-900 rounded-full"></div>
+              )}
+            </NavLink>
+          </li>
+
+          <li>
+            <NavLink
               to="/Gallery1"
               className={({ isActive }) =>
                 `flex items-center gap-3 px-4 py-3 rounded-lg transition-all duration-200 group ${

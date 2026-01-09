@@ -29,6 +29,7 @@ import Dashboard1 from './component/admin/Dashboard1';
 import Sport from './component/admin/Sports';
 import Activities12 from './component/admin/Activities1';
 import Research from './component/admin/Research';
+import FeeStructure from './component/admin/FeeStructure';
 
 
 // Add this if you have an Organisation component; otherwise, create a placeholder or remove the link
@@ -77,6 +78,7 @@ function App() {
           <Route path="/Sports1" element={<><Dashboard /><Sport /></>} />
           <Route path="/Activities1" element={<><Dashboard /><Activities12 /></>} />
           <Route path="/Research" element={<><Dashboard /><Research /></>} />
+          <Route path="/fee-structure" element={<><Dashboard /><FeeStructure /></>} />
           {/* Catch-all route */}
           <Route path="*" element={
             <>
