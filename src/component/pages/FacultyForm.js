@@ -110,7 +110,7 @@ const TeachingStaff = () => {
                     </div>
                   </div>
                   <h2 className="text-lg font-semibold text-white mb-2 group-hover:text-blue-200 transition-colors duration-300">
-                    {teacher.gender === 'Male' ? 'Mr. ' : teacher.gender === 'Female' ? 'Miss ' : ''}{teacher.name}
+                    {teacher.gender === 'Male' ? 'Mr. ' : teacher.gender === 'Female' ? 'Miss.  ' : ''}{teacher.name}
                   </h2>
                   <p className="text-gray-300 text-sm bg-black/20 rounded-full px-3 py-1 inline-block group-hover:bg-black/30 transition-all duration-300">
                     {teacher.position}
