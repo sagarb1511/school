@@ -162,7 +162,7 @@ const Aboutus = () => {
               textShadow: '1px 1px 2px rgba(0,0,0,0.1)',
               textAlign: 'center'
             }}>
-              {language === 'mr' ? 'श्री वैभव विलासराव शिंदे (दादा)' : 'Shri Vaibhav Vilasrao Shinde (Dada)'}
+              {language === 'mr' ? 'श्री वैभव विलासराव शिंदे (दादा)' : 'Shri.Vaibhav Vilasrao Shinde (Dada)'}
             </h2>
             
             <div style={{ 
