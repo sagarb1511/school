@@ -266,7 +266,7 @@ export const translations = {
     // About Us page content
     aboutUsTitle: "About Us",
     founder: "FOUNDER",
-    coFounderChairman: "CO-FOUNDER & CHAIRMAN",
+    coFounderChairman: "Chairman & Director of D.C.C Bank, Sangli",
     establishmentDate: "📅 Establishment Date: 03 November 1962",
     chairmanTitle: "🎓 Chairman of Rajaram Shikshan Sanstha",
     ourHeritage: "🏛️ Our Heritage",

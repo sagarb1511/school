@@ -101,15 +101,22 @@ const FeeStructure = () => {
       try {
         const feeData = feeStructureData[courseName];
         
-        // Delete from Firebase Storage if storage path exists
-        if (feeData && feeData.storagePath) {
-          const storageReference = storageRef(storage, feeData.storagePath);
-          await deleteObject(storageReference);
-        }
-        
-        // Delete from Firebase Realtime Database
+        // Delete from Firebase Realtime Database first (this should always succeed)
         const feeRef = ref(database, `School/feeStructure/${courseName}`);
         await remove(feeRef);
+        
+        // Try to delete from Firebase Storage if storage path exists
+        // But don't fail the entire operation if storage deletion fails
+        if (feeData && feeData.storagePath) {
+          try {
+            const storageReference = storageRef(storage, feeData.storagePath);
+            await deleteObject(storageReference);
+            console.log('Storage file deleted successfully:', feeData.storagePath);
+          } catch (storageError) {
+            console.warn('Storage file already deleted or not found:', storageError.message);
+            // Don't show error to user for storage issues, just log it
+          }
+        }
         
         toast.success(`✅ Fee structure deleted successfully for ${courseName}!`, {
           position: "top-right",

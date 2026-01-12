@@ -1278,7 +1278,10 @@ const Teacher = () => {
       
       let photoURL = '';
       if (formData.photo) {
-        const imageRef = storageRef(storage, `School/staff/${sanitizedName}/${formData.photo.name}`);
+        // In edit mode, use the original staff ID for storage path to maintain consistency
+        // In add mode, use the new sanitized name
+        const storageFolderName = editMode && editingStaffId ? editingStaffId : sanitizedName;
+        const imageRef = storageRef(storage, `School/staff/${storageFolderName}/${formData.photo.name}`);
         await uploadBytes(imageRef, formData.photo);
         photoURL = await getDownloadURL(imageRef);
       } else if (editMode && editingStaffId) {
