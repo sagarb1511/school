@@ -1032,6 +1032,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 const Teacher = () => {
   const [formData, setFormData] = useState({
+    title: '',
     name: '',
     position: '',
     photo: null,
@@ -1184,6 +1185,10 @@ const Teacher = () => {
   const validateForm = () => {
     const newErrors = {};
 
+    if (!formData.title) {
+      newErrors.title = 'Please select a title';
+    }
+
     if (!formData.name.trim()) {
       newErrors.name = 'Teacher name is required';
     } else if (formData.name.trim().length < 2) {
@@ -1290,6 +1295,7 @@ const Teacher = () => {
       }
       
       const staffData = {
+        title: formData.title,
         name: formData.name,
         position: formData.position,
         staffType: staffType,
@@ -1304,6 +1310,7 @@ const Teacher = () => {
       toast.success(editMode ? 'Staff updated successfully!' : 'Staff added successfully!');
       
       setFormData({
+        title: '',
         name: '',
         position: '',
         photo: null,
@@ -1328,6 +1335,7 @@ const Teacher = () => {
     setEditMode(true);
     setEditingStaffId(staff.id);
     setFormData({
+      title: staff.title || '',
       name: staff.name,
       position: staff.position,
       photo: null,
@@ -1354,6 +1362,7 @@ const Teacher = () => {
 
   const handleClear = () => {
     setFormData({
+      title: '',
       name: '',
       position: '',
       photo: null,
@@ -1606,34 +1615,60 @@ const Teacher = () => {
               </div>
             )}
 
+
             <form onSubmit={handleSubmit} className="space-y-6">
-              {/* Name Field */}
+              {/* Name Field with Title */}
               <div>
                 <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
                   Staff Name <span className="text-red-500">*</span>
                 </label>
-                <input
-                  type="text"
-                  id="name"
-                  name="name"
-                  value={formData.name}
-                  onChange={handleInputChange}
-                  className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:outline-none transition-colors ${
-                    errors.name 
-                      ? 'border-red-300 focus:border-red-500 focus:ring-red-200' 
-                      : 'border-gray-300 focus:border-blue-500 focus:ring-blue-200'
-                  } ${isSubmitting ? 'bg-gray-100 cursor-not-allowed' : ''}`}
-                  placeholder="Enter staff member's full name"
-                  disabled={isSubmitting}
-                />
-                {errors.name && (
-                  <p className="mt-2 text-sm text-red-600 flex items-center">
-                    <svg className="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" />
-                    </svg>
-                    {errors.name}
-                  </p>
-                )}
+                <div className="flex gap-4">
+                  <div className="w-1/4">
+                    <select
+                      name="title"
+                      value={formData.title}
+                      onChange={handleInputChange}
+                      className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:outline-none transition-colors ${
+                        errors.title 
+                          ? 'border-red-300 focus:border-red-500 focus:ring-red-200' 
+                          : 'border-gray-300 focus:border-blue-500 focus:ring-blue-200'
+                      } ${isSubmitting ? 'bg-gray-100 cursor-not-allowed' : ''}`}
+                      disabled={isSubmitting}
+                    >
+                      <option value="">Title</option>
+                      <option value="Mr.">Mr.</option>
+                      <option value="Miss.">Miss.</option>
+                      <option value="Mrs.">Mrs.</option>
+                    </select>
+                    {errors.title && (
+                      <p className="mt-2 text-sm text-red-600">{errors.title}</p>
+                    )}
+                  </div>
+                  <div className="flex-1">
+                    <input
+                      type="text"
+                      id="name"
+                      name="name"
+                      value={formData.name}
+                      onChange={handleInputChange}
+                      className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:outline-none transition-colors ${
+                        errors.name 
+                          ? 'border-red-300 focus:border-red-500 focus:ring-red-200' 
+                          : 'border-gray-300 focus:border-blue-500 focus:ring-blue-200'
+                      } ${isSubmitting ? 'bg-gray-100 cursor-not-allowed' : ''}`}
+                      placeholder="Enter staff member's full name"
+                      disabled={isSubmitting}
+                    />
+                    {errors.name && (
+                      <p className="mt-2 text-sm text-red-600 flex items-center">
+                        <svg className="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                          <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" />
+                        </svg>
+                        {errors.name}
+                      </p>
+                    )}
+                  </div>
+                </div>
               </div>
 
               {/* Staff Type Field */}
@@ -1752,7 +1787,7 @@ const Teacher = () => {
                     <svg className="w-8 h-8 mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                     </svg>
-                    <span className="font-medium">Male (Mr.)</span>
+                    <span className="font-medium">Male</span>
                   </button>
                   
                   <button
@@ -1768,7 +1803,7 @@ const Teacher = () => {
                     <svg className="w-8 h-8 mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                     </svg>
-                    <span className="font-medium">Female (Miss.)</span>
+                    <span className="font-medium">Female</span>
                   </button>
                 </div>
               </div>
@@ -1997,7 +2032,7 @@ const Teacher = () => {
                             </div>
                             <div className="ml-4">
                               <div className="text-sm font-medium text-gray-900">
-                                {staff.gender === 'Male' ? 'Mr. ' : staff.gender === 'Female' ? 'Miss. ' : ''}{staff.name}
+                                {staff.title ? `${staff.title} ` : ''}{staff.name}
                               </div>
                               <div className="text-xs text-gray-500 truncate max-w-[140px]">
                                 ID: {staff.id}

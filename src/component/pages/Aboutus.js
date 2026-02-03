@@ -151,7 +151,7 @@ const Aboutus = () => {
               letterSpacing: '2px',
               textTransform: 'uppercase'
             }}>
-              {getTranslation('coFounderChairman', language)}
+              {language === 'mr' ? getTranslation('coFounderChairman', language) : <>Chairman<br />Director of D.C.C Bank, Sangli</>}
             </h3>
             
             <h2 className="cofounder-name" style={{ 

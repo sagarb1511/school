@@ -330,7 +330,7 @@ const Home = () => {
           />
         </div>
         <h3 className="leader-name" style={styles.leaderName}>{language === 'mr' ? 'श्री वैभव विलासराव शिंदे (दादा)' : 'Shri.Vaibhav Vilasrao Shinde (Dada)'}</h3>
-        <p style={styles.leaderTitle}>{language === 'mr' ? 'सह-संस्थापक' : 'Chairman & Director of D.C.C Bank, Sangli'}</p>
+        <p style={styles.leaderTitle}>{language === 'mr' ? 'सह-संस्थापक' : <>Chairman<br />Director of D.C.C Bank, Sangli</>}</p>
         <p className="leader-description" style={styles.leaderDescription}>
           {language === 'mr' ? 'समर्पित शिक्षक आणि प्रशासक ज्यांनी आमच्या संस्थेच्या शैक्षणिक दृष्टिकोनाला आकार देण्यास मदत केली.' : 'Dedicated educator and administrator who helped shape the academic vision of our institution.'}
         </p>
