@@ -2,7 +2,7 @@ export const translations = {
   en: {
     // Organization names
     organizationName: "RAJARAM SHIKSHAN SANSTHA",
-    CollegeName: "VILASRAO SHINDE MAHAVIDYALAYA (ARTS COMMERCE SCIENCE AND BCA) ASHTA, TAL-WALWA, DIST-SANGLI. PIN-416301",
+    collegeName: "VILASRAO SHINDE MAHAVIDYALAYA (ARTS COMMERCE SCIENCE AND BCA) ASHTA, TAL-WALWA, DIST-SANGLI. PIN-416301",
     
     // Navigation menu items
     home: "Home",
@@ -192,7 +192,7 @@ export const translations = {
     callUsDesc: "Mon to Fri 10am to 6pm",
     visitUsDesc: "Ashta, Sangli - 416301",
     workingHoursDesc: "10:00 AM - 6:00 PM",
-    // followUs: "Follow Us",
+    followUs: "Follow Us",
     departmentContacts: "Department Contacts",
     admissionsOffice: "Admissions Office",
     academicDepartment: "Academic Department",
@@ -281,7 +281,7 @@ export const translations = {
     collegeMainText: "The eternal inspiring monument of this institution in Ashta city is the new Vilasrao Shinde Mahavidyalaya (Arts, Commerce and Science) college which started in 2022.",
     collegeDetailedText: "Ashta city has a social, political and educational heritage. Ashta city's municipality has been in existence since December 6, 1853 and is the oldest municipality in Maharashtra. With unwavering faith in the folk leader late Rajarambapu Patil for the creation of a civilized society, late Vilasrao Shinde (Saheb) established 'Rajaram Shikshan Sanstha' on 03 November 1962. Through this educational institution, Rajaram Shikshan Sanstha has done the work of educating and making literate the masses in rural areas. Currently, on behalf of the institution, a total of 10 secondary and higher secondary schools are running in Walwa, Shirala, Miraj in Sangli district and Vandur in Kagal taluka in Kolhapur district. Also, the center of Yashwantrao Chavan Maharashtra Open University Nashik is running. Shinde Saheb consistently kept alive the vision of giving justice to all neglected sections of society and connecting man to man, that's why he became a folk leader. This unwavering position of a true folk leader of this soil was conferred on him by society itself. Vilasrao Shinde Mahavidyalaya (Arts, Commerce and Science) The eternal inspiring monument of this institution in Ashta city is the new Vilasrao Shinde Mahavidyalaya (Arts, Commerce and Science) college which started in 2022. To provide educational facilities for higher education to students in Ashta city and surrounding rural areas and to make them capable by providing quality education, as well as to develop personality in the age of competition using information and technology of the 21st century, the emerging leadership of Ashta city and Chairman of Rajaram Shikshan Sanstha Hon. Vaibhav Vilasrao Shinde (Dada) has started a senior college with Arts, Commerce and Science branches from 01 September 2022 with the approval of Maharashtra Government and Shivaji University, Kolhapur.",
     principalTitle: "Principal",
-    collegeName2: "Vilasrao Shinde Mahavidyalaya, Ashta",
+    collegeName: "Vilasrao Shinde Mahavidyalaya, Ashta",
     collegeAddress: "Ta. Walwa, Dist. Sangli",
     keyFeaturesTitle: "🏆 Key Features of the College",
     
@@ -305,7 +305,7 @@ export const translations = {
     
     // Footer
     quickLinks: "Quick Links",
-    // followUs: "Follow Us",
+    followUs: "Follow Us",
     copyright: "© 2024 Vilasrao Shinde Mahavidyalaya. All rights reserved.",
     
     // Facilities page
@@ -370,7 +370,7 @@ export const translations = {
   mr: {
     // Organization names
     organizationName: "राजाराम शिक्षण संस्था",
-    CollegeName: "विलासराव शिंदे महाविद्यालय (कला वाणिज्य विज्ञान आणि बीसीए) अष्टा, तालुका-वाळवा, जिल्हा-सांगली. पिन-४१६३०१",
+    collegeName: "विलासराव शिंदे महाविद्यालय (कला वाणिज्य विज्ञान आणि बीसीए) अष्टा, तालुका-वाळवा, जिल्हा-सांगली. पिन-४१६३०१",
     
     // Navigation menu items
     home: "मुख्यपृष्ठ",
@@ -562,7 +562,7 @@ export const translations = {
     callUsDesc: "सोमवार ते शुक्रवार सकाळी ९ ते संध्याकाळी ६",
     visitUsDesc: "मुंबई, महाराष्ट्र - ४००००१",
     workingHoursDesc: "सकाळी ९:०० ते संध्याकाळी ६:००",
-    followUss: "आमचे अनुसरण करा",
+    followUs: "आमचे अनुसरण करा",
     departmentContacts: "विभागीय संपर्क",
     admissionsOffice: "प्रवेश कार्यालय",
     academicDepartment: "शैक्षणिक विभाग",
@@ -651,7 +651,7 @@ export const translations = {
     collegeMainText: "या संस्थेचे आष्टा शहरातील चिरंतन स्फूर्तीदायक स्मारक म्हणजेच सन २०२२ मध्ये सुरू होत असलेले नवीन विलासराव शिंदे महाविद्यालय (कला, वाणिज्य व विज्ञान) शाखा असणारे महाविद्यालय होय.",
     collegeDetailedText: "आष्टा या शहराला सामाजिक, राजकिय व शैक्षणिक वारसा आहे. आष्टा शहराची नगरपालिका ही ६ डिसेंबर १८५३ पासूनची असून, महाराष्ट्रातील सर्वात जुनी नगरपालिका आहे. सुसंस्कृत समाज निर्मितीसाठी लोकनेते स्व. राजारामबापू पाटील यांच्यावरील अढळ निष्ठेने स्व. विलासराव शिंदे (साहेब) यांनी ०३ नोव्हेंबर १९६२ रोजी 'राजाराम शिक्षण संस्थेची' स्थापना केली, या शिक्षण संस्थेच्या माध्यमातून ग्रामीण भागातील बहुजनांना शिक्षण देऊन साक्षर बनविण्याचे काम राजाराम शिक्षण संस्थेने केले आहे. संस्थेच्या वतीने सध्या सांगली जिल्ह्यात वाळवा, शिराळा, मिरज व कोल्हापूर जिल्ह्यात कागल तालुक्यात वंदूर असे एकूण १० माध्यमिक व उच्च माध्यमिक शाळा सुरू आहेत. तसेच यशवंतराव चव्हाण महाराष्ट्र मुक्त विद्यापीठ नाशिक यांचे केंद्र सुरू आहे. समाजातील सर्व उपेक्षित घटकांना न्याय देण्याची, माणसाला माणूस जोडण्याची दृष्टी शिंदे साहेबांनी सातत्याने जागृत ठेवली म्हणूनच ते लोकनेते ठरले. या मातीतील खरेखुरे लोकनेते हे अढळपद त्यांना समाजानेच बहाल केले. विलासराव शिंदे महाविद्यालय (कला, वाणिज्य व विज्ञान) या संस्थेचे आष्टा शहरातील चिरंतन स्फूर्तीदायक स्मारक म्हणजेच सन २०२२ मध्ये सुरू होत असलेले नवीन विलासराव शिंदे महाविद्यालय (कला, वाणिज्य व विज्ञान) शाखा असणारे महाविद्यालय होय. आष्टा शहर व परिसरातील ग्रामीण भागातील विद्यार्थ्यांची उच्च शिक्षणाची शैक्षणिक सोय व्हावी व त्यांना दर्जेदार शिक्षण देऊन सक्षम बनवावे तसेच २१ व्या शतकातील माहिती व तंत्रज्ञानाचा उपयोग करून स्पर्धेच्या युगात व्यक्तिमत्व विकास घडवावा या हेतूने आष्टा शहराचे उगवते नेतृत्व व राजाराम शिक्षण संस्थेचे चेअरमन मा. वैभव विलासराव शिंदे (दादा) यांनी कला, वाणिज्य व विज्ञान शाखा असणारे वरिष्ठ महाविद्यालय ०१ सप्टेंबर २०२२ पासून महाराष्ट्र शासन व शिवाजी विद्यापीठ, कोल्हापूर यांच्या मान्यतेने सुरू केले आहे.",
     principalTitle: "प्राचार्य",
-    collegeName1: "विलासराव शिंदे महाविद्यालय, आष्टा",
+    collegeName: "विलासराव शिंदे महाविद्यालय, आष्टा",
     collegeAddress: "ता. वाळवा, जि. सांगली",
     keyFeaturesTitle: "🏆 महाविद्यालयाची मुख्य वैशिष्ट्ये",
     
@@ -675,7 +675,7 @@ export const translations = {
     
     // Footer
     quickLinks: "द्रुत दुवे",
-    followUs1: "आमचे अनुसरण करा",
+    followUs: "आमचे अनुसरण करा",
     copyright: "© २०२४ विलासराव शिंदे महाविद्यालय. सर्व हक्क राखीव.",
     
     // Facilities page
